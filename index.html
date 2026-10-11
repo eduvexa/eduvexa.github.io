@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EduVexa - Study Abroad Simplified. Explore international education opportunities and get guidance for university admission, scholarships and student visas.">
+<title>EduVexa | Study Abroad Simplified</title>
+
+<style>
+:root {
+  --navy: #102D4E;
+  --gold: #D9A62C;
+  --white: #ffffff;
+  --light: #f5f7fb;
+  --text: #26364a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--white);
+  padding: 18px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--gold);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+nav a {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--gold);
+}
+
+.hero {
+  background: linear-gradient(120deg, #102D4E, #19466d);
+  color: white;
+  text-align: center;
+  padding: 110px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 5vw, 60px);
+  line-height: 1.2;
+  margin: 0 auto 20px;
+  max-width: 850px;
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 18px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 13px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 6px;
+  transition: 0.3s;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #102D4E;
+}
+
+.btn-white {
+  background: white;
+  color: var(--navy);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+section {
+  padding: 75px 7%;
+}
+
+.section-title {
+  text-align: center;
+  color: var(--navy);
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+
+.section-subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px 22px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  color: var(--navy);
+}
+
+.card-icon {
+  font-size: 34px;
+}
+
+.light-section {
+  background: var(--light);
+}
+
+.about {
+  max-width: 850px;
+  margin: auto;
+  text-align: center;
+}
+
+.contact {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+}
+
+.contact .section-title {
+  color: white;
+}
+
+.contact a {
+  color: var(--gold);
+}
+
+.contact-info {
+  margin: 25px auto;
+  max-width: 700px;
+}
+
+.contact-info p {
+  margin: 12px 0;
+}
+
+footer {
+  background: #091c31;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+}
+
+.whatsapp {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+@media(max-width: 768px) {
+  header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  section {
+    padding: 55px 5%;
+  }
+
+  .hero {
+    padding: 80px 20px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .whatsapp {
+    bottom: 15px;
+    right: 15px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#home" class="logo">Edu<span>Vexa</span></a>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <h1>Your Global Education <span>Journey Starts Here</span></h1>
+
+  <p>
+    Study Abroad Simplified. Explore international education
+    opportunities with personalized university admission,
+    scholarship and student visa guidance.
+  </p>
+
+  <a href="https://wa.me/8801811909779" class="btn btn-gold"
+     target="_blank" rel="noopener noreferrer">
+    Get Free Consultation
+  </a>
+
+  <a href="#destinations" class="btn btn-white">
+    Explore Destinations
+  </a>
+</section>
+
+<section id="about">
+  <h2 class="section-title">Welcome to EduVexa</h2>
+
+  <div class="about">
+    <p>
+      EduVexa – Study Abroad Simplified is an international
+      education consultancy focused on helping students
+      explore study opportunities around the world.
+    </p>
+
+    <p>
+      From choosing a suitable university to preparing
+      admission documents and understanding the visa
+      application process, our goal is to make your
+      international education journey easier.
+    </p>
+  </div>
+</section>
+
+<section id="destinations" class="light-section">
+  <h2 class="section-title">Explore Study Destinations</h2>
+
+  <p class="section-subtitle">
+    Discover international education opportunities
+    across our study destinations.
+  </p>
+
+  <div class="grid">
+
+    <div class="card"><div class="card-icon">🇺🇿</div><h3>Uzbekistan</h3><p>Explore study opportunities in Uzbekistan.</p></div>
+
+    <div class="card"><div class="card-icon">🇸🇰</div><h3>Slovakia</h3><p>Discover higher education opportunities in Slovakia.</p></div>
+
+    <div class="card"><div class="card-icon">🇷🇴</div><h3>Romania</h3><p>Explore universities and study programs in Romania.</p></div>
+
+    <div class="card"><div class="card-icon">🇱🇹</div><h3>Lithuania</h3><p>Discover international study opportunities in Lithuania.</p></div>
+
+    <div class="card"><div class="card-icon">🇭🇺</div><h3>Hungary</h3><p>Explore education and scholarship opportunities in Hungary.</p></div>
+
+    <div class="card"><div class="card-icon">🇨🇳</div><h3>China</h3><p>Discover universities and study programs in China.</p></div>
+
+    <div class="card"><div class="card-icon">🇮🇹</div><h3>Italy</h3><p>Explore higher education opportunities in Italy.</p></div>
+
+    <div class="card"><div class="card-icon">🇹🇷</div><h3>Turkey</h3><p>Discover university admission opportunities in Turkey.</p></div>
+
+    <div class="card"><div class="card-icon">🇮🇳</div><h3>India</h3><p>Explore university programs and admission options in India.</p></div>
+
+    <div class="card"><div class="card-icon">🇲🇾</div><h3>Malaysia</h3><p>Discover international education opportunities in Malaysia.</p></div>
+
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="section-title">Our Services</h2>
+
+  <p class="section-subtitle">
+    Guidance and support throughout your study abroad journey.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3>Document Assessment</h3>
+      <p>Reviewing academic and application documents.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏫</div>
+      <h3>University Selection</h3>
+      <p>Guidance in selecting universities and programs.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🎓</div>
+      <h3>University Admission</h3>
+      <p>Assistance with university admission applications.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🛂</div>
+      <h3>Student Visa Processing</h3>
+      <p>Guidance on student visa documentation and applications.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏅</div>
+      <h3>Scholarship Assistance</h3>
+      <p>Helping students explore available scholarship opportunities.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📄</div>
+      <h3>Document Preparation</h3>
+      <p>Support with preparing required application documents.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">💼</div>
+      <h3>Career Counseling</h3>
+      <p>Guidance on academic pathways and future career goals.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">✈️</div>
+      <h3>Pre-Departure Briefing</h3>
+      <p>Helping students prepare for their international education journey.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="contact">
+
+  <h2 class="section-title">Start Your Study Abroad Journey</h2>
+
+  <p>Connect with EduVexa for guidance on your next steps.</p>
+
+  <div class="contact-info">
+
+    <p>
+      📧 Email:
+      <a href="mailto:eduvexastudya@gmail.com">
+        eduvexastudya@gmail.com
+      </a>
+    </p>
+
+    <p>
+      📱 WhatsApp:
+      <a href="https://wa.me/8801811909779">
+        +880 1811-909779
+      </a>
+    </p>
+
+    <p>⏰ Online Inquiry: 24/7</p>
+
+    <p>
+      📘 Facebook:
+      <a href="https://www.facebook.com/EduVexaStudyAbroadSimplified/"
+         target="_blank" rel="noopener noreferrer">
+        Visit Our Facebook Page
+      </a>
+    </p>
+
+  </div>
+
+  <a href="https://wa.me/8801811909779"
+     class="btn btn-gold"
+     target="_blank" rel="noopener noreferrer">
+    Contact Us on WhatsApp
+  </a>
+
+</section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> EduVexa – Study Abroad Simplified. All Rights Reserved.</p>
+</footer>
+
+<a class="whatsapp"
+   href="https://wa.me/8801811909779"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with EduVexa on WhatsApp">
+  💬 WhatsApp
+</a>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
