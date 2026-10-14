@@ -1,170 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="EduVexa - Study Abroad Simplified. Explore universities, international study destinations, scholarships and admission guidance.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="description"
+content="EduVexa - Study Abroad Simplified. Explore universities, scholarships, international education opportunities and admission guidance.">
+
 <meta name="theme-color" content="#102D4E">
 
 <title>EduVexa | Study Abroad Simplified</title>
 
+<link rel="icon" href="../eduvexa%20logo%20jpg.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
-:root{
+
+/* =====================================
+   EDUVEXA PREMIUM DESIGN SYSTEM
+===================================== */
+
+:root {
 --navy:#102D4E;
 --dark:#081b35;
 --gold:#D9A62C;
+--gold-light:#f0c65a;
+--white:#ffffff;
 --light:#f5f7fb;
---white:#fff;
 --text:#526174;
+--border:#e5eaf1;
 }
 
-*{box-sizing:border-box}
+* {
+box-sizing:border-box;
+}
 
-html{scroll-behavior:smooth}
+html {
+scroll-behavior:smooth;
+}
 
-body{
+body {
 margin:0;
 font-family:"DM Sans",Arial,sans-serif;
 color:var(--navy);
+background:white;
 }
 
-h1,h2,h3{
-font-family:Manrope,Arial,sans-serif;
+h1,h2,h3,h4 {
+font-family:"Manrope",Arial,sans-serif;
 }
 
-a{text-decoration:none}
+a {
+text-decoration:none;
+}
 
-button,input,select,textarea{
+button,input,select,textarea {
 font:inherit;
 }
 
-button{cursor:pointer}
+button {
+cursor:pointer;
+}
 
-.container{
+button:disabled {
+opacity:.6;
+cursor:wait;
+}
+
+.container {
 width:min(1200px,92%);
 margin:auto;
 }
 
-section{
-padding:85px 0;
+section {
+padding:90px 0;
 scroll-margin-top:90px;
 }
 
-[hidden]{display:none!important}
+[hidden] {
+display:none!important;
+}
 
-.topbar{
+/* =====================================
+   TOP BAR
+===================================== */
+
+.topbar {
 background:var(--dark);
-color:#dbe5f0;
-padding:10px 0;
+color:#d8e3ef;
+padding:11px 0;
 font-size:12px;
 }
 
-.topbar .container{
+.topbar-inner {
 display:flex;
 justify-content:space-between;
 gap:15px;
 flex-wrap:wrap;
 }
 
-.topbar a{color:white}
+.topbar a {
+color:white;
+}
 
-/* HEADER */
+/* =====================================
+   HEADER
+===================================== */
 
-header{
-background:white;
+header {
+background:rgba(255,255,255,.97);
 position:sticky;
 top:0;
-z-index:100;
-box-shadow:0 3px 20px #001b3515;
+z-index:1000;
+box-shadow:0 4px 25px rgba(0,0,0,.07);
+backdrop-filter:blur(15px);
 }
 
-.header-inner{
-display:flex;
-justify-content:space-between;
-align-items:center;
+.header-inner {
 min-height:85px;
-gap:20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:25px;
 }
 
-.logo img{
-width:190px;
-max-height:75px;
+.logo {
+display:flex;
+align-items:center;
+}
+
+.logo img {
+width:185px;
+height:72px;
 object-fit:contain;
 }
 
-nav{
+nav {
 display:flex;
 align-items:center;
 gap:23px;
 }
 
-nav a{
+nav a {
+color:var(--navy);
 font-size:13px;
 font-weight:700;
-color:var(--navy);
+transition:.3s;
 }
 
-nav a:hover{color:var(--gold)}
+nav a:hover {
+color:var(--gold);
+}
 
-.menu-btn{
+.menu-btn {
 display:none;
-border:0;
+border:none;
 background:none;
-font-size:30px;
+font-size:29px;
 color:var(--navy);
 }
 
-.btn{
-display:inline-block;
-padding:14px 25px;
+/* =====================================
+   BUTTONS
+===================================== */
+
+.btn {
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+padding:15px 28px;
 border-radius:9px;
 font-size:13px;
 font-weight:800;
 border:0;
 transition:.3s;
-text-align:center;
 }
 
-.btn:hover{
+.btn:hover {
 transform:translateY(-3px);
 }
 
-.gold{
+.btn-gold {
 background:var(--gold);
 color:var(--navy);
 }
 
-.dark{
-background:var(--navy);
-color:white;
+.btn-gold:hover {
+background:var(--gold-light);
 }
 
-.white{
+.btn-white {
 background:white;
 color:var(--navy);
 }
 
-/* HERO */
-
-.hero{
-min-height:650px;
-display:flex;
-align-items:center;
-background:
-linear-gradient(90deg,rgba(5,21,43,.97),rgba(7,30,56,.80),rgba(7,30,56,.45)),
-url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85")
-center/cover;
+.btn-navy {
+background:var(--navy);
 color:white;
 }
 
-.hero-content{
+/* =====================================
+   HERO
+===================================== */
+
+.hero {
+min-height:700px;
+display:flex;
+align-items:center;
+color:white;
+
+background:
+linear-gradient(
+90deg,
+rgba(5,20,41,.97) 0%,
+rgba(8,30,55,.89) 48%,
+rgba(8,30,55,.42) 100%
+),
+url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2000&q=85")
+center/cover;
+}
+
+.hero-content {
 max-width:780px;
 }
 
-.badge{
+.hero-badge {
 color:var(--gold);
 font-size:12px;
 font-weight:800;
@@ -172,111 +239,129 @@ letter-spacing:2px;
 text-transform:uppercase;
 }
 
-.hero h1{
-font-size:clamp(38px,5.5vw,70px);
+.hero h1 {
+font-size:clamp(40px,5.5vw,72px);
 line-height:1.15;
 letter-spacing:-2px;
-margin:23px 0;
+margin:22px 0;
+font-weight:800;
 }
 
-.hero h1 span{color:var(--gold)}
+.hero h1 span {
+color:var(--gold);
+}
 
-.hero p{
+.hero p {
 font-size:17px;
 line-height:1.9;
-max-width:650px;
-color:#dce7f2;
+color:#dce6f2;
+max-width:640px;
 margin-bottom:35px;
 }
 
-.hero-actions{
+.hero-actions {
 display:flex;
-gap:15px;
+gap:14px;
 flex-wrap:wrap;
 }
 
-/* STATS */
+/* =====================================
+   STATS
+===================================== */
 
-.stats{
+.stats {
 background:white;
-padding:35px 0;
+padding:38px 0;
 box-shadow:0 5px 30px #001b3510;
 }
 
-.stats-grid{
+.stats-grid {
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:20px;
 text-align:center;
 }
 
-.stat strong{
-font-size:28px;
+.stat strong {
 display:block;
-color:var(--navy);
+font-size:30px;
+font-weight:800;
 }
 
-.stat p{
+.stat p {
 font-size:13px;
 color:var(--text);
 }
 
-/* GENERAL */
+/* =====================================
+   SECTION HEADINGS
+===================================== */
 
-.section-title{
+.section-title {
 text-align:center;
 font-size:clamp(28px,4vw,42px);
 margin:0 0 15px;
+font-weight:800;
 }
 
-.section-subtitle{
+.section-line {
+width:65px;
+height:4px;
+border-radius:10px;
+background:var(--gold);
+margin:0 auto 20px;
+}
+
+.section-subtitle {
 text-align:center;
 max-width:700px;
-margin:0 auto 45px;
+margin:0 auto 48px;
 color:var(--text);
+font-size:15px;
 line-height:1.9;
 }
 
-.line{
-width:65px;
-height:4px;
-background:var(--gold);
-margin:0 auto 20px;
-border-radius:10px;
+.light-section {
+background:var(--light);
 }
 
-.grid{
+/* =====================================
+   CARDS
+===================================== */
+
+.grid {
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
 gap:24px;
 }
 
-.card{
+.card {
 background:white;
-border-radius:15px;
-padding:27px;
-box-shadow:0 5px 25px #001b3510;
+border:1px solid var(--border);
+border-radius:16px;
+padding:28px;
+box-shadow:0 7px 30px #001b3510;
 transition:.3s;
-border:1px solid #edf0f5;
 }
 
-.card:hover{
-transform:translateY(-5px);
+.card:hover {
+transform:translateY(-6px);
 border-color:var(--gold);
+box-shadow:0 18px 40px #001b3518;
 }
 
-.card h3{
+.card h3 {
 font-size:18px;
-margin:15px 0 10px;
+margin:18px 0 10px;
 }
 
-.card p{
-color:var(--text);
+.card p {
 font-size:14px;
+color:var(--text);
 line-height:1.8;
 }
 
-.card-link{
+.card-link {
 display:inline-block;
 margin-top:15px;
 font-size:13px;
@@ -284,259 +369,261 @@ font-weight:800;
 color:#b58722;
 }
 
-.light-section{
-background:var(--light);
-}
-
-.flag{
+.flag {
 width:65px;
 height:45px;
-object-fit:cover;
 border-radius:6px;
-box-shadow:0 3px 10px #0002;
+object-fit:cover;
+box-shadow:0 4px 15px #0002;
 }
 
-.icon{
-font-size:32px;
-}
-
-/* EXPLORER */
-
-.explorer{
-background:white;
-}
-
-.explorer-box{
-background:var(--light);
-padding:30px;
-border-radius:16px;
-margin-bottom:25px;
-}
-
-.explorer-controls{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-
-label{
-font-weight:700;
-font-size:13px;
-display:block;
-margin-bottom:15px;
-}
-
-input,select,textarea{
-width:100%;
-padding:13px;
-border:1px solid #dce4ed;
-border-radius:9px;
-margin-top:8px;
-background:white;
-color:var(--navy);
-}
-
-input:focus,select:focus,textarea:focus{
-outline:2px solid #d9a62c55;
-}
-
-.result-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
-}
-
-.result-card{
-background:white;
-padding:25px;
-border-radius:13px;
-border:1px solid #e7edf4;
-box-shadow:0 4px 18px #001b350a;
-}
-
-.result-card h3{
-font-size:18px;
-}
-
-.result-card p{
-font-size:13px;
-color:var(--text);
-line-height:1.8;
-}
-
-.result-card a{
-display:inline-block;
-margin:8px 10px 8px 0;
-font-size:12px;
-font-weight:800;
-color:#b58722;
-}
-
-.result-card button{
-margin-top:10px;
-}
-
-.empty{
-text-align:center;
-padding:35px;
-color:var(--text);
-background:white;
-border-radius:12px;
-grid-column:1/-1;
-}
-
-/* SERVICES */
-
-.service-icon{
-width:60px;
-height:60px;
+.service-icon {
+width:62px;
+height:62px;
 background:#fff5dd;
-border-radius:13px;
+border-radius:15px;
 display:grid;
 place-items:center;
-font-size:28px;
+font-size:29px;
 }
 
-/* ABOUT */
+/* =====================================
+   ABOUT
+===================================== */
 
-.about{
+.about {
 background:var(--navy);
 color:white;
 text-align:center;
 }
 
-.about p{
-max-width:800px;
-margin:auto;
-line-height:2;
-color:#d5e1ed;
-}
-
-.about .section-title{
+.about .section-title {
 color:white;
 }
 
-/* FORM */
-
-.application{
-background:var(--light);
-}
-
-.form-box{
+.about p {
 max-width:850px;
 margin:auto;
-background:white;
-padding:40px;
-border-radius:18px;
-box-shadow:0 12px 40px #001b3510;
+line-height:2;
+color:#dce6f2;
 }
 
-.form-grid{
+/* =====================================
+   UNIVERSITY EXPLORER
+===================================== */
+
+.explorer-box {
+background:var(--light);
+padding:30px;
+border-radius:16px;
+margin-bottom:30px;
+}
+
+.explorer-controls {
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:20px;
 }
 
-.form-box textarea{
-resize:vertical;
+label {
+display:block;
+font-size:13px;
+font-weight:700;
+margin-bottom:17px;
 }
 
-.education-fields{
+input,select,textarea {
+width:100%;
+padding:14px;
+border:1px solid #dce4ed;
+border-radius:9px;
+margin-top:9px;
+background:white;
+color:var(--navy);
+}
+
+input:focus,select:focus,textarea:focus {
+outline:2px solid #d9a62c55;
+}
+
+.result-grid {
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(265px,1fr));
+gap:22px;
+}
+
+.result-card {
+background:white;
+padding:27px;
+border-radius:15px;
+border:1px solid var(--border);
+box-shadow:0 5px 25px #001b3510;
+}
+
+.result-card h3 {
+font-size:18px;
+margin-top:0;
+}
+
+.result-card p {
+font-size:13px;
+line-height:1.8;
+color:var(--text);
+}
+
+.result-card a {
+display:inline-block;
+margin:12px 10px 0 0;
+font-size:13px;
+font-weight:700;
+color:#b58722;
+}
+
+.result-card button {
+margin-top:15px;
+}
+
+.empty {
+grid-column:1/-1;
+padding:35px;
+background:white;
+border-radius:12px;
+text-align:center;
+color:var(--text);
+}
+
+/* =====================================
+   APPLICATION FORM
+===================================== */
+
+.form-box {
+max-width:850px;
+margin:auto;
+background:white;
+padding:42px;
+border-radius:18px;
+box-shadow:0 15px 45px #001b3510;
+}
+
+.form-grid {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.education-fields {
 background:#f7f9fc;
-padding:20px;
+padding:22px;
 border-radius:12px;
 margin-bottom:20px;
 }
 
-.form-note{
+.form-note {
 text-align:center;
 font-size:12px;
 color:var(--text);
-margin-top:15px;
+margin-top:16px;
 }
 
-/* CONTACT */
+/* =====================================
+   CONTACT
+===================================== */
 
-.contact{
+.contact {
 background:var(--navy);
 color:white;
 text-align:center;
 }
 
-.contact .section-title{
+.contact .section-title {
 color:white;
 }
 
-.contact p{
-color:#dce7f2;
+.contact p {
+color:#dce6f2;
 }
 
-.contact a{
+.contact a {
 color:var(--gold);
 }
 
-/* FOOTER */
+/* =====================================
+   FOOTER
+===================================== */
 
-footer{
+footer {
 background:var(--dark);
-color:#aebfd2;
-padding:45px 0 25px;
+color:#b9c8d8;
+padding:55px 0 25px;
 }
 
-.footer-grid{
+.footer-grid {
 display:grid;
 grid-template-columns:2fr 1fr 1fr;
-gap:35px;
+gap:40px;
 }
 
-.footer-grid a{
-display:block;
-color:#aebfd2;
-font-size:13px;
-margin:12px 0;
-}
-
-.footer-grid h3{
+.footer-grid h3 {
 color:white;
 font-size:16px;
 }
 
-.footer-logo{
-max-width:170px;
-background:white;
-padding:7px;
-border-radius:8px;
+.footer-grid a {
+display:block;
+color:#b9c8d8;
+font-size:13px;
+margin:12px 0;
 }
 
-.copyright{
+.footer-grid p {
+font-size:14px;
+line-height:1.8;
+}
+
+.footer-logo {
+width:175px;
+background:white;
+padding:8px;
+border-radius:9px;
+}
+
+.copyright {
+margin-top:40px;
 border-top:1px solid #ffffff20;
-text-align:center;
 padding-top:25px;
-margin-top:35px;
+text-align:center;
 font-size:12px;
 }
 
-.whatsapp{
+/* =====================================
+   WHATSAPP
+===================================== */
+
+.whatsapp {
 position:fixed;
-right:20px;
-bottom:20px;
-z-index:500;
+bottom:22px;
+right:22px;
 background:#25D366;
 color:white;
 padding:16px 22px;
 border-radius:50px;
-box-shadow:0 6px 20px #0003;
 font-size:13px;
 font-weight:800;
+box-shadow:0 8px 25px #0003;
+z-index:1200;
 }
 
-/* MOBILE */
+/* =====================================
+   RESPONSIVE
+===================================== */
 
-@media(max-width:950px){
+@media(max-width:950px) {
 
-.menu-btn{display:block}
+.menu-btn {
+display:block;
+}
 
-nav{
+nav {
 display:none;
 position:absolute;
 top:100%;
@@ -545,67 +632,99 @@ right:0;
 background:white;
 padding:25px;
 flex-direction:column;
-box-shadow:0 10px 25px #0002;
+box-shadow:0 15px 25px #0002;
 }
 
-nav.open{display:flex}
+nav.open {
+display:flex;
+}
 
-.footer-grid{
+.footer-grid {
 grid-template-columns:1fr 1fr;
 }
 
 }
 
-@media(max-width:600px){
+@media(max-width:600px) {
 
-section{padding:60px 0}
-
-.hero{
-min-height:600px;
+section {
+padding:65px 0;
 }
 
-.stats-grid{
+.hero {
+min-height:620px;
+}
+
+.hero h1 {
+letter-spacing:-1px;
+}
+
+.stats-grid {
 grid-template-columns:1fr 1fr;
 }
 
 .explorer-controls,
 .form-grid,
-.footer-grid{
+.footer-grid {
 grid-template-columns:1fr;
 }
 
-.form-box{
+.form-box {
 padding:25px 20px;
 }
 
-.logo img{
+.logo img {
 width:155px;
 }
 
 }
+
 </style>
+
 </head>
 
 <body>
 
+<!-- TOP BAR -->
+
 <div class="topbar">
-<div class="container">
+
+<div class="container topbar-inner">
+
 <span>✦ EduVexa — Study Abroad Simplified</span>
-<span>WhatsApp: +880 1811-909779</span>
+
+<span>
+WhatsApp:
+<a href="https://wa.me/8801811909779">
++880 1811-909779
+</a>
+</span>
+
 </div>
+
 </div>
+
+<!-- HEADER -->
 
 <header>
 
 <div class="container header-inner">
 
 <a class="logo" href="#home">
-<img src="../eduvexa%20logo%20jpg.jpg" alt="EduVexa Logo">
+
+<img
+src="../eduvexa%20logo%20jpg.jpg"
+alt="EduVexa Official Logo">
+
 </a>
 
-<button class="menu-btn" id="menuBtn"
+<button
+class="menu-btn"
+id="menuBtn"
 aria-label="Toggle navigation"
-aria-expanded="false">☰</button>
+aria-expanded="false">
+☰
+</button>
 
 <nav id="nav">
 
@@ -634,7 +753,7 @@ aria-expanded="false">☰</button>
 
 <div class="hero-content">
 
-<div class="badge">
+<div class="hero-badge">
 Your Gateway To Global Education
 </div>
 
@@ -652,11 +771,11 @@ pre-departure support.
 
 <div class="hero-actions">
 
-<a class="btn gold" href="#destinations">
+<a href="#destinations" class="btn btn-gold">
 Explore Destinations →
 </a>
 
-<a class="btn white" href="#apply">
+<a href="#apply" class="btn btn-white">
 Apply Now
 </a>
 
@@ -675,7 +794,7 @@ Apply Now
 <div class="container stats-grid">
 
 <div class="stat">
-<strong id="countryCount">—</strong>
+<strong id="countryCount">10</strong>
 <p>Study Destinations</p>
 </div>
 
@@ -704,9 +823,11 @@ Apply Now
 
 <div class="container">
 
-<h2 class="section-title">Welcome to EduVexa</h2>
+<h2 class="section-title">
+Welcome to EduVexa
+</h2>
 
-<div class="line"></div>
+<div class="section-line"></div>
 
 <p>
 EduVexa – Study Abroad Simplified is an international
@@ -722,23 +843,96 @@ and pre-departure preparation.
 
 </section>
 
-<!-- COUNTRIES -->
+<!-- STUDY DESTINATIONS -->
 
 <section id="destinations" class="light-section">
 
 <div class="container">
 
-<h2 class="section-title">Explore Study Destinations</h2>
-<div class="line"></div>
+<h2 class="section-title">
+Explore Study Destinations
+</h2>
+
+<div class="section-line"></div>
 
 <p class="section-subtitle">
-Discover international education opportunities across
-our featured destinations.
+Discover international education opportunities
+across our featured destinations.
 </p>
 
 <div class="grid" id="countryGrid">
 
-<p>Loading destinations...</p>
+<!-- STATIC FALLBACK COUNTRIES -->
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/my.png" alt="Malaysia flag">
+<h3>Malaysia</h3>
+<p>Explore international education opportunities in Malaysia.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/sk.png" alt="Slovakia flag">
+<h3>Slovakia</h3>
+<p>Explore higher education opportunities in Slovakia.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/ro.png" alt="Romania flag">
+<h3>Romania</h3>
+<p>Discover university opportunities in Romania.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/hu.png" alt="Hungary flag">
+<h3>Hungary</h3>
+<p>Explore academic and scholarship opportunities in Hungary.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/lt.png" alt="Lithuania flag">
+<h3>Lithuania</h3>
+<p>Discover international education opportunities in Lithuania.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/cn.png" alt="China flag">
+<h3>China</h3>
+<p>Explore international university programs in China.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/in.png" alt="India flag">
+<h3>India</h3>
+<p>Discover university programs and academic opportunities in India.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/it.png" alt="Italy flag">
+<h3>Italy</h3>
+<p>Explore higher education opportunities in Italy.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/tr.png" alt="Turkey flag">
+<h3>Turkey</h3>
+<p>Discover university admission opportunities in Turkey.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
+
+<div class="card">
+<img class="flag" src="https://flagcdn.com/w160/uz.png" alt="Uzbekistan flag">
+<h3>Uzbekistan</h3>
+<p>Explore academic opportunities in Uzbekistan.</p>
+<a class="card-link" href="#universities">Explore Universities →</a>
+</div>
 
 </div>
 
@@ -746,14 +940,17 @@ our featured destinations.
 
 </section>
 
-<!-- UNIVERSITIES -->
+<!-- UNIVERSITY EXPLORER -->
 
-<section id="universities" class="explorer">
+<section id="universities">
 
 <div class="container">
 
-<h2 class="section-title">University Explorer</h2>
-<div class="line"></div>
+<h2 class="section-title">
+University Explorer
+</h2>
+
+<div class="section-line"></div>
 
 <p class="section-subtitle">
 Select your country, explore universities and discover
@@ -766,18 +963,21 @@ available academic programs.
 
 <label>
 Select Country
+
 <select id="universityCountry">
 <option value="">Select Country</option>
 </select>
+
 </label>
 
 <label>
 Search University
+
 <input
 id="universitySearch"
 type="search"
-placeholder="Search university name..."
->
+placeholder="Search university name...">
+
 </label>
 
 </div>
@@ -798,7 +998,7 @@ Select a country to explore universities.
 Available Programs
 </h2>
 
-<div class="line"></div>
+<div class="section-line"></div>
 
 <div class="result-grid" id="programGrid"></div>
 
@@ -808,18 +1008,21 @@ Available Programs
 
 </section>
 
-<!-- SCHOLARSHIPS -->
+<!-- SCHOLARSHIP FINDER -->
 
 <section id="scholarships" class="light-section">
 
 <div class="container">
 
-<h2 class="section-title">Scholarship Finder</h2>
-<div class="line"></div>
+<h2 class="section-title">
+Scholarship Finder
+</h2>
+
+<div class="section-line"></div>
 
 <p class="section-subtitle">
-Explore published scholarship opportunities
-and visit official sources for current information.
+Explore scholarship opportunities and check
+official sources for current eligibility and deadlines.
 </p>
 
 <div class="explorer-box">
@@ -828,18 +1031,21 @@ and visit official sources for current information.
 
 <label>
 Select Country
+
 <select id="scholarshipCountry">
 <option value="">Select Country</option>
 </select>
+
 </label>
 
 <label>
 Search Scholarship
+
 <input
 id="scholarshipSearch"
 type="search"
-placeholder="Search scholarship..."
->
+placeholder="Search scholarship...">
+
 </label>
 
 </div>
@@ -864,14 +1070,83 @@ Select a country to explore scholarships.
 
 <div class="container">
 
-<h2 class="section-title">Our Services</h2>
-<div class="line"></div>
+<h2 class="section-title">
+Our Services
+</h2>
+
+<div class="section-line"></div>
 
 <p class="section-subtitle">
 Guidance throughout your international education journey.
 </p>
 
-<div class="grid" id="servicesGrid"></div>
+<div class="grid">
+
+<div class="card">
+<div class="service-icon">📋</div>
+<h3>Document Assessment</h3>
+<p>Academic document assessment and application guidance.</p>
+<p>Secure online document submission is being prepared.</p>
+</div>
+
+<div class="card">
+<div class="service-icon">🏛️</div>
+<h3>University Selection</h3>
+<p>Explore universities and available academic programs.</p>
+<a class="card-link" href="#universities">
+Explore Universities →
+</a>
+</div>
+
+<div class="card">
+<div class="service-icon">🎓</div>
+<h3>University Admission</h3>
+<p>University admission application guidance and support.</p>
+</div>
+
+<div class="card">
+<div class="service-icon">🛂</div>
+<h3>Student Visa Processing</h3>
+<p>Guidance on student visa documentation and application requirements.</p>
+</div>
+
+<div class="card">
+<div class="service-icon">🏅</div>
+<h3>Scholarship Assistance</h3>
+<p>Explore relevant scholarship opportunities.</p>
+<a class="card-link" href="#scholarships">
+Explore Scholarships →
+</a>
+</div>
+
+<div class="card">
+<div class="service-icon">📑</div>
+<h3>Document Preparation</h3>
+<p>Support with preparing academic application documents.</p>
+</div>
+
+<div class="card">
+<div class="service-icon">💼</div>
+<h3>Career Counseling</h3>
+<p>Guidance on academic pathways and career planning.</p>
+
+<a
+class="card-link"
+href="https://wa.me/8801811909779"
+target="_blank"
+rel="noopener noreferrer">
+Request Counseling →
+</a>
+
+</div>
+
+<div class="card">
+<div class="service-icon">✈️</div>
+<h3>Pre-Departure Briefing</h3>
+<p>Practical guidance before starting your international education journey.</p>
+</div>
+
+</div>
 
 </div>
 
@@ -879,12 +1154,15 @@ Guidance throughout your international education journey.
 
 <!-- APPLICATION -->
 
-<section id="apply" class="application">
+<section id="apply" class="light-section">
 
 <div class="container">
 
-<h2 class="section-title">Apply for Study Abroad</h2>
-<div class="line"></div>
+<h2 class="section-title">
+Apply for Study Abroad
+</h2>
+
+<div class="section-line"></div>
 
 <p class="section-subtitle">
 Complete your information to start an inquiry with EduVexa.
@@ -917,15 +1195,30 @@ Email Address
 
 <label>
 Interested Country *
+
 <select id="interestedCountry" required>
 <option value="">Select Country</option>
+
+<option>Malaysia</option>
+<option>Slovakia</option>
+<option>Romania</option>
+<option>Hungary</option>
+<option>Lithuania</option>
+<option>China</option>
+<option>India</option>
+<option>Italy</option>
+<option>Turkey</option>
+<option>Uzbekistan</option>
+
 </select>
+
 </label>
 
 </div>
 
 <label>
 Education Qualification *
+
 <select id="qualification" required>
 
 <option value="">Select Qualification</option>
@@ -938,20 +1231,29 @@ Education Qualification *
 <option>Dakhil</option>
 
 </select>
+
 </label>
 
-<div id="educationFields" class="education-fields" hidden>
+<div class="education-fields" id="educationFields" hidden>
 
 <div class="form-grid">
 
 <label>
-<span id="subjectLabel">Group / Subject *</span>
+
+<span id="subjectLabel">
+Group / Subject *
+</span>
+
 <input id="subject" maxlength="100">
+
 </label>
 
 <label>
+
 Result (GPA / CGPA) *
+
 <input id="result" maxlength="40">
+
 </label>
 
 </div>
@@ -960,13 +1262,21 @@ Result (GPA / CGPA) *
 
 <label>
 Additional Message
-<textarea id="studentMessage" rows="4"
+
+<textarea
+id="studentMessage"
+rows="4"
 maxlength="1000"></textarea>
+
 </label>
 
-<button type="submit" class="btn gold"
+<button
+class="btn btn-gold"
+type="submit"
 style="width:100%">
+
 Submit Application via WhatsApp →
+
 </button>
 
 <p class="form-note">
@@ -988,10 +1298,15 @@ You must press Send to submit your inquiry.
 
 <div class="container">
 
-<h2 class="section-title">Contact EduVexa</h2>
-<div class="line"></div>
+<h2 class="section-title">
+Contact EduVexa
+</h2>
 
-<p>Start your global education journey with us.</p>
+<div class="section-line"></div>
+
+<p>
+Start your global education journey with us.
+</p>
 
 <p>
 WhatsApp:
@@ -1008,15 +1323,23 @@ eduvexastudya@gmail.com
 </p>
 
 <p>
-<a href="https://www.facebook.com/EduVexaStudyAbroadSimplified/"
-target="_blank" rel="noopener noreferrer">
+
+<a
+href="https://www.facebook.com/EduVexaStudyAbroadSimplified/"
+target="_blank"
+rel="noopener noreferrer">
 Facebook
 </a>
+
 &nbsp; | &nbsp;
-<a href="https://www.instagram.com/eduvexastudya/"
-target="_blank" rel="noopener noreferrer">
+
+<a
+href="https://www.instagram.com/eduvexastudya/"
+target="_blank"
+rel="noopener noreferrer">
 Instagram
 </a>
+
 </p>
 
 </div>
@@ -1024,6 +1347,8 @@ Instagram
 </section>
 
 </main>
+
+<!-- FOOTER -->
 
 <footer>
 
@@ -1033,13 +1358,15 @@ Instagram
 
 <div>
 
-<img class="footer-logo"
+<img
+class="footer-logo"
 src="../eduvexa%20logo%20jpg.jpg"
 alt="EduVexa">
 
 <p>
 EduVexa – Study Abroad Simplified.
-Explore your global education opportunities.
+Explore international education opportunities
+with personalized guidance.
 </p>
 
 </div>
@@ -1076,7 +1403,8 @@ WhatsApp
 </div>
 
 <div class="copyright">
-© <span id="year"></span> EduVexa.
+© <span id="year">2026</span>
+EduVexa – Study Abroad Simplified.
 All Rights Reserved.
 </div>
 
@@ -1084,414 +1412,787 @@ All Rights Reserved.
 
 </footer>
 
-<a class="whatsapp"
+<a
+class="whatsapp"
 href="https://wa.me/8801811909779"
 target="_blank"
 rel="noopener noreferrer">
 WhatsApp Chat
 </a>
 
-<script type="module">
+<!-- =====================================
+     BASE JAVASCRIPT
+===================================== -->
 
-import {createClient} from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+<script>
 
-/* SUPABASE CONFIGURATION */
+/* MOBILE MENU */
 
-const SUPABASE_URL=
-"https://cnxtddqojzawfwakmixl.supabase.co";
+const menuButton=document.getElementById("menuBtn");
+const navigation=document.getElementById("nav");
 
-const SUPABASE_KEY=
-"sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF";
+menuButton.addEventListener("click",()=>{
 
-const db=createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+const opened=navigation.classList.toggle("open");
+
+menuButton.setAttribute(
+"aria-expanded",
+String(opened)
 );
 
-const el=id=>document.getElementById(id);
+});
 
-let countries=[];
+navigation.querySelectorAll("a").forEach(link=>{
+
+link.addEventListener("click",()=>{
+
+navigation.classList.remove("open");
+
+menuButton.setAttribute("aria-expanded","false");
+
+});
+
+});
+
+/* EDUCATION QUALIFICATION */
+
+const qualification=document.getElementById("qualification");
+
+const educationFields=document.getElementById("educationFields");
+
+const subject=document.getElementById("subject");
+
+const result=document.getElementById("result");
+
+const subjectLabel=document.getElementById("subjectLabel");
+
+qualification.addEventListener("change",()=>{
+
+const level=qualification.value;
+const active=Boolean(level);
+
+educationFields.hidden=!active;
+
+subject.required=active;
+result.required=active;
+
+subject.value="";
+result.value="";
+
+if(["SSC","HSC","Dakhil"].includes(level)){
+
+subjectLabel.textContent="Group *";
+
+subject.placeholder=
+"Science / Business Studies / Humanities";
+
+}else if(level==="Diploma"){
+
+subjectLabel.textContent="Diploma Subject / Technology *";
+
+subject.placeholder=
+"Example: Computer Technology";
+
+}else if(level==="Alim"){
+
+subjectLabel.textContent="Group / Subject *";
+
+subject.placeholder="Enter your group or subject";
+
+}else{
+
+subjectLabel.textContent="Department / Subject *";
+
+subject.placeholder=
+"Enter your department or subject";
+
+}
+
+});
+
+/* APPLICATION FORM */
+
+document.getElementById("applicationForm")
+.addEventListener("submit",event=>{
+
+event.preventDefault();
+
+const name=document.getElementById("studentName").value.trim();
+
+const phone=document.getElementById("studentPhone").value.trim();
+
+const email=document.getElementById("studentEmail").value.trim();
+
+const country=document.getElementById("interestedCountry").value;
+
+const level=qualification.value;
+
+const educationSubject=subject.value.trim();
+
+const educationResult=result.value.trim();
+
+const message=document.getElementById("studentMessage").value.trim();
+
+if(!name||!phone||!country||!level||
+!educationSubject||!educationResult){
+
+alert("Please complete all required fields.");
+
+return;
+
+}
+
+const text=[
+
+"NEW STUDENT INQUIRY - EduVexa",
+"",
+"Full Name: "+name,
+"WhatsApp: "+phone,
+"Email: "+(email||"Not provided"),
+"Interested Country: "+country,
+"Education Qualification: "+level,
+"Group / Department / Subject: "+educationSubject,
+"Result: "+educationResult,
+"Additional Message: "+(message||"Not provided")
+
+].join("\n");
+
+window.location.href=
+"https://wa.me/8801811909779?text="+
+encodeURIComponent(text);
+
+});
+
+/* FOOTER YEAR */
+
+document.getElementById("year").textContent=
+new Date().getFullYear();
+
+</script>
+
+<!-- =====================================
+     SUPABASE INTEGRATION
+===================================== -->
+
+<script type="module">
+
+const SUPABASE_URL =
+"https://cnxtddqojzawfwakmixl.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF";
+
+const fallbackCountries=[
+{id:1,name:"Malaysia",code:"MY"},
+{id:2,name:"Slovakia",code:"SK"},
+{id:3,name:"Romania",code:"RO"},
+{id:4,name:"Hungary",code:"HU"},
+{id:5,name:"Lithuania",code:"LT"},
+{id:6,name:"China",code:"CN"},
+{id:7,name:"India",code:"IN"},
+{id:8,name:"Italy",code:"IT"},
+{id:9,name:"Turkey",code:"TR"},
+{id:10,name:"Uzbekistan",code:"UZ"}
+];
+
+const byId=id=>document.getElementById(id);
+
+let db=null;
+
+let countries=fallbackCountries;
 let universities=[];
 let scholarships=[];
+let databaseReady=false;
 
-function createEmpty(text){
+function emptyMessage(message){
 
 const div=document.createElement("div");
 
 div.className="empty";
-div.textContent=text;
+div.textContent=message;
 
 return div;
 
 }
 
-function countryOption(country){
+function setMessage(id,message){
+
+const container=byId(id);
+
+container.replaceChildren(emptyMessage(message));
+
+}
+
+function fillCountryDropdowns(){
+
+const selectors=[
+"universityCountry",
+"scholarshipCountry"
+];
+
+for(const id of selectors){
+
+const select=byId(id);
+
+select.replaceChildren();
+
+const first=document.createElement("option");
+
+first.value="";
+first.textContent="Select Country";
+
+select.appendChild(first);
+
+for(const country of countries){
 
 const option=document.createElement("option");
 
 option.value=country.id;
 option.textContent=country.name;
 
-return option;
+select.appendChild(option);
 
 }
 
-/* LOAD COUNTRIES */
-
-async function loadCountries(){
-
-const {data,error}=await db
-.from("countries")
-.select("*")
-.order("id");
-
-if(error){
-console.error("Countries:",error.message);
-el("countryGrid").replaceChildren(
-createEmpty("Unable to load destinations.")
-);
-return;
 }
 
-countries=data||[];
+}
 
-el("countryCount").textContent=countries.length;
+/* =====================================
+   COUNTRY CARDS
+===================================== */
 
-const grid=el("countryGrid");
+function renderCountries(){
+
+const grid=byId("countryGrid");
+
 grid.replaceChildren();
 
-for(const country of countries){
+countries.forEach(country=>{
 
 const card=document.createElement("div");
+
 card.className="card";
 
-if(country.flag_url){
-
 const flag=document.createElement("img");
+
 flag.className="flag";
-flag.src=country.flag_url;
+
+flag.src=country.flag_url ||
+"https://flagcdn.com/w160/"+country.code.toLowerCase()+".png";
+
 flag.alt=country.name+" flag";
 
-card.append(flag);
-
-}
-
 const title=document.createElement("h3");
+
 title.textContent=country.name;
 
 const description=document.createElement("p");
+
 description.textContent=
-country.description||
+country.description ||
 "Explore international education opportunities.";
 
 const link=document.createElement("a");
+
 link.className="card-link";
 link.href="#universities";
 link.textContent="Explore Universities →";
 
 link.addEventListener("click",()=>{
 
-el("universityCountry").value=country.id;
+byId("universityCountry").value=country.id;
+
 renderUniversities();
 
 });
 
-card.append(title,description,link);
-grid.append(card);
+card.append(flag,title,description,link);
 
-}
+grid.appendChild(card);
 
-if(!countries.length){
-grid.append(createEmpty("No destinations available."));
-}
-
-for(const id of [
-"universityCountry",
-"scholarshipCountry",
-"interestedCountry"
-]){
-
-const select=el(id);
-
-select.length=1;
-
-countries.forEach(country=>{
-select.append(countryOption(country));
 });
 
-}
+byId("countryCount").textContent=countries.length;
 
 }
 
-/* LOAD UNIVERSITIES */
-
-async function loadUniversities(){
-
-const {data,error}=await db
-.from("universities")
-.select("*")
-.eq("is_published",true)
-.order("name");
-
-if(error){
-console.error("Universities:",error.message);
-el("universityGrid").replaceChildren(
-createEmpty("Unable to load universities.")
-);
-return;
-}
-
-universities=data||[];
-
-el("universityCount").textContent=
-universities.length;
-
-renderUniversities();
-
-}
+/* =====================================
+   UNIVERSITY EXPLORER
+===================================== */
 
 function renderUniversities(){
 
-const countryId=Number(el("universityCountry").value);
-const search=el("universitySearch").value.toLowerCase();
+const countryId=Number(
+byId("universityCountry").value
+);
 
-const grid=el("universityGrid");
+const search=byId("universitySearch")
+.value.toLowerCase();
+
+const grid=byId("universityGrid");
+
 grid.replaceChildren();
 
-el("programSection").hidden=true;
+byId("programSection").hidden=true;
 
 if(!countryId){
 
-grid.append(
-createEmpty("Select a country to explore universities.")
+grid.appendChild(
+emptyMessage("Select a country to explore universities.")
 );
 
 return;
+
+}
+
+if(!databaseReady){
+
+grid.appendChild(
+emptyMessage("University database is currently unavailable. Please try again later.")
+);
+
+return;
+
 }
 
 const filtered=universities.filter(university=>
+
 university.country_id===countryId &&
+
 university.name.toLowerCase().includes(search)
+
 );
 
 if(!filtered.length){
 
-grid.append(
-createEmpty("No published universities found for this selection.")
+grid.appendChild(
+emptyMessage("No published universities found for this country.")
 );
 
 return;
+
 }
 
 filtered.forEach(university=>{
 
-const card=document.createElement("div");
+const card=document.createElement("article");
+
 card.className="result-card";
 
-const heading=document.createElement("h3");
-heading.textContent=university.name;
+const title=document.createElement("h3");
 
-const location=document.createElement("p");
-location.textContent=
+title.textContent=university.name;
+
+const city=document.createElement("p");
+
+city.textContent=
 "Location: "+(university.city||"Not specified");
 
 const type=document.createElement("p");
+
 type.textContent=
 "Type: "+(university.university_type||"Not specified");
 
 const button=document.createElement("button");
-button.className="btn dark";
+
+button.className="btn btn-navy";
+
 button.textContent="View Programs";
 
-button.onclick=()=>loadPrograms(university);
+button.addEventListener("click",()=>{
 
-card.append(heading,location,type,button);
+loadPrograms(university);
+
+});
+
+card.append(title,city,type,button);
 
 if(university.official_website){
 
 const link=document.createElement("a");
 
 link.href=university.official_website;
+
 link.target="_blank";
 link.rel="noopener noreferrer";
-link.textContent="Official Website ↗";
+
+link.textContent="Official University Website ↗";
 
 card.append(link);
 
 }
 
-grid.append(card);
+grid.appendChild(card);
 
 });
 
 }
 
-/* LOAD UNIVERSITY PROGRAMS */
+/* =====================================
+   UNIVERSITY PROGRAMS
+===================================== */
 
 async function loadPrograms(university){
 
-el("programSection").hidden=false;
+const section=byId("programSection");
 
-el("programTitle").textContent=
+section.hidden=false;
+
+byId("programTitle").textContent=
 "Programs at "+university.name;
 
-const grid=el("programGrid");
+const grid=byId("programGrid");
 
 grid.replaceChildren(
-createEmpty("Loading programs...")
+emptyMessage("Loading programs...")
 );
+
+try{
 
 const {data,error}=await db
+
 .from("programs")
+
 .select("*")
+
 .eq("university_id",university.id)
+
 .eq("is_published",true)
+
 .order("name");
 
-if(error){
-
-console.error("Programs:",error.message);
-
-grid.replaceChildren(
-createEmpty("Unable to load programs.")
-);
-
-return;
-}
+if(error)throw error;
 
 grid.replaceChildren();
 
 if(!data?.length){
 
-grid.append(
-createEmpty("No verified programs published yet.")
+grid.appendChild(
+emptyMessage("No verified programs published yet.")
 );
 
 return;
+
 }
 
-data.forEach(program=>{
+for(const program of data){
 
-const card=document.createElement("div");
+const card=document.createElement("article");
+
 card.className="result-card";
 
 const title=document.createElement("h3");
+
 title.textContent=program.name;
 
-const level=document.createElement("p");
-level.textContent=
-"Degree: "+(program.degree_level||"Not specified");
+card.appendChild(title);
 
-const duration=document.createElement("p");
-duration.textContent=
-"Duration: "+(program.duration||"Check official source");
+const details=[
 
-const tuition=document.createElement("p");
-tuition.textContent=
-"Tuition: "+(program.tuition_fee||"Check official source");
+["Degree",program.degree_level],
+["Duration",program.duration],
+["Tuition Fee",program.tuition_fee],
+["Admission Requirements",program.admission_requirements]
 
-card.append(title,level,duration,tuition);
+];
 
-if(program.admission_requirements){
+details.forEach(([label,value])=>{
 
-const requirements=document.createElement("p");
-requirements.textContent=
-"Requirements: "+program.admission_requirements;
+if(!value)return;
 
-card.append(requirements);
+const p=document.createElement("p");
 
-}
+p.textContent=label+": "+value;
+
+card.appendChild(p);
+
+});
 
 if(program.official_program_url){
 
 const link=document.createElement("a");
 
 link.href=program.official_program_url;
+
 link.target="_blank";
 link.rel="noopener noreferrer";
+
 link.textContent="Official Program Details ↗";
 
-card.append(link);
+card.appendChild(link);
 
 }
 
-grid.append(card);
+grid.appendChild(card);
 
-});
+}
 
-el("programSection").scrollIntoView({
+}catch(error){
+
+console.error("Programs loading failed:",error);
+
+setMessage(
+"programGrid",
+"Unable to load programs. Please try again later."
+);
+
+}
+
+section.scrollIntoView({
 behavior:"smooth",
 block:"start"
 });
 
 }
 
-/* SCHOLARSHIPS */
+/* =====================================
+   SCHOLARSHIP FINDER
+===================================== */
 
-async function loadScholarships(){
+function renderScholarships(){
 
-const {data,error}=await db
-.from("scholarships")
-.select("*")
-.eq("is_published",true)
-.order("name");
+const countryId=Number(
+byId("scholarshipCountry").value
+);
 
-if(error){
+const search=byId("scholarshipSearch")
+.value.toLowerCase();
 
-console.error("Scholarships:",error.message);
+const grid=byId("scholarshipGrid");
 
-el("scholarshipGrid").replaceChildren(
-createEmpty("Unable to load scholarships.")
+grid.replaceChildren();
+
+if(!countryId){
+
+grid.appendChild(
+emptyMessage("Select a country to explore scholarships.")
 );
 
 return;
+
 }
 
-scholarships=data||[];
+if(!databaseReady){
+
+grid.appendChild(
+emptyMessage("Scholarship database is currently unavailable.")
+);
+
+return;
+
+}
+
+const filtered=scholarships.filter(s=>
+
+s.country_id===countryId &&
+
+s.name.toLowerCase().includes(search)
+
+);
+
+if(!filtered.length){
+
+grid.appendChild(
+emptyMessage("No published scholarships available for this selection.")
+);
+
+return;
+
+}
+
+filtered.forEach(scholarship=>{
+
+const card=document.createElement("article");
+
+card.className="result-card";
+
+const title=document.createElement("h3");
+
+title.textContent=scholarship.name;
+
+card.appendChild(title);
+
+const details=[
+
+["Provider",scholarship.provider],
+["Degree Level",scholarship.degree_level],
+["Coverage",scholarship.coverage],
+["Eligibility",scholarship.eligibility],
+["Deadline",scholarship.application_deadline],
+["Status",scholarship.status]
+
+];
+
+details.forEach(([label,value])=>{
+
+if(!value)return;
+
+const p=document.createElement("p");
+
+p.textContent=label+": "+value;
+
+card.appendChild(p);
+
+});
+
+if(scholarship.official_url){
+
+const link=document.createElement("a");
+
+link.href=scholarship.official_url;
+
+link.target="_blank";
+link.rel="noopener noreferrer";
+
+link.textContent="Official Scholarship Website ↗";
+
+card.appendChild(link);
+
+}
+
+const inquiry=document.createElement("a");
+
+inquiry.href=
+"https://wa.me/8801811909779?text="+
+encodeURIComponent(
+"Hello EduVexa! I want information about the scholarship: "+
+scholarship.name
+);
+
+inquiry.target="_blank";
+inquiry.rel="noopener noreferrer";
+
+inquiry.textContent="Get Scholarship Guidance →";
+
+card.appendChild(inquiry);
+
+grid.appendChild(card);
+
+});
+
+}
+
+/* =====================================
+   LOAD SUPABASE DATA
+===================================== */
+
+async function initializeDatabase(){
+
+renderCountries();
+
+fillCountryDropdowns();
+
+try{
+
+const module=await import(
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+);
+
+db=module.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+const [
+countryResponse,
+universityResponse,
+scholarshipResponse
+]=await Promise.all([
+
+db.from("countries")
+.select("*")
+.order("id"),
+
+db.from("universities")
+.select("*")
+.eq("is_published",true)
+.order("name"),
+
+db.from("scholarships")
+.select("*")
+.eq("is_published",true)
+.order("name")
+
+]);
+
+if(countryResponse.error){
+throw countryResponse.error;
+}
+
+if(universityResponse.error){
+throw universityResponse.error;
+}
+
+if(scholarshipResponse.error){
+throw scholarshipResponse.error;
+}
+
+countries=countryResponse.data||[];
+
+universities=universityResponse.data||[];
+
+scholarships=scholarshipResponse.data||[];
+
+databaseReady=true;
+
+renderCountries();
+
+fillCountryDropdowns();
+
+byId("universityCount").textContent=
+universities.length;
+
+console.info("EduVexa database connected.");
+
+}catch(error){
+
+console.error(
+"EduVexa Supabase connection:",
+error
+);
+
+databaseReady=false;
+
+byId("universityCount").textContent="—";
+
+}
+
+renderUniversities();
 
 renderScholarships();
 
 }
 
-function renderScholarships(){
+/* =====================================
+   EVENT LISTENERS
+===================================== */
 
-const countryId=Number(el("scholarshipCountry").value);
-const search=el("scholarshipSearch").value.toLowerCase();
-
-const grid=el("scholarshipGrid");
-grid.replaceChildren();
-
-if(!countryId){
-
-grid.append(
-createEmpty("Select a country to explore scholarships.")
+byId("universityCountry").addEventListener(
+"change",
+renderUniversities
 );
 
-return;
-}
-
-const filtered=scholarships.filter(s=>
-s.country_id===countryId &&
-s.name.toLowerCase().includes(search)
+byId("universitySearch").addEventListener(
+"input",
+renderUniversities
 );
 
-if(!filtered.length){
-
-grid.append(
-createEmpty("No published scholarships available for this selection.")
+byId("scholarshipCountry").addEventListener(
+"change",
+renderScholarships
 );
 
-return;
-}
+byId("scholarshipSearch").addEventListener(
+"input",
+renderScholarships
+);
 
-filtered.forEach(scholarship=>{
+/* INITIALIZE */
 
-const card=document.createElement("div");
-card.className="result-card";
+initializeDatabase();
 
-const title=document.createElement("h3");
-title.textContent=scholarship.name;
+</script>
 
-const provider=document.createElement("p");
-provider.textContent=
+</body>
+</html>
