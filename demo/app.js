@@ -560,7 +560,8 @@ async function initializeDatabase() {
     );
 
     db = module.createClient(
-      SUPABASE_URL,
+      const SUPABASE_URL =
+"https://cnxtddpqjzawfwakmlxl.supabase.co";
       SUPABASE_KEY
     );
 
