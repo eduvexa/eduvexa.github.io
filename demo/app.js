@@ -1,6 +1,8 @@
-// ==========================================
-// EduVexa V4.2 - Premium Website Application
-// ==========================================
+// =============================================
+// EduVexa V4.3 - Premium Website Application
+// =============================================
+
+// SUPABASE CONFIGURATION
 
 const SUPABASE_URL =
   "https://cnxtddpqjzawfwakmlxl.supabase.co";
@@ -12,9 +14,9 @@ const WHATSAPP_NUMBER = "8801811909779";
 
 const $ = (id) => document.getElementById(id);
 
-// ==========================================
+// =============================================
 // INITIAL DATA
-// ==========================================
+// =============================================
 
 const fallbackCountries = [
   { id: 1, name: "Malaysia", code: "MY" },
@@ -30,25 +32,27 @@ const fallbackCountries = [
 ];
 
 let countries = [...fallbackCountries];
+
 let universities = [];
 let scholarships = [];
 
 let db = null;
 let databaseConnected = false;
 
-// ==========================================
-// UTILITIES
-// ==========================================
+// =============================================
+// HELPER FUNCTIONS
+// =============================================
 
 function createEmpty(message) {
-  const element = document.createElement("div");
-  element.className = "empty";
-  element.textContent = message;
-  return element;
+  const div = document.createElement("div");
+  div.className = "empty";
+  div.textContent = message;
+  return div;
 }
 
 function showEmpty(containerId, message) {
   const container = $(containerId);
+
   if (!container) return;
 
   container.replaceChildren(createEmpty(message));
@@ -56,22 +60,27 @@ function showEmpty(containerId, message) {
 
 function createParagraph(label, value) {
   const p = document.createElement("p");
-  p.textContent = `${label}: ${value || "Not specified"}`;
+
+  p.textContent =
+    `${label}: ${value || "Not specified"}`;
+
   return p;
 }
 
 function createExternalLink(url, text) {
   const link = document.createElement("a");
+
   link.href = url;
   link.textContent = text;
   link.target = "_blank";
   link.rel = "noopener noreferrer";
+
   return link;
 }
 
-// ==========================================
+// =============================================
 // COUNTRY DROPDOWNS
-// ==========================================
+// =============================================
 
 function populateCountryDropdowns() {
   const dropdownIds = [
@@ -81,30 +90,36 @@ function populateCountryDropdowns() {
 
   dropdownIds.forEach((id) => {
     const select = $(id);
+
     if (!select) return;
 
     select.replaceChildren();
 
     const placeholder = document.createElement("option");
+
     placeholder.value = "";
     placeholder.textContent = "Select Country";
+
     select.appendChild(placeholder);
 
     countries.forEach((country) => {
       const option = document.createElement("option");
+
       option.value = country.id;
       option.textContent = country.name;
+
       select.appendChild(option);
     });
   });
 }
 
-// ==========================================
+// =============================================
 // COUNTRY CARDS
-// ==========================================
+// =============================================
 
 function renderCountries() {
   const grid = $("countryGrid");
+
   if (!grid) return;
 
   grid.replaceChildren();
@@ -114,6 +129,7 @@ function renderCountries() {
     card.className = "card";
 
     const flag = document.createElement("img");
+
     flag.className = "flag";
     flag.alt = `${country.name} flag`;
     flag.loading = "lazy";
@@ -126,52 +142,67 @@ function renderCountries() {
     title.textContent = country.name;
 
     const description = document.createElement("p");
+
     description.textContent =
       country.description ||
       `Explore international education opportunities in ${country.name}.`;
 
     const link = document.createElement("a");
+
     link.className = "card-link";
     link.href = "#universities";
     link.textContent = "Explore Universities →";
 
     link.addEventListener("click", () => {
       const select = $("universityCountry");
+
       select.value = String(country.id);
+
       renderUniversities();
     });
 
     card.append(flag, title, description, link);
+
     grid.appendChild(card);
   });
 }
 
-// ==========================================
+// =============================================
 // UNIVERSITY EXPLORER
-// ==========================================
+// =============================================
 
 function renderUniversities() {
-  const countryId = Number($("universityCountry").value);
-  const search = $("universitySearch").value.trim().toLowerCase();
+  const countryId = Number(
+    $("universityCountry").value
+  );
+
+  const search = $("universitySearch")
+    .value.trim()
+    .toLowerCase();
 
   const grid = $("universityGrid");
+
   grid.replaceChildren();
 
   $("programSection").hidden = true;
 
   if (!countryId) {
     grid.appendChild(
-      createEmpty("Select a country to explore universities.")
+      createEmpty(
+        "Select a country to explore universities."
+      )
     );
+
     return;
   }
 
   if (!databaseConnected) {
     grid.appendChild(
       createEmpty(
-        "University database is currently unavailable. Please try again later."
+        "University database is currently unavailable."
       )
     );
+
     return;
   }
 
@@ -182,17 +213,19 @@ function renderUniversities() {
     );
   });
 
-  if (filtered.length === 0) {
+  if (!filtered.length) {
     grid.appendChild(
       createEmpty(
         "No published universities found for this country."
       )
     );
+
     return;
   }
 
   filtered.forEach((university) => {
     const card = document.createElement("article");
+
     card.className = "result-card";
 
     const title = document.createElement("h3");
@@ -209,6 +242,7 @@ function renderUniversities() {
     );
 
     const button = document.createElement("button");
+
     button.className = "btn dark";
     button.textContent = "View Programs";
 
@@ -231,12 +265,13 @@ function renderUniversities() {
   });
 }
 
-// ==========================================
+// =============================================
 // UNIVERSITY PROGRAMS
-// ==========================================
+// =============================================
 
 async function loadPrograms(university) {
   const section = $("programSection");
+
   const grid = $("programGrid");
 
   section.hidden = false;
@@ -250,7 +285,9 @@ async function loadPrograms(university) {
 
   try {
     if (!db) {
-      throw new Error("Database connection unavailable.");
+      throw new Error(
+        "Database connection unavailable."
+      );
     }
 
     const { data, error } = await db
@@ -267,14 +304,16 @@ async function loadPrograms(university) {
     if (!data || data.length === 0) {
       grid.appendChild(
         createEmpty(
-          "No verified programs have been published for this university yet."
+          "No verified programs published yet."
         )
       );
+
       return;
     }
 
     data.forEach((program) => {
       const card = document.createElement("article");
+
       card.className = "result-card";
 
       const title = document.createElement("h3");
@@ -284,19 +323,28 @@ async function loadPrograms(university) {
 
       if (program.degree_level) {
         card.appendChild(
-          createParagraph("Degree", program.degree_level)
+          createParagraph(
+            "Degree",
+            program.degree_level
+          )
         );
       }
 
       if (program.duration) {
         card.appendChild(
-          createParagraph("Duration", program.duration)
+          createParagraph(
+            "Duration",
+            program.duration
+          )
         );
       }
 
       if (program.tuition_fee) {
         card.appendChild(
-          createParagraph("Tuition Fee", program.tuition_fee)
+          createParagraph(
+            "Tuition Fee",
+            program.tuition_fee
+          )
         );
       }
 
@@ -321,7 +369,10 @@ async function loadPrograms(university) {
       grid.appendChild(card);
     });
   } catch (error) {
-    console.error("Program loading failed:", error);
+    console.error(
+      "Program loading failed:",
+      error
+    );
 
     showEmpty(
       "programGrid",
@@ -335,23 +386,30 @@ async function loadPrograms(university) {
   });
 }
 
-// ==========================================
+// =============================================
 // SCHOLARSHIP FINDER
-// ==========================================
+// =============================================
 
 function renderScholarships() {
-  const countryId = Number($("scholarshipCountry").value);
-  const search = $("scholarshipSearch").value
-    .trim()
+  const countryId = Number(
+    $("scholarshipCountry").value
+  );
+
+  const search = $("scholarshipSearch")
+    .value.trim()
     .toLowerCase();
 
   const grid = $("scholarshipGrid");
+
   grid.replaceChildren();
 
   if (!countryId) {
     grid.appendChild(
-      createEmpty("Select a country to explore scholarships.")
+      createEmpty(
+        "Select a country to explore scholarships."
+      )
     );
+
     return;
   }
 
@@ -361,6 +419,7 @@ function renderScholarships() {
         "Scholarship database is currently unavailable."
       )
     );
+
     return;
   }
 
@@ -371,21 +430,24 @@ function renderScholarships() {
     );
   });
 
-  if (filtered.length === 0) {
+  if (!filtered.length) {
     grid.appendChild(
       createEmpty(
-        "No published scholarships available for this selection."
+        "No published scholarships available for this country."
       )
     );
+
     return;
   }
 
   filtered.forEach((scholarship) => {
     const card = document.createElement("article");
+
     card.className = "result-card";
 
     const title = document.createElement("h3");
     title.textContent = scholarship.name;
+
     card.appendChild(title);
 
     const details = [
@@ -414,12 +476,12 @@ function renderScholarships() {
       );
     }
 
-    const whatsappMessage =
+    const whatsappText =
       `Hello EduVexa! I want information about ${scholarship.name}.`;
 
     card.appendChild(
       createExternalLink(
-        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`,
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`,
         "Get Scholarship Guidance →"
       )
     );
@@ -428,19 +490,23 @@ function renderScholarships() {
   });
 }
 
-// ==========================================
-// EDUCATION QUALIFICATION
-// ==========================================
+// =============================================
+// EDUCATION QUALIFICATION FORM
+// =============================================
 
 function setupEducationForm() {
   const qualification = $("qualification");
+
   const fields = $("educationFields");
+
   const subject = $("subject");
   const result = $("result");
+
   const label = $("subjectLabel");
 
   qualification.addEventListener("change", () => {
     const level = qualification.value;
+
     const active = Boolean(level);
 
     fields.hidden = !active;
@@ -451,83 +517,102 @@ function setupEducationForm() {
     subject.value = "";
     result.value = "";
 
-    if (["SSC", "HSC", "Dakhil"].includes(level)) {
+    if (
+      ["SSC", "HSC", "Dakhil"].includes(level)
+    ) {
       label.textContent = "Group *";
+
       subject.placeholder =
         "Science / Business Studies / Humanities";
     } else if (level === "Diploma") {
       label.textContent =
         "Diploma Subject / Technology *";
+
       subject.placeholder =
         "Example: Computer Technology";
     } else if (level === "Alim") {
-      label.textContent = "Group / Subject *";
+      label.textContent =
+        "Group / Subject *";
+
       subject.placeholder =
         "Enter your group or subject";
     } else {
       label.textContent =
         "Department / Subject *";
+
       subject.placeholder =
         "Enter your department or subject";
     }
   });
 }
 
-// ==========================================
+// =============================================
 // WHATSAPP APPLICATION
-// ==========================================
+// =============================================
 
 function setupApplicationForm() {
-  $("applicationForm").addEventListener("submit", (event) => {
-    event.preventDefault();
+  $("applicationForm").addEventListener(
+    "submit",
+    (event) => {
+      event.preventDefault();
 
-    const name = $("studentName").value.trim();
-    const phone = $("studentPhone").value.trim();
-    const email = $("studentEmail").value.trim();
+      const name = $("studentName").value.trim();
 
-    const country = $("interestedCountry").value;
-    const qualification = $("qualification").value;
+      const phone = $("studentPhone").value.trim();
 
-    const subject = $("subject").value.trim();
-    const result = $("result").value.trim();
-    const message = $("studentMessage").value.trim();
+      const email = $("studentEmail").value.trim();
 
-    if (
-      !name ||
-      !phone ||
-      !country ||
-      !qualification ||
-      !subject ||
-      !result
-    ) {
-      alert("Please complete all required fields.");
-      return;
+      const country = $("interestedCountry").value;
+
+      const qualification = $("qualification").value;
+
+      const subject = $("subject").value.trim();
+
+      const result = $("result").value.trim();
+
+      const message = $("studentMessage").value.trim();
+
+      if (
+        !name ||
+        !phone ||
+        !country ||
+        !qualification ||
+        !subject ||
+        !result
+      ) {
+        alert(
+          "Please complete all required fields."
+        );
+
+        return;
+      }
+
+      const text = [
+        "NEW STUDENT INQUIRY - EduVexa",
+        "",
+        `Full Name: ${name}`,
+        `WhatsApp: ${phone}`,
+        `Email: ${email || "Not provided"}`,
+        `Interested Country: ${country}`,
+        `Qualification: ${qualification}`,
+        `Group / Subject: ${subject}`,
+        `Result: ${result}`,
+        `Message: ${message || "Not provided"}`
+      ].join("\n");
+
+      window.location.href =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     }
-
-    const text = [
-      "NEW STUDENT INQUIRY - EduVexa",
-      "",
-      `Full Name: ${name}`,
-      `WhatsApp: ${phone}`,
-      `Email: ${email || "Not provided"}`,
-      `Interested Country: ${country}`,
-      `Qualification: ${qualification}`,
-      `Group / Subject: ${subject}`,
-      `Result: ${result}`,
-      `Message: ${message || "Not provided"}`
-    ].join("\n");
-
-    window.location.href =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-  });
+  );
 }
 
-// ==========================================
+// =============================================
 // MOBILE NAVIGATION
-// ==========================================
+// =============================================
 
 function setupMobileMenu() {
   const button = $("menuBtn");
+
   const nav = $("nav");
 
   button.addEventListener("click", () => {
@@ -542,26 +627,29 @@ function setupMobileMenu() {
   nav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       nav.classList.remove("open");
-      button.setAttribute("aria-expanded", "false");
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
     });
   });
 }
 
-// ==========================================
-// LOAD SUPABASE DATABASE
-// ==========================================
+// =============================================
+// SUPABASE INITIALIZATION
+// =============================================
 
 async function initializeDatabase() {
   populateCountryDropdowns();
 
   try {
-    const module = await import(
+    const supabaseModule = await import(
       "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
     );
 
-    db = module.createClient(
-      const SUPABASE_URL =
-"https://cnxtddpqjzawfwakmlxl.supabase.co";
+    db = supabaseModule.createClient(
+      SUPABASE_URL,
       SUPABASE_KEY
     );
 
@@ -606,13 +694,14 @@ async function initializeDatabase() {
     databaseConnected = true;
 
     populateCountryDropdowns();
+
     renderCountries();
 
     $("universityCount").textContent =
       universities.length;
 
     console.info(
-      "EduVexa Supabase connection successful."
+      "EduVexa Supabase connected successfully."
     );
   } catch (error) {
     console.error(
@@ -624,47 +713,50 @@ async function initializeDatabase() {
 
     $("universityCount").textContent = "—";
 
-    // Keep initial country information available.
     populateCountryDropdowns();
   }
 
   renderUniversities();
+
   renderScholarships();
 }
 
-// ==========================================
-// INITIALIZE WEBSITE
-// ==========================================
+// =============================================
+// WEBSITE INITIALIZATION
+// =============================================
 
-document.addEventListener("DOMContentLoaded", () => {
-  setupMobileMenu();
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    setupMobileMenu();
 
-  setupEducationForm();
+    setupEducationForm();
 
-  setupApplicationForm();
+    setupApplicationForm();
 
-  $("universityCountry").addEventListener(
-    "change",
-    renderUniversities
-  );
+    $("universityCountry").addEventListener(
+      "change",
+      renderUniversities
+    );
 
-  $("universitySearch").addEventListener(
-    "input",
-    renderUniversities
-  );
+    $("universitySearch").addEventListener(
+      "input",
+      renderUniversities
+    );
 
-  $("scholarshipCountry").addEventListener(
-    "change",
-    renderScholarships
-  );
+    $("scholarshipCountry").addEventListener(
+      "change",
+      renderScholarships
+    );
 
-  $("scholarshipSearch").addEventListener(
-    "input",
-    renderScholarships
-  );
+    $("scholarshipSearch").addEventListener(
+      "input",
+      renderScholarships
+    );
 
-  $("year").textContent =
-    new Date().getFullYear();
+    $("year").textContent =
+      new Date().getFullYear();
 
-  initializeDatabase();
-});
+    initializeDatabase();
+  }
+);
