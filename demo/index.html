@@ -3,1248 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>EduVexa | Admin Dashboard</title>
+<meta name="description" content="EduVexa - Study Abroad Simplified. Explore universities, scholarships and international study opportunities.">
+<title>EduVexa | Study Abroad Simplified</title>
+
+<link rel="icon" href="../eduvexa%20logo%20jpg.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --navy:#102D4E;
-  --dark:#081b35;
-  --gold:#D9A62C;
-  --bg:#f4f7fb;
-  --text:#334155;
-  --border:#e2e8f0;
+--navy:#102D4E;
+--dark:#081b35;
+--gold:#D9A62C;
+--white:#fff;
+--light:#f5f7fb;
+--text:#526174;
 }
 
 *{box-sizing:border-box}
 
+html{scroll-behavior:smooth}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+margin:0;
+font-family:"DM Sans",Arial,sans-serif;
+color:var(--navy);
 }
 
+h1,h2,h3{
+font-family:Manrope,Arial,sans-serif;
+}
+
+a{text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 [hidden]{display:none!important}
 
-button,input,select,textarea{
-  font:inherit;
+.container{
+width:min(1200px,92%);
+margin:auto;
 }
 
-button{cursor:pointer}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  margin-top:7px;
-}
-
-label{
-  display:block;
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:15px;
-}
-
-.btn{
-  border:0;
-  padding:12px 18px;
-  border-radius:8px;
-  font-weight:bold;
-}
-
-.btn:disabled{opacity:.6}
-
-.gold{
-  background:var(--gold);
-  color:var(--navy);
-}
-
-.dark{
-  background:var(--navy);
-  color:white;
-}
-
-.light{
-  background:#e9eef5;
-  color:var(--navy);
-}
-
-.red{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-/* LOGIN */
-
-.login{
-  min-height:100vh;
-  background:linear-gradient(135deg,#081b35,#18486d);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
-
-.login-card{
-  background:white;
-  width:100%;
-  max-width:420px;
-  padding:35px;
-  border-radius:18px;
-  box-shadow:0 20px 50px #0003;
-}
-
-.logo{
-  display:block;
-  width:190px;
-  max-width:100%;
-  margin:0 auto 25px;
-}
-
-.login-card h2{
-  color:var(--navy);
-  text-align:center;
-}
-
-.login-card p{
-  text-align:center;
-  font-size:13px;
-  color:#64748b;
-}
-
-.login-card form{margin-top:25px}
-.login-card .btn{width:100%}
-
-.message{
-  margin-top:15px;
-  font-size:13px;
-  overflow-wrap:anywhere;
-}
-
-.error{color:#dc2626}
-.success{color:#15803d}
-
-/* DASHBOARD */
-
-.dashboard{
-  display:flex;
-  min-height:100vh;
-}
-
-.sidebar{
-  width:250px;
-  flex-shrink:0;
-  background:var(--dark);
-  padding:20px 12px;
-}
-
-.sidebar-logo{
-  background:white;
-  padding:8px;
-  border-radius:10px;
-  margin-bottom:25px;
-}
-
-.sidebar-logo img{
-  width:100%;
-  max-height:90px;
-  object-fit:contain;
-}
-
-.sidebar button{
-  display:block;
-  width:100%;
-  background:transparent;
-  color:#cbd5e1;
-  border:0;
-  text-align:left;
-  padding:14px;
-  border-radius:8px;
-  margin-bottom:6px;
-  font-weight:bold;
-}
-
-.sidebar button:hover,
-.sidebar button.active{
-  background:#ffffff18;
-  color:var(--gold);
-}
-
-.main{
-  flex:1;
-  min-width:0;
+section{
+padding:85px 0;
+scroll-margin-top:90px;
 }
 
 .topbar{
-  background:white;
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
+background:var(--dark);
+color:white;
+padding:10px 0;
+font-size:12px;
 }
 
-.topbar h2{
-  margin:0;
-  color:var(--navy);
-  font-size:21px;
+.topbar .container{
+display:flex;
+justify-content:space-between;
+gap:15px;
+flex-wrap:wrap;
 }
 
-.content{
-  padding:25px;
-  max-width:1400px;
-  margin:auto;
+header{
+position:sticky;
+top:0;
+z-index:100;
+background:white;
+box-shadow:0 3px 25px #0001;
 }
 
-.welcome{
-  background:linear-gradient(120deg,#102D4E,#205784);
-  color:white;
-  padding:30px;
-  border-radius:14px;
-  margin-bottom:20px;
+.header-inner{
+min-height:85px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:25px;
 }
 
-.welcome p{color:#dbeafe}
+.logo img{
+width:190px;
+max-height:75px;
+object-fit:contain;
+}
+
+nav{
+display:flex;
+gap:23px;
+align-items:center;
+}
+
+nav a{
+color:var(--navy);
+font-size:13px;
+font-weight:700;
+}
+
+nav a:hover{color:var(--gold)}
+
+.menu-btn{
+display:none;
+background:none;
+border:0;
+font-size:29px;
+}
+
+.btn{
+display:inline-block;
+padding:14px 26px;
+border-radius:9px;
+font-size:13px;
+font-weight:800;
+border:0;
+}
+
+.gold{background:var(--gold);color:var(--navy)}
+.white{background:white;color:var(--navy)}
+.dark{background:var(--navy);color:white}
+
+.hero{
+min-height:680px;
+display:flex;
+align-items:center;
+color:white;
+background:
+linear-gradient(90deg,rgba(5,20,41,.97),rgba(8,30,55,.85),rgba(8,30,55,.4)),
+url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2000&q=85")
+center/cover;
+}
+
+.hero-content{max-width:780px}
+
+.badge{
+color:var(--gold);
+font-size:12px;
+font-weight:800;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.hero h1{
+font-size:clamp(40px,5.5vw,72px);
+line-height:1.15;
+letter-spacing:-2px;
+margin:22px 0;
+}
+
+.hero h1 span{color:var(--gold)}
+
+.hero p{
+font-size:17px;
+line-height:1.9;
+color:#dce6f2;
+max-width:650px;
+margin-bottom:35px;
+}
+
+.hero-actions{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:20px;
-}
-
-.stat{
-  background:white;
-  padding:24px;
-  border-radius:12px;
-}
-
-.stat strong{
-  display:block;
-  font-size:30px;
-  color:var(--navy);
-  margin-top:12px;
-}
-
-.panel{
-  background:white;
-  padding:25px;
-  border-radius:12px;
-  margin-bottom:20px;
-}
-
-.panel-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.panel-head h3{
-  margin:0;
-  color:var(--navy);
-}
-
-.notice{
-  padding:14px;
-  background:#eff6ff;
-  color:#1e40af;
-  border-radius:8px;
-  font-size:13px;
-}
-
-.table-wrap{overflow:auto}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px;
-}
-
-th,td{
-  padding:13px;
-  text-align:left;
-  border-bottom:1px solid var(--border);
-  vertical-align:top;
-  overflow-wrap:anywhere;
-}
-
-th{background:#f8fafc}
-
-.actions{
-  display:flex;
-  gap:7px;
-}
-
-.actions button{
-  border:0;
-  border-radius:6px;
-  padding:8px;
-}
-
-/* MODAL */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:#0009;
-  z-index:2000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:15px;
-}
-
-.modal-box{
-  background:white;
-  width:100%;
-  max-width:700px;
-  max-height:90vh;
-  overflow:auto;
-  padding:25px;
-  border-radius:15px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.form-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:10px;
-  margin-top:20px;
-}
-
-@media(max-width:850px){
-  .sidebar{width:78px;padding:12px 5px}
-  .sidebar button{font-size:11px;text-align:center;padding:12px 3px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-}
-
-@media(max-width:600px){
-  .content{padding:12px}
-  .topbar h2{font-size:16px}
-  .form-grid{grid-template-columns:1fr}
-  .modal-box{padding:18px}
-  .stat{padding:15px}
-}
-</style>
-</head>
-
-<body>
-
-<!-- LOGIN -->
-
-<section id="loginScreen" class="login">
-
-<div class="login-card">
-
-<img
-  src="../eduvexa%20logo%20jpg.jpg"
-  class="logo"
-  alt="EduVexa">
-
-<h2>Admin Login</h2>
-
-<p>EduVexa Management Portal</p>
-
-<form id="loginForm">
-
-<label>
-Email Address
-<input
-  type="email"
-  id="email"
-  required
-  autocomplete="username">
-</label>
-
-<label>
-Password
-<input
-  type="password"
-  id="password"
-  required
-  autocomplete="current-password">
-</label>
-
-<button
-  type="submit"
-  id="loginBtn"
-  class="btn gold">
-Secure Login →
-</button>
-
-</form>
-
-<p id="loginMessage" class="message" role="status"></p>
-
-</div>
-</section>
-
-<!-- DASHBOARD -->
-
-<div id="dashboard" class="dashboard" hidden>
-
-<aside class="sidebar">
-
-<div class="sidebar-logo">
-<img
-  src="../eduvexa%20logo%20jpg.jpg"
-  alt="EduVexa">
-</div>
-
-<button data-page="overview" class="active">
-🏠 <span data-i18n="overview">Overview</span>
-</button>
-
-<button data-page="countries">
-🌍 <span data-i18n="countries">Countries</span>
-</button>
-
-<button data-page="universities">
-🎓 <span data-i18n="universities">Universities</span>
-</button>
-
-<button data-page="programs">
-📚 <span data-i18n="programs">Programs</span>
-</button>
-
-<button data-page="scholarships">
-🏅 <span data-i18n="scholarships">Scholarships</span>
-</button>
-
-<button id="logoutBtn">
-🚪 <span data-i18n="logout">Logout</span>
-</button>
-
-</aside>
-
-<div class="main">
-
-<header class="topbar">
-
-<h2 id="pageTitle">Overview</h2>
-
-<select id="language" style="width:auto;margin:0">
-<option value="en">English</option>
-<option value="bn">বাংলা</option>
-</select>
-
-</header>
-
-<main class="content">
-
-<div id="overviewPage">
-
-<div class="welcome">
-
-<h2 data-i18n="welcome">
-Welcome to EduVexa Admin Dashboard
-</h2>
-
-<p data-i18n="description">
-Manage your university and scholarship information.
-</p>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-Countries
-<strong id="countCountries">—</strong>
-</div>
-
-<div class="stat">
-Universities
-<strong id="countUniversities">—</strong>
-</div>
-
-<div class="stat">
-Programs
-<strong id="countPrograms">—</strong>
-</div>
-
-<div class="stat">
-Scholarships
-<strong id="countScholarships">—</strong>
-</div>
-
-</div>
-
-<div class="panel">
-
-<h3>EduVexa Management Center</h3>
-
-<p>Select a section to manage information.</p>
-
-<div class="notice">
-Only verified information should be published.
-</div>
-
-</div>
-
-</div>
-
-<div id="dataPage" hidden>
-
-<div class="panel">
-
-<div class="panel-head">
-
-<h3 id="dataTitle">Manage Data</h3>
-
-<button id="addBtn" class="btn gold">
-+ Add New
-</button>
-
-</div>
-
-<div class="table-wrap">
-
-<table>
-<thead id="tableHead"></thead>
-<tbody id="tableBody"></tbody>
-</table>
-
-</div>
-
-<p id="tableMessage" class="message"></p>
-
-</div>
-
-</div>
-
-</main>
-</div>
-</div>
-
-<!-- EDIT MODAL -->
-
-<div id="modal" class="modal" hidden>
-
-<div class="modal-box">
-
-<div class="panel-head">
-
-<h3 id="modalTitle">Add Information</h3>
-
-<button id="closeModal" class="btn light">✕</button>
-
-</div>
-
-<form id="dataForm">
-
-<div id="formFields" class="form-grid"></div>
-
-<div class="form-actions">
-
-<button type="button" id="cancelBtn" class="btn light">
-Cancel
-</button>
-
-<button type="submit" id="saveBtn" class="btn gold">
-Save Changes
-</button>
-
-</div>
-
-</form>
-
-<p id="formMessage" class="message"></p>
-
-</div>
-</div>
-
-<!-- SUPABASE LIBRARY -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-
-<script>
-
-/* =====================================
-   CONFIGURATION
-===================================== */
-
-const SUPABASE_URL =
-"https://cnxtddpqjzawfwakmlxl.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF";
-
-const el = id => document.getElementById(id);
-
-let db = null;
-
-function message(id,text,error=false){
-
-const target=el(id);
-
-target.textContent=text;
-
-target.className=
-"message "+(error?"error":"success");
-
-}
-
-/* =====================================
-   LANGUAGE
-===================================== */
-
-const translations={
-
-en:{
-overview:"Overview",
-countries:"Countries",
-universities:"Universities",
-programs:"Programs",
-scholarships:"Scholarships",
-logout:"Logout",
-welcome:"Welcome to EduVexa Admin Dashboard",
-description:"Manage university and scholarship information."
-},
-
-bn:{
-overview:"ড্যাশবোর্ড",
-countries:"দেশসমূহ",
-universities:"বিশ্ববিদ্যালয়",
-programs:"বিষয় ও প্রোগ্রাম",
-scholarships:"স্কলারশিপ",
-logout:"লগআউট",
-welcome:"EduVexa অ্যাডমিন ড্যাশবোর্ডে স্বাগতম",
-description:"বিশ্ববিদ্যালয় ও স্কলারশিপের তথ্য পরিচালনা করুন।"
-}
-
-};
-
-let language="en";
-let page="overview";
-let editingId=null;
-
-function translate(){
-
-document.querySelectorAll("[data-i18n]").forEach(node=>{
-
-const key=node.dataset.i18n;
-
-node.textContent=translations[language][key]||key;
-
-});
-
-el("pageTitle").textContent=
-translations[language][page]||page;
-
-el("dataTitle").textContent=
-translations[language][page]||page;
-
-}
-
-el("language").onchange=async event=>{
-
-language=event.target.value;
-
-localStorage.setItem("eduvexa_lang",language);
-
-translate();
-
-if(page!=="overview")await loadTable();
-
-};
-
-/* =====================================
-   DATABASE FIELDS
-===================================== */
-
-const fields={
-
-countries:[
-["name","Country Name","text",true],
-["code","Country Code","text",true],
-["flag_url","Flag URL","url",false],
-["description","Description","textarea",false]
-],
-
-universities:[
-["country_id","Country","countries",true],
-["name","University Name","text",true],
-["city","City","text",false],
-["university_type","University Type","text",false],
-["official_website","Official Website","url",false],
-["description","Description","textarea",false],
-["is_published","Published","checkbox",false]
-],
-
-programs:[
-["university_id","University","universities",true],
-["name","Program Name","text",true],
-["degree_level","Degree Level","text",false],
-["duration","Duration","text",false],
-["tuition_fee","Tuition Fee","text",false],
-["admission_requirements","Admission Requirements","textarea",false],
-["official_program_url","Official Program URL","url",false],
-["is_published","Published","checkbox",false]
-],
-
-scholarships:[
-["country_id","Country","countries",true],
-["name","Scholarship Name","text",true],
-["provider","Provider","text",false],
-["degree_level","Degree Level","text",false],
-["coverage","Coverage","textarea",false],
-["eligibility","Eligibility","textarea",false],
-["application_deadline","Application Deadline","date",false],
-["official_url","Official URL","url",false],
-["status","Status","text",false],
-["is_published","Published","checkbox",false]
-]
-
-};
-
-/* =====================================
-   LOGIN
-===================================== */
-
-async function checkAdmin(){
-
-const {data:{user},error}=await db.auth.getUser();
-
-if(error)throw error;
-
-if(!user)return false;
-
-const {data,error:roleError}=await db
-.from("admin_users")
-.select("role")
-.eq("user_id",user.id)
-.maybeSingle();
-
-if(roleError)throw roleError;
-
-return !!data &&
-["admin","super_admin"].includes(data.role);
-
-}
-
-async function openDashboard(){
-
-const allowed=await checkAdmin();
-
-if(!allowed){
-
-await db.auth.signOut();
-
-throw new Error("Admin permission required.");
-
-}
-
-el("loginScreen").hidden=true;
-el("dashboard").hidden=false;
-
-await loadCounts();
-
-}
-
-el("loginForm").addEventListener("submit",async event=>{
-
-event.preventDefault();
-
-const button=el("loginBtn");
-
-button.disabled=true;
-button.textContent="Signing in...";
-
-message("loginMessage","Connecting to Supabase...");
-
-try{
-
-if(!db){
-throw new Error("Supabase client is not initialized.");
-}
-
-const {error}=await db.auth.signInWithPassword({
-
-email:el("email").value.trim(),
-password:el("password").value
-
-});
-
-if(error)throw error;
-
-el("password").value="";
-
-await openDashboard();
-
-}catch(error){
-
-message("loginMessage",error.message,true);
-
-}finally{
-
-button.disabled=false;
-button.textContent="Secure Login →";
-
-}
-
-});
-
-/* =====================================
-   LOGOUT
-===================================== */
-
-el("logoutBtn").onclick=async()=>{
-
-await db.auth.signOut();
-
-location.reload();
-
-};
-
-/* =====================================
-   DASHBOARD COUNTS
-===================================== */
-
-async function loadCounts(){
-
-for(const table of Object.keys(fields)){
-
-const {count,error}=await db
-.from(table)
-.select("*",{count:"exact",head:true});
-
-const id=
-"count"+table[0].toUpperCase()+table.slice(1);
-
-el(id).textContent=error?"—":(count??0);
-
-}
-
-}
-
-/* =====================================
-   NAVIGATION
-===================================== */
-
-document.querySelectorAll("[data-page]").forEach(button=>{
-
-button.onclick=async()=>{
-
-page=button.dataset.page;
-
-document.querySelectorAll("[data-page]").forEach(b=>{
-b.classList.remove("active");
-});
-
-button.classList.add("active");
-
-el("overviewPage").hidden=page!=="overview";
-
-el("dataPage").hidden=page==="overview";
-
-translate();
-
-if(page==="overview"){
-await loadCounts();
-}else{
-await loadTable();
-}
-
-};
-
-});
-
-/* =====================================
-   LOAD TABLE
-===================================== */
-
-async function loadTable(){
-
-el("tableBody").replaceChildren();
-
-el("tableHead").replaceChildren();
-
-message("tableMessage","Loading...");
-
-const {data,error}=await db
-.from(page)
-.select("*")
-.order("id",{ascending:false})
-.limit(500);
-
-if(error){
-
-message("tableMessage",error.message,true);
-return;
-
-}
-
-const columns=fields[page].slice(0,4);
-
-const header=document.createElement("tr");
-
-columns.forEach(field=>{
-
-const th=document.createElement("th");
-th.textContent=field[1];
-header.append(th);
-
-});
-
-const actionsTitle=document.createElement("th");
-actionsTitle.textContent="Actions";
-header.append(actionsTitle);
-
-el("tableHead").append(header);
-
-(data||[]).forEach(record=>{
-
-const tr=document.createElement("tr");
-
-columns.forEach(field=>{
-
-const td=document.createElement("td");
-
-td.textContent=record[field[0]]??"—";
-
-tr.append(td);
-
-});
-
-const actions=document.createElement("td");
-actions.className="actions";
-
-const edit=document.createElement("button");
-edit.textContent="Edit";
-edit.className="light";
-edit.onclick=()=>openModal(record);
-
-const remove=document.createElement("button");
-remove.textContent="Delete";
-remove.className="red";
-remove.onclick=()=>deleteRecord(record.id);
-
-actions.append(edit,remove);
-
-tr.append(actions);
-
-el("tableBody").append(tr);
-
-});
-
-message("tableMessage",`${(data||[]).length} records loaded.`);
-
-}
-
-/* =====================================
-   FORM BUILDER
-===================================== */
-
-async function buildField(field,value){
-
-const [name,label,type,required]=field;
-
-const wrapper=document.createElement("label");
-
-wrapper.textContent=label;
-
-let input;
-
-if(type==="textarea"){
-
-input=document.createElement("textarea");
-input.rows=3;
-input.value=value??"";
-
-}else if(type==="countries"||type==="universities"){
-
-input=document.createElement("select");
-
-const empty=document.createElement("option");
-empty.value="";
-empty.textContent="Select "+label;
-
-input.append(empty);
-
-const {data,error}=await db
-.from(type)
-.select("id,name")
-.order("name");
-
-if(error)throw error;
-
-(data||[]).forEach(item=>{
-
-const option=document.createElement("option");
-
-option.value=item.id;
-option.textContent=item.name;
-
-option.selected=
-String(value)===String(item.id);
-
-input.append(option);
-
-});
-
-}else if(type==="checkbox"){
-
-input=document.createElement("input");
-input.type="checkbox";
-input.checked=value===true;
-
-}else{
-
-input=document.createElement("input");
-input.type=type;
-input.value=value??"";
-
-}
-
-input.name=name;
-input.required=required;
-
-wrapper.append(input);
-
-return wrapper;
-
-}
-
-/* =====================================
-   ADD / EDIT
-===================================== */
-
-async function openModal(record=null){
-
-editingId=record?.id??null;
-
-el("modalTitle").textContent=
-record?"Edit Information":"Add Information";
-
-el("formFields").replaceChildren();
-
-el("formMessage").textContent="";
-
-el("modal").hidden=false;
-
-try{
-
-for(const field of fields[page]){
-
-const input=await buildField(
-field,
-record?.[field[0]]
-);
-
-el("formFields").append(input);
-
-}
-
-}catch(error){
-
-message("formMessage",error.message,true);
-
-}
-
-}
-
-function closeModal(){
-
-el("modal").hidden=true;
-
-}
-
-el("addBtn").onclick=()=>openModal();
-
-el("closeModal").onclick=closeModal;
-
-el("cancelBtn").onclick=closeModal;
-
-/* =====================================
-   SAVE
-===================================== */
-
-el("dataForm").addEventListener("submit",async event=>{
-
-event.preventDefault();
-
-const payload={};
-
-for(const field of fields[page]){
-
-const [name,label,type]=field;
-
-const input=event.target.elements.namedItem(name);
-
-let value=
-type==="checkbox"?input.checked:input.value.trim();
-
-if(type!=="checkbox"&&value===""){
-value=null;
-}
-
-if(
-(type==="countries"||type==="universities")
-&&value!==null
-){
-value=Number(value);
-}
-
-payload[name]=value;
-
-}
-
-const button=el("saveBtn");
-button.disabled=true;
-
-try{
-
-let response;
-
-if(editingId!==null){
-
-response=await db
-.from(page)
-.update(payload)
-.eq("id",editingId)
-.select();
-
-}else{
-
-response=await db
-.from(page)
-.insert(payload)
-.select();
-
-}
-
-if(response.error)throw response.error;
-
-if(!response.data?.length){
-throw new Error("No record saved. Check database permissions.");
-}
-
-closeModal();
-
-await loadTable();
-await loadCounts();
-
-}catch(error){
-
-message("formMessage",error.message,true);
-
-}finally{
-
-button.disabled=false;
-
-}
-
-});
-
-/* =====================================
-   DELETE
-===================================== */
-
-async function deleteRecord(id){
-
-if(!confirm(
-"Delete this record? Related information may also be deleted."
-))return;
-
-const {data,error}=await db
-.from(page)
-.delete()
-.eq("id",id)
-.select("id");
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-if(!data?.length){
-
-alert("No record deleted.");
-return;
-
-}
-
-await loadTable();
-await loadCounts();
-
-}
-
-/* =====================================
-   INITIALIZATION
-===================================== */
-
-async function initialize(){
-
-const saved=localStorage.getItem("eduvexa_lang");
-
-if(saved==="bn"||saved==="en"){
-language=saved;
-}
-
-el("language").value=language;
-
-translate();
-
-try{
-
-if(!window.supabase?.createClient){
-
-throw new Error(
-"Supabase JavaScript library did not load."
-);
-
-}
-
-db=window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-console.info("EduVexa Supabase client initialized.");
-
-const {data:{session},error}=await db.auth.getSession();
-
-if(error)throw error;
-
-if(session){
-
-try{
-
-await openDashboard();
-
-}catch(error){
-
-message("loginMessage",error.message,true);
-
-}
-
-}
-
-}catch(error){
-
-message("loginMessage",error.message,true);
-
-}
-
-}
-
-initialize();
-
-</script>
-
-</body>
-</html>
+padding:35px 0;
+background:white;
+box-shadow:0 
