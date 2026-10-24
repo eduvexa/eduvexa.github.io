@@ -1,1010 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduVexa | Study Abroad Simplified</title>
-<meta name="description" content="EduVexa – Study Abroad Simplified. University admission, student visa processing, scholarship assistance and career counseling for international students.">
-<meta property="og:title" content="EduVexa | Study Abroad Simplified">
-<meta property="og:description" content="Your gateway to global education. University admission, visa processing and scholarship support.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://eduvexa.github.io/">
-<link rel="icon" type="image/jpeg" href="eduvexa%20logo%20jpg.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --navy: #102D4E;
-  --navy-dark: #0A1F36;
-  --gold: #D9A62C;
-  --gold-light: #E8BC55;
-  --white: #ffffff;
-  --light: #f5f7fb;
-  --text: #33475e;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Poppins', Arial, sans-serif;
-  color: var(--text);
-  line-height: 1.7;
-  background: var(--white);
-}
-
-/* ---------- HEADER ---------- */
-header {
-  background: var(--white);
-  padding: 10px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-}
-
-.header-logo img {
-  height: 64px;
-  width: auto;
-  display: block;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-}
-
-nav a {
-  color: var(--navy);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  transition: 0.3s;
-}
-
-nav a:hover { color: var(--gold); }
-
-.nav-cta {
-  background: var(--gold);
-  color: var(--navy) !important;
-  padding: 10px 22px;
-  border-radius: 8px;
-  font-weight: 700 !important;
-}
-
-.nav-cta:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
-}
-
-.menu-btn {
-  display: none;
-  font-size: 26px;
-  background: none;
-  border: none;
-  color: var(--navy);
-  cursor: pointer;
-}
-
-/* ---------- HERO ---------- */
-.hero {
-  background:
-    radial-gradient(circle at 80% 20%, rgba(217,166,44,0.18), transparent 45%),
-    radial-gradient(circle at 15% 85%, rgba(217,166,44,0.12), transparent 40%),
-    linear-gradient(125deg, var(--navy-dark), var(--navy) 55%, #1a4a78);
-  color: white;
-  text-align: center;
-  padding: 130px 20px 140px;
-}
-
-.hero-badge {
-  display: inline-block;
-  background: rgba(217,166,44,0.15);
-  border: 1px solid rgba(217,166,44,0.5);
-  color: var(--gold-light);
-  padding: 8px 20px;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 25px;
-  letter-spacing: 0.5px;
-}
-
-.hero h1 {
-  font-size: clamp(34px, 5.5vw, 62px);
-  line-height: 1.15;
-  max-width: 900px;
-  margin: 0 auto 22px;
-  font-weight: 800;
-}
-
-.hero h1 span { color: var(--gold); }
-
-.hero p {
-  max-width: 680px;
-  margin: 0 auto 38px;
-  font-size: 17px;
-  color: #d7e2ef;
-}
-
-.btn {
-  display: inline-block;
-  padding: 15px 32px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 700;
-  margin: 6px;
-  transition: 0.3s;
-  font-size: 15px;
-}
-
-.btn-gold { background: var(--gold); color: var(--navy); }
-
-.btn-gold:hover { background: var(--gold-light); transform: translateY(-3px); }
-
-.btn-outline {
-  border: 2px solid rgba(255,255,255,0.7);
-  color: white;
-}
-
-.btn-outline:hover { background: white; color: var(--navy); transform: translateY(-3px); }
-
-/* ---------- STATS ---------- */
-.stats {
-  background: var(--white);
-  padding: 0 6%;
-  margin-top: -60px;
-  position: relative;
-  z-index: 5;
-}
-
-.stats-inner {
-  max-width: 1000px;
-  margin: auto;
-  background: var(--white);
-  border-radius: 18px;
-  box-shadow: 0 15px 45px rgba(16,45,78,0.15);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 35px 20px;
-  gap: 10px;
-}
-
-.stat { text-align: center; }
-
-.stat h3 {
-  color: var(--navy);
-  font-size: 32px;
-  font-weight: 800;
-}
-
-.stat h3 span { color: var(--gold); }
-
-.stat p { font-size: 14px; font-weight: 500; }
-
-/* ---------- SECTIONS ---------- */
-section { padding: 85px 6%; }
-
-.section-title {
-  text-align: center;
-  color: var(--navy);
-  font-size: clamp(26px, 3.5vw, 38px);
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-
-.section-title-line {
-  width: 70px;
-  height: 4px;
-  background: var(--gold);
-  border-radius: 5px;
-  margin: 0 auto 18px;
-}
-
-.section-subtitle {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 50px;
-  font-size: 16px;
-}
-
-/* ---------- ABOUT ---------- */
-.about-wrap {
-  max-width: 900px;
-  margin: auto;
-  text-align: center;
-}
-
-.about-wrap p { margin-bottom: 16px; font-size: 16.5px; }
-
-/* ---------- DESTINATIONS ---------- */
-.destinations { background: var(--light); }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px 24px;
-  box-shadow: 0 5px 25px rgba(16,45,78,0.07);
-  transition: 0.3s;
-  text-align: center;
-  text-decoration: none;
-  color: var(--text);
-  display: block;
-  border: 1px solid transparent;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  border-color: var(--gold);
-  box-shadow: 0 15px 35px rgba(16,45,78,0.13);
-}
-
-.flag {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  margin-bottom: 15px;
-}
-
-.card h3 { color: var(--navy); font-size: 19px; margin-bottom: 8px; }
-
-.card p { font-size: 14px; }
-
-.card .apply-link {
-  display: inline-block;
-  margin-top: 14px;
-  color: var(--gold);
-  font-weight: 700;
-  font-size: 14px;
-}
-
-/* ---------- SERVICES ---------- */
-.services .card { text-align: left; }
-
-.icon-box {
-  width: 58px;
-  height: 58px;
-  background: linear-gradient(135deg, var(--navy), #1c4a7a);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  margin-bottom: 18px;
-}
-
-.card h3 { font-size: 18px; }
-
-.card p { font-size: 14.5px; }
-
-/* ---------- WHY US ---------- */
-.why { background: var(--navy); color: white; }
-
-.why .section-title { color: white; }
-
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 24px;
-  max-width: 1150px;
-  margin: auto;
-}
-
-.why-item {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(217,166,44,0.35);
-  border-radius: 16px;
-  padding: 32px 24px;
-  text-align: center;
-  transition: 0.3s;
-}
-
-.why-item:hover { background: rgba(217,166,44,0.12); transform: translateY(-6px); }
-
-.why-item .icon { font-size: 36px; margin-bottom: 14px; }
-
-.why-item h3 { color: var(--gold-light); font-size: 18px; margin-bottom: 8px; }
-
-.why-item p { font-size: 14px; color: #dbe5f0; }
-
-/* ---------- SUCCESS CTA ---------- */
-.success-cta {
-  text-align: center;
-  background: linear-gradient(120deg, var(--gold), var(--gold-light));
-  padding: 70px 6%;
-}
-
-.success-cta h2 { color: var(--navy); font-size: clamp(24px, 3.5vw, 36px); font-weight: 800; }
-
-.success-cta p { color: #4a3a10; max-width: 640px; margin: 12px auto 28px; font-weight: 500; }
-
-.btn-navy { background: var(--navy); color: white; }
-
-.btn-navy:hover { background: var(--navy-dark); transform: translateY(-3px); }
-
-/* ---------- APPLY FORM ---------- */
-.apply { background: var(--light); }
-
-.form-wrap {
-  max-width: 760px;
-  margin: auto;
-  background: white;
-  border-radius: 20px;
-  padding: 45px 40px;
-  box-shadow: 0 15px 45px rgba(16,45,78,0.1);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-
-.form-group { margin-bottom: 18px; }
-
-.form-group label {
-  display: block;
-  font-weight: 600;
-  color: var(--navy);
-  font-size: 14px;
-  margin-bottom: 7px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 13px 15px;
-  border: 1.5px solid #d7dee8;
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 15px;
-  color: var(--text);
-  background: #fbfcfe;
-  transition: 0.3s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--gold);
-  background: white;
-}
-
-.form-note {
-  text-align: center;
-  font-size: 13.5px;
-  margin-top: 16px;
-  color: #6b7c92;
-}
-
-/* ---------- CONTACT ---------- */
-.contact { background: var(--navy); color: white; text-align: center; }
-
-.contact .section-title { color: white; }
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 22px;
-  max-width: 1050px;
-  margin: 45px auto 35px;
-}
-
-.contact-box {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px;
-  padding: 28px 20px;
-}
-
-.contact-box .icon { font-size: 30px; margin-bottom: 10px; }
-
-.contact-box h3 { color: var(--gold-light); font-size: 16px; margin-bottom: 8px; }
-
-.contact-box p, .contact-box a { font-size: 14.5px; color: #e2eaf3; text-decoration: none; }
-
-.contact-box a:hover { color: var(--gold); }
-
-/* ---------- FOOTER ---------- */
-footer {
-  background: var(--navy-dark);
-  color: #b9c7d8;
-  padding: 55px 6% 25px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1.2fr;
-  gap: 40px;
-  max-width: 1150px;
-  margin: auto;
-  padding-bottom: 35px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.footer-logo img { height: 58px; margin-bottom: 15px; }
-
-.footer-grid h4 { color: white; font-size: 17px; margin-bottom: 16px; }
-
-.footer-grid ul { list-style: none; }
-
-.footer-grid ul li { margin-bottom: 10px; }
-
-.footer-grid a { color: #b9c7d8; text-decoration: none; font-size: 14.5px; }
-
-.footer-grid a:hover { color: var(--gold); }
-
-.socials { display: flex; gap: 12px; margin-top: 18px; }
-
-.socials a {
-  width: 42px;
-  height: 42px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.3s;
-}
-
-.socials a:hover { background: var(--gold); transform: translateY(-3px); }
-
-.socials svg { width: 20px; height: 20px; fill: white; }
-
-.copyright {
-  text-align: center;
-  padding-top: 22px;
-  font-size: 13.5px;
-}
-
-/* ---------- WHATSAPP FLOAT ---------- */
-.whatsapp-float {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 60px;
-  height: 60px;
-  background: #25D366;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 20px rgba(37,211,102,0.45);
-  z-index: 1200;
-  transition: 0.3s;
-}
-
-.whatsapp-float:hover { transform: scale(1.1); }
-
-.whatsapp-float svg { width: 32px; height: 32px; fill: white; }
-
-/* ---------- REVEAL ANIMATION ---------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: 0.7s ease;
-}
-
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ---------- MOBILE ---------- */
-@media (max-width: 900px) {
-
-  .menu-btn { display: block; }
-
-  nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    flex-direction: column;
-    padding: 20px;
-    gap: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    display: none;
-  }
-
-  nav.open { display: flex; }
-
-  .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 25px; }
-
-  .form-row { grid-template-columns: 1fr; }
-
-  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-
-  section { padding: 60px 5%; }
-
-  .hero { padding: 90px 20px 110px; }
-
-  .form-wrap { padding: 32px 22px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081b35">
+  <meta name="description" content="EduVexa helps students explore international universities, scholarships, admissions and study abroad opportunities.">
+  <title>EduVexa | Study Abroad Simplified</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./demo/style.css">
+  <script src="./demo/app.js" defer></script>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header>
-  <a href="#home" class="header-logo">
-    <img src="eduvexa%20logo%20jpg.jpg" alt="EduVexa - Study Abroad Simplified">
-  </a>
+<header class="site-header" id="siteHeader">
+  <div class="container nav-wrap">
 
-  <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <a href="#home" class="brand">
+      <img src="./eduvexa%20logo%20jpg.jpg" alt="EduVexa Logo">
+      <span>
+        <strong>EduVexa</strong>
+        <small>Study Abroad Simplified</small>
+      </span>
+    </a>
 
-  <nav id="navMenu">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#destinations">Destinations</a>
-    <a href="#services">Services</a>
-    <a href="#apply">Apply</a>
-    <a href="#contact">Contact</a>
-    <a href="https://wa.me/8801811909779" class="nav-cta" target="_blank" rel="noopener noreferrer">Free Consultation</a>
-  </nav>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#universities">Universities</a>
+      <a href="#scholarships">Scholarships</a>
+      <a href="#services">Services</a>
+      <a href="#apply">Apply</a>
+      <a href="#contact" class="nav-contact">Contact Us</a>
+    </nav>
+
+  </div>
 </header>
 
 <main>
 
-<!-- ================= HERO ================= -->
-<section class="hero" id="home">
-  <div class="hero-badge">🎓 Trusted Study Abroad Consultancy</div>
+  <!-- HERO -->
 
-  <h1>Your Global Education <span>Journey Starts Here</span></h1>
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
 
-  <p>
-    Study Abroad Simplified. Explore international education opportunities with
-    personalized university admission, scholarship and student visa guidance.
-  </p>
+    <div class="container hero-content">
 
-  <a href="https://wa.me/8801811909779" class="btn btn-gold" target="_blank" rel="noopener noreferrer">Get Free Consultation</a>
-  <a href="#destinations" class="btn btn-outline">Explore Destinations</a>
-</section>
+      <div class="hero-badge">
+        YOUR GLOBAL EDUCATION JOURNEY STARTS HERE
+      </div>
 
-<!-- ================= STATS ================= -->
-<div class="stats">
-  <div class="stats-inner reveal">
-    <div class="stat"><h3>10<span>+</span></h3><p>Study Destinations</p></div>
-    <div class="stat"><h3>8<span>+</span></h3><p>Core Services</p></div>
-    <div class="stat"><h3>24<span>/7</span></h3><p>Online Support</p></div>
-    <div class="stat"><h3>100<span>%</span></h3><p>Personalized Guidance</p></div>
-  </div>
-</div>
+      <h1>
+        Your Ambition.<br>
+        <span>Our Global Vision.</span>
+      </h1>
 
-<!-- ================= ABOUT ================= -->
-<section id="about">
-  <h2 class="section-title">Welcome to EduVexa</h2>
-  <div class="section-title-line"></div>
+      <p>
+        Explore international universities, discover study opportunities,
+        and take your next step toward a brighter future with EduVexa.
+      </p>
 
-  <div class="about-wrap reveal">
-    <p>
-      <strong>EduVexa – Study Abroad Simplified</strong> is an international education
-      consultancy dedicated to helping students explore study opportunities around the world.
-    </p>
-    <p>
-      From choosing the right university to preparing admission documents and
-      understanding the visa application process — our mission is to make your
-      international education journey simple, clear and successful.
-    </p>
-  </div>
-</section>
+      <div class="hero-buttons">
+        <a href="#universities" class="btn btn-gold">
+          Explore Universities →
+        </a>
 
-<!-- ================= DESTINATIONS ================= -->
-<section class="destinations" id="destinations">
-  <h2 class="section-title">Explore Study Destinations</h2>
-  <div class="section-title-line"></div>
-  <p class="section-subtitle">
-    Discover international education opportunities across our destinations.
-    Click on any country to start your inquiry on WhatsApp.
-  </p>
+        <a href="#apply" class="btn btn-outline">
+          Start Your Journey
+        </a>
+      </div>
 
-  <div class="grid">
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Uzbekistan.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/uz.png" alt="Uzbekistan flag">
-      <h3>Uzbekistan</h3>
-      <p>Explore quality education and affordable study options in Uzbekistan.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Slovakia.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/sk.png" alt="Slovakia flag">
-      <h3>Slovakia</h3>
-      <p>Discover higher education opportunities in the heart of Europe.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Romania.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/ro.png" alt="Romania flag">
-      <h3>Romania</h3>
-      <p>Explore universities and diverse study programs in Romania.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Lithuania.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/lt.png" alt="Lithuania flag">
-      <h3>Lithuania</h3>
-      <p>Discover international study opportunities in the Baltic region.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Hungary.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/hu.png" alt="Hungary flag">
-      <h3>Hungary</h3>
-      <p>Explore education and scholarship opportunities in Hungary.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20China.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/cn.png" alt="China flag">
-      <h3>China</h3>
-      <p>Discover world-class universities and programs in China.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Italy.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/it.png" alt="Italy flag">
-      <h3>Italy</h3>
-      <p>Explore higher education opportunities in historic Italy.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Turkey.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/tr.png" alt="Turkey flag">
-      <h3>Turkey</h3>
-      <p>Discover university admission opportunities in Turkey.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20India.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/in.png" alt="India flag">
-      <h3>India</h3>
-      <p>Explore university programs and admission options in India.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-    <a class="card reveal" href="https://wa.me/8801811909779?text=Hello%20EduVexa!%20I%20am%20interested%20in%20studying%20in%20Malaysia.%20Please%20share%20details." target="_blank" rel="noopener noreferrer">
-      <img class="flag" src="https://flagcdn.com/w160/my.png" alt="Malaysia flag">
-      <h3>Malaysia</h3>
-      <p>Discover affordable international education in Malaysia.</p>
-      <span class="apply-link">Inquire Now →</span>
-    </a>
-
-  </div>
-</section>
-
-<!-- ================= SERVICES ================= -->
-<section class="services" id="services">
-  <h2 class="section-title">Our Services</h2>
-  <div class="section-title-line"></div>
-  <p class="section-subtitle">Complete guidance and support throughout your study abroad journey.</p>
-
-  <div class="grid">
-
-    <div class="card reveal">
-      <div class="icon-box">📋</div>
-      <h3>Document Assessment</h3>
-      <p>Professional review of your academic and application documents.</p>
-    </div>
-
-    <div class="card reveal">
-      <div class="icon-box">🏫</div>
-      <h3>University Selection</h3>
-      <p>Expert guidance in selecting the right university and program for you.</p>
-    </div>
-
-    <div class="card reveal">
-      <div class="icon-box">🎓</div>
-      <h3>University Admission</h3>
-      <p>Complete assistance with your university admission applications.</p>
-    </div>
-
-    <div class="card reveal">
-      <div class="icon-box">🛂</div>
-      <h3>Student Visa Processing</h3>
-      <p>Step-by-step guidance on student visa documentation and applications.</p>
-    </div>
-
-    <div class="card reveal">
-      <div class="icon-box">🏅</div>
-      <h3>Scholarship Assistance</h3>
-      <p>Helping you discover and apply for available scholarship opportunities.</p>
-    </div>
-
-    <div class="card reveal">
-      <div class="icon-box">📄</div>
-      <h3>Document Preparation</h3>
-      <p>Full support with preparing all required application documents.</p>
-    </div>
-
-    <div class="card reveal">
-      <div class="icon-box">💼</div>
-      <h3>Career Counseling</h3>
-      <p>Guidance on academic pathways and your future career goals.</p>
-    </div>
-
-    <div class="card reveal">
-      <div class="icon-box">✈️</div>
-      <h3>Pre-Departure Briefing</h3>
-      <p>Complete preparation guidance before your international journey.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================= WHY US ================= -->
-<section class="why" id="why">
-  <h2 class="section-title">Why Choose EduVexa?</h2>
-  <div class="section-title-line"></div>
-
-  <div class="why-grid">
-    <div class="why-item reveal">
-      <div class="icon">🎯</div>
-      <h3>Personalized Guidance</h3>
-      <p>Every student gets advice tailored to their profile and goals.</p>
-    </div>
-
-    <div class="why-item reveal">
-      <div class="icon">🤝</div>
-      <h3>End-to-End Support</h3>
-      <p>From documents to departure — we support you at every step.</p>
-    </div>
-
-    <div class="why-item reveal">
-      <div class="icon">🌍</div>
-      <h3>10+ Destinations</h3>
-      <p>Wide range of countries and universities to choose from.</p>
-    </div>
-
-    <div class="why-item reveal">
-      <div class="icon">⚡</div>
-      <h3>24/7 Support</h3>
-      <p>Have a question? Our team is available anytime on WhatsApp.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SUCCESS CTA ================= -->
-<section class="success-cta">
-  <h2>Your Success Story Starts Here</h2>
-  <p>Join the students building their global future with EduVexa. Your dream university is closer than you think.</p>
-  <a href="#apply" class="btn btn-navy">Start Your Application</a>
-</section>
-
-<!-- ================= APPLY FORM ================= -->
-<section class="apply" id="apply">
-  <h2 class="section-title">Apply Now</h2>
-  <div class="section-title-line"></div>
-  <p class="section-subtitle">Fill out the form and send us your details. We will contact you as soon as possible.</p>
-
-  <div class="form-wrap reveal">
-    <form id="applyForm">
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="fname">Full Name *</label>
-          <input type="text" id="fname" name="fname" placeholder="Your full name" required>
+      <div class="hero-stats">
+        <div>
+          <strong>10</strong>
+          <span>Study Destinations</span>
         </div>
 
-        <div class="form-group">
-          <label for="phone">WhatsApp Number *</label>
-          <input type="tel" id="phone" name="phone" placeholder="+880 1XXX-XXXXXX" required>
+        <div>
+          <strong id="universityCount">—</strong>
+          <span>Listed Universities</span>
+        </div>
+
+        <div>
+          <strong>24/7</strong>
+          <span>Online Inquiry</span>
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="your@email.com">
+    </div>
+  </section>
+
+  <!-- DESTINATIONS -->
+
+  <section class="section destinations-section" id="destinations">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">EXPLORE THE WORLD</span>
+        <h2>Our Study Destinations</h2>
+        <p>
+          Discover education opportunities across our international study destinations.
+        </p>
+      </div>
+
+      <div class="country-grid" id="countryGrid"></div>
+
+    </div>
+  </section>
+
+  <!-- UNIVERSITY EXPLORER -->
+
+  <section class="section university-section" id="universities">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">FIND YOUR UNIVERSITY</span>
+        <h2>University Explorer</h2>
+        <p>
+          Select your preferred country and explore available universities and programs.
+        </p>
+      </div>
+
+      <div class="explorer-panel">
+
+        <div class="explorer-controls">
+
+          <div class="form-group">
+            <label for="universityCountry">Select Country</label>
+            <select id="universityCountry">
+              <option value="">Select Country</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="universitySearch">Search University</label>
+            <input
+              type="search"
+              id="universitySearch"
+              placeholder="Search by university name..."
+            >
+          </div>
+
+        </div>
+
+        <div id="universityGrid" class="university-grid">
+          <div class="empty-state">
+            Select a country to explore universities.
+          </div>
+        </div>
+
+      </div>
+
+      <div id="programSection" class="program-section" hidden>
+
+        <div class="section-heading">
+          <span class="eyebrow">AVAILABLE COURSES</span>
+          <h2 id="programTitle">University Programs</h2>
+        </div>
+
+        <div id="programGrid" class="program-grid"></div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCHOLARSHIPS -->
+
+  <section class="section scholarship-section" id="scholarships">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">FUND YOUR FUTURE</span>
+        <h2>Scholarship Finder</h2>
+        <p>
+          Explore scholarship opportunities and verify application details through official sources.
+        </p>
+      </div>
+
+      <div class="explorer-panel">
+
+        <div class="explorer-controls">
+
+          <div class="form-group">
+            <label for="scholarshipCountry">Select Country</label>
+            <select id="scholarshipCountry">
+              <option value="">Select Country</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="scholarshipSearch">Search Scholarship</label>
+            <input
+              type="search"
+              id="scholarshipSearch"
+              placeholder="Search scholarships..."
+            >
+          </div>
+
+        </div>
+
+        <div id="scholarshipGrid" class="scholarship-grid">
+          <div class="empty-state">
+            Select a country to explore scholarships.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+
+  <section class="section services-section" id="services">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">HOW WE SUPPORT YOU</span>
+        <h2>Our Professional Services</h2>
+        <p>
+          Guidance and support throughout your international education journey.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="service-icon">📑</div>
+          <h3>Document Assessment</h3>
+          <p>Review your academic profile and understand documentation requirements.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3>University Selection</h3>
+          <p>Explore universities aligned with your academic interests and goals.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🏛️</div>
+          <h3>University Admission</h3>
+          <p>Receive guidance on admission procedures and application preparation.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">✈️</div>
+          <h3>Student Visa Processing</h3>
+          <p>Understand student visa requirements and the application process.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🏅</div>
+          <h3>Scholarship Assistance</h3>
+          <p>Discover scholarship opportunities and official application resources.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">📂</div>
+          <h3>Document Preparation</h3>
+          <p>Get assistance preparing documents required for applications.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">💬</div>
+          <h3>Career Counseling</h3>
+          <p>Discuss your education plans and future career direction.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🌍</div>
+          <h3>Pre-Departure Briefing</h3>
+          <p>Prepare for your international study experience before departure.</p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOCUMENT ASSESSMENT -->
+
+  <section class="section assessment-section" id="assessment">
+    <div class="container assessment-layout">
+
+      <div>
+        <span class="eyebrow">YOUR PROFILE MATTERS</span>
+        <h2>Document Assessment</h2>
+
+        <p>
+          Understanding your academic qualifications and documents
+          is an important step toward planning your study abroad journey.
+        </p>
+
+        <p>
+          Our team can guide you on which academic documents may be
+          required based on your education background.
+        </p>
+
+        <a href="#apply" class="btn btn-gold">
+          Request Assessment →
+        </a>
+      </div>
+
+      <div class="assessment-card">
+        <h3>Commonly Required Documents</h3>
+
+        <ul>
+          <li>Academic Certificates</li>
+          <li>Academic Transcripts / Marksheets</li>
+          <li>Passport</li>
+          <li>Passport-Size Photograph</li>
+          <li>Additional Supporting Documents</li>
+        </ul>
+
+        <p class="security-note">
+          For your privacy, sensitive document uploads are not currently
+          accepted through this website.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CAREER COUNSELING -->
+
+  <section class="section counseling-section" id="counseling">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">PERSONALIZED GUIDANCE</span>
+        <h2>Career Counseling</h2>
+        <p>
+          Connect with EduVexa to discuss your education goals,
+          university preferences and potential study pathways.
+        </p>
+      </div>
+
+      <div class="counseling-box">
+        <div class="counseling-icon">🎯</div>
+
+        <h3>Plan Your International Education Journey</h3>
+
+        <p>
+          Our counseling service helps you explore your options
+          and make informed decisions about your future.
+        </p>
+
+        <a
+          href="https://wa.me/8801811909779"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-gold"
+        >
+          Speak With EduVexa →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- APPLICATION -->
+
+  <section class="section application-section" id="apply">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">TAKE THE FIRST STEP</span>
+        <h2>Start Your Application</h2>
+        <p>
+          Share your academic background and preferred study destination.
+          Your information will be prepared as a WhatsApp message.
+        </p>
+      </div>
+
+      <form id="applicationForm" class="application-form">
+
+        <div class="form-row">
+
+          <div class="form-group">
+            <label for="studentName">Full Name *</label>
+            <input id="studentName" name="studentName" type="text" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentWhatsapp">WhatsApp Number *</label>
+            <input
+              id="studentWhatsapp"
+              name="studentWhatsapp"
+              type="tel"
+              required
+            >
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="form-group">
+            <label for="studentEmail">Email Address</label>
+            <input id="studentEmail" name="studentEmail" type="email">
+          </div>
+
+          <div class="form-group">
+            <label for="interestedCountry">Interested Country *</label>
+            <select id="interestedCountry" name="interestedCountry" required>
+              <option value="">Select Country</option>
+            </select>
+          </div>
+
         </div>
 
         <div class="form-group">
-          <label for="country">Preferred Country *</label>
-          <select id="country" name="country" required>
-            <option value="">— Select Country —</option>
-            <option>Uzbekistan</option>
-            <option>Slovakia</option>
-            <option>Romania</option>
-            <option>Lithuania</option>
-            <option>Hungary</option>
-            <option>China</option>
-            <option>Italy</option>
-            <option>Turkey</option>
-            <option>India</option>
-            <option>Malaysia</option>
-            <option>Other</option>
+          <label for="qualification">Highest / Relevant Qualification *</label>
+
+          <select id="qualification" name="qualification" required>
+            <option value="">Select Qualification</option>
+            <option value="SSC">SSC</option>
+            <option value="HSC">HSC</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Bachelor's">Bachelor's</option>
+            <option value="Master's">Master's</option>
+            <option value="Alim">Alim</option>
+            <option value="Dakhil">Dakhil</option>
           </select>
         </div>
+
+        <div id="educationFields"></div>
+
+        <div class="form-group">
+          <label for="studentMessage">Additional Message</label>
+          <textarea
+            id="studentMessage"
+            name="studentMessage"
+            rows="5"
+            placeholder="Tell us about your preferred subject, budget or study goals..."
+          ></textarea>
+        </div>
+
+        <div class="form-group consent-group">
+          <label>
+            <input type="checkbox" id="applicationConsent" required>
+            I agree to share my submitted information with EduVexa
+            through WhatsApp for education counseling purposes.
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-gold submit-btn">
+          Continue to WhatsApp →
+        </button>
+
+        <p class="form-note">
+          Clicking the button opens WhatsApp with a prepared message.
+          You must press Send in WhatsApp to submit your inquiry.
+        </p>
+
+      </form>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="section contact-section" id="contact">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">WE ARE HERE TO HELP</span>
+        <h2>Contact EduVexa</h2>
+        <p>
+          Have questions about studying abroad? Get in touch with our team.
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="level">Education Level</label>
-        <select id="level" name="level">
-          <option value="">— Select Level —</option>
-          <option>After SSC</option>
-          <option>After HSC</option>
-          <option>Bachelor's Student</option>
-          <option>Bachelor's Completed</option>
-          <option>Master's Student</option>
-          <option>Master's Completed</option>
-        </select>
+      <div class="contact-grid">
+
+        <a
+          class="contact-card"
+          href="https://wa.me/8801811909779"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>💬</span>
+          <h3>WhatsApp</h3>
+          <p>+880 1811-909779</p>
+        </a>
+
+        <a class="contact-card" href="mailto:eduvexastudya@gmail.com">
+          <span>✉️</span>
+          <h3>Email</h3>
+          <p>eduvexastudya@gmail.com</p>
+        </a>
+
+        <a
+          class="contact-card"
+          href="https://www.facebook.com/EduVexaStudyAbroadSimplified/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>📘</span>
+          <h3>Facebook</h3>
+          <p>Follow EduVexa</p>
+        </a>
+
+        <a
+          class="contact-card"
+          href="https://www.instagram.com/eduvexastudya/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>📸</span>
+          <h3>Instagram</h3>
+          <p>Connect With Us</p>
+        </a>
+
       </div>
 
-      <div class="form-group">
-        <label for="message">Your Message</label>
-        <textarea id="message" name="message" rows="4" placeholder="Tell us about your study plans..."></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-gold" style="width:100%; border:none; cursor:pointer; font-size:16px;">
-        📲 Submit Application via WhatsApp
-      </button>
-
-      <p class="form-note">Your application will open in WhatsApp — just press send. We reply as soon as possible.</p>
-
-    </form>
-  </div>
-</section>
-
-<!-- ================= CONTACT ================= -->
-<section class="contact" id="contact">
-  <h2 class="section-title">Contact Us</h2>
-  <div class="section-title-line"></div>
-  <p style="max-width:600px; margin:auto; color:#d7e2ef;">Connect with EduVexa anytime — we are here to guide you.</p>
-
-  <div class="contact-grid">
-    <div class="contact-box reveal">
-      <div class="icon">📱</div>
-      <h3>WhatsApp</h3>
-      <p><a href="https://wa.me/8801811909779" target="_blank" rel="noopener noreferrer">+880 1811-909779</a></p>
     </div>
-
-    <div class="contact-box reveal">
-      <div class="icon">📧</div>
-      <h3>Email</h3>
-      <p><a href="mailto:eduvexastudya@gmail.com">eduvexastudya@gmail.com</a></p>
-    </div>
-
-    <div class="contact-box reveal">
-      <div class="icon">📍</div>
-      <h3>Office</h3>
-      <p>Ca' Farsetti – San Marco 4136,<br>30124 Venice, Italy</p>
-    </div>
-
-    <div class="contact-box reveal">
-      <div class="icon">⏰</div>
-      <h3>Availability</h3>
-      <p>Online Inquiry: 24/7</p>
-    </div>
-  </div>
-
-  <a href="https://wa.me/8801811909779" class="btn btn-gold" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-</section>
+  </section>
 
 </main>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-  <div class="footer-grid">
+<footer class="site-footer">
+  <div class="container footer-content">
 
-    <div>
-      <div class="footer-logo">
-        <img src="eduvexa%20logo%20jpg.jpg" alt="EduVexa Logo">
-      </div>
-      <p style="font-size:14.5px;">
-        EduVexa – Study Abroad Simplified. Your trusted partner for
-        international education, admissions, scholarships and visa guidance.
-      </p>
-
-      <div class="socials">
-        <a href="https://www.facebook.com/EduVexaStudyAbroadSimplified/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.9 3.77-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.9h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/eduvexastudya/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.88 5.88 0 0 0-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.48 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84ZM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>
-        </a>
-        <a href="https://wa.me/8801811909779" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35ZM12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 7 2.9 9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.9 9.88Zm8.42-18.3A11.82 11.82 0 0 0 12.04 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.47-8.42Z"/></svg>
-        </a>
-        <a href="mailto:eduvexastudya@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
-        </a>
-      </div>
+    <div class="footer-brand">
+      <h3>EduVexa</h3>
+      <p>Study Abroad Simplified</p>
+      <small>
+        Helping students explore international education opportunities.
+      </small>
     </div>
 
-    <div>
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#destinations">Study Destinations</a></li>
-        <li><a href="#services">Our Services</a></li>
-        <li><a href="#apply">Apply Now</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h4>Contact Info</h4>
-      <ul>
-        <li>📍 Ca' Farsetti – San Marco 4136,<br>30124 Venice, Italy</li>
-        <li>📧 <a href="mailto:eduvexastudya@gmail.com">eduvexastudya@gmail.com</a></li>
-        <li>📱 <a href="https://wa.me/8801811909779">+880 1811-909779</a></li>
-        <li>⏰ Online Support: 24/7</li>
-      </ul>
+    <div class="footer-links">
+      <a href="#destinations">Destinations</a>
+      <a href="#universities">Universities</a>
+      <a href="#scholarships">Scholarships</a>
+      <a href="#services">Services</a>
+      <a href="#apply">Apply Now</a>
     </div>
 
   </div>
 
-  <p class="copyright">© <span id="year"></span> EduVexa – Study Abroad Simplified. All Rights Reserved.</p>
+  <div class="footer-bottom">
+    © <span id="currentYear">2026</span> EduVexa.
+    All Rights Reserved.
+  </div>
 </footer>
 
-<!-- ================= WHATSAPP FLOAT ================= -->
-<a class="whatsapp-float" href="https://wa.me/8801811909779" target="_blank" rel="noopener noreferrer" aria-label="Chat with EduVexa on WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35ZM12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 7 2.9 9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.9 9.88Zm8.42-18.3A11.82 11.82 0 0 0 12.04 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.47-8.42Z"/></svg>
+<a
+  href="https://wa.me/8801811909779"
+  class="floating-whatsapp"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contact EduVexa on WhatsApp"
+>
+  💬
 </a>
-
-<script>
-// Year
-document.getElementById("year").textContent = new Date().getFullYear();
-
-// Mobile menu
-const menuBtn = document.getElementById("menuBtn");
-const navMenu = document.getElementById("navMenu");
-menuBtn.addEventListener("click", () => navMenu.classList.toggle("open"));
-navMenu.querySelectorAll("a").forEach(link =>
-  link.addEventListener("click", () => navMenu.classList.remove("open"))
-);
-
-// Apply form -> WhatsApp
-document.getElementById("applyForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById("fname").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const country = document.getElementById("country").value;
-  const level = document.getElementById("level").value;
-  const message = document.getElementById("message").value.trim();
-
-  let text = "🎓 NEW APPLICATION — EduVexa\n\n";
-  text += "👤 Name: " + name + "\n";
-  text += "📱 WhatsApp: " + phone + "\n";
-  if (email) text += "📧 Email: " + email + "\n";
-  text += "🌍 Preferred Country: " + country + "\n";
-  if (level) text += "📚 Education Level: " + level + "\n";
-  if (message) text += "💬 Message: " + message + "\n";
-
-  const url = "https://wa.me/8801811909779?text=" + encodeURIComponent(text);
-  window.open(url, "_blank");
-});
-
-// Reveal on scroll
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("visible");
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-</script>
 
 </body>
 </html>
