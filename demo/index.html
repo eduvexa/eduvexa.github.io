@@ -1,64 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081b35">
+  <meta name="description" content="EduVexa helps students explore international universities, scholarships, admissions and study abroad opportunities.">
+  <title>EduVexa | Study Abroad Simplified</title>
 
-<meta name="description"
-content="EduVexa - Study Abroad Simplified. Explore universities, scholarships and international education opportunities.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-<title>EduVexa | Study Abroad Simplified</title>
-
-<link rel="icon" href="../eduvexa%20logo%20jpg.jpg">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="./style.css">
-
-<script src="./app.js" defer></script>
-
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
+<header class="site-header" id="siteHeader">
+  <div class="container nav-wrap">
 
-<div class="topbar">
-  <div class="container topbar-inner">
-    <span>✦ EduVexa — Study Abroad Simplified</span>
-    <span>WhatsApp: +880 1811-909779</span>
-  </div>
-</div>
-
-<!-- HEADER -->
-
-<header>
-  <div class="container header-inner">
-
-    <a href="#home" class="logo">
-      <img src="../eduvexa%20logo%20jpg.jpg"
-           alt="EduVexa Official Logo">
+    <a href="#home" class="brand">
+      <img src="../eduvexa%20logo%20jpg.jpg" alt="EduVexa Logo">
+      <span>
+        <strong>EduVexa</strong>
+        <small>Study Abroad Simplified</small>
+      </span>
     </a>
 
-    <button class="menu-btn"
-            id="menuBtn"
-            aria-label="Toggle navigation"
-            aria-expanded="false">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
       ☰
     </button>
 
-    <nav id="nav">
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
       <a href="#home">Home</a>
-      <a href="#about">About</a>
       <a href="#destinations">Destinations</a>
       <a href="#universities">Universities</a>
       <a href="#scholarships">Scholarships</a>
       <a href="#services">Services</a>
-      <a href="#apply">Apply Now</a>
-      <a href="#contact">Contact</a>
+      <a href="#apply">Apply</a>
+      <a href="#contact" class="nav-contact">Contact Us</a>
     </nav>
 
   </div>
@@ -66,587 +47,523 @@ content="EduVexa - Study Abroad Simplified. Explore universities, scholarships a
 
 <main>
 
-<!-- HERO -->
+  <!-- HERO -->
 
-<section class="hero" id="home">
-  <div class="container">
-    <div class="hero-content">
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
 
-      <div class="badge">
-        Your Gateway To Global Education
+    <div class="container hero-content">
+
+      <div class="hero-badge">
+        YOUR GLOBAL EDUCATION JOURNEY STARTS HERE
       </div>
 
       <h1>
-        Your Future Knows
-        <span>No Borders.</span>
+        Your Ambition.<br>
+        <span>Our Global Vision.</span>
       </h1>
 
       <p>
-        Explore international education opportunities across Europe
-        and Asia. EduVexa simplifies your journey through university
-        selection, admission guidance, scholarship assistance
-        and pre-departure support.
+        Explore international universities, discover study opportunities,
+        and take your next step toward a brighter future with EduVexa.
       </p>
 
-      <div class="hero-actions">
-        <a href="#destinations" class="btn gold">
-          Explore Destinations →
+      <div class="hero-buttons">
+        <a href="#universities" class="btn btn-gold">
+          Explore Universities →
         </a>
 
-        <a href="#apply" class="btn white">
-          Apply Now
+        <a href="#apply" class="btn btn-outline">
+          Start Your Journey
         </a>
       </div>
 
-    </div>
-  </div>
-</section>
+      <div class="hero-stats">
+        <div>
+          <strong>10</strong>
+          <span>Study Destinations</span>
+        </div>
 
-<!-- STATS -->
+        <div>
+          <strong id="universityCount">—</strong>
+          <span>Listed Universities</span>
+        </div>
 
-<div class="stats">
-  <div class="container stats-grid">
-
-    <div class="stat">
-      <strong>10</strong>
-      <p>Study Destinations</p>
-    </div>
-
-    <div class="stat">
-      <strong id="universityCount">—</strong>
-      <p>Published Universities</p>
-    </div>
-
-    <div class="stat">
-      <strong>08</strong>
-      <p>Education Services</p>
-    </div>
-
-    <div class="stat">
-      <strong>24/7</strong>
-      <p>Online Inquiry</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- ABOUT -->
-
-<section id="about" class="about">
-  <div class="container">
-
-    <h2 class="section-title">
-      Welcome to EduVexa
-    </h2>
-
-    <div class="line"></div>
-
-    <p>
-      EduVexa – Study Abroad Simplified helps students explore
-      suitable international education opportunities through
-      university selection, documentation assistance,
-      admission guidance and pre-departure support.
-    </p>
-
-  </div>
-</section>
-
-<!-- DESTINATIONS -->
-
-<section id="destinations" class="light-section">
-  <div class="container">
-
-    <h2 class="section-title">
-      Explore Study Destinations
-    </h2>
-
-    <div class="line"></div>
-
-    <p class="section-subtitle">
-      Discover international education opportunities
-      across our featured destinations.
-    </p>
-
-    <div class="grid" id="countryGrid">
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/my.png"
-             alt="Malaysia flag">
-        <h3>Malaysia</h3>
-        <p>Explore study opportunities in Malaysia.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/sk.png"
-             alt="Slovakia flag">
-        <h3>Slovakia</h3>
-        <p>Explore European education opportunities.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/ro.png"
-             alt="Romania flag">
-        <h3>Romania</h3>
-        <p>Discover university opportunities in Romania.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/hu.png"
-             alt="Hungary flag">
-        <h3>Hungary</h3>
-        <p>Explore education and scholarship opportunities.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/lt.png"
-             alt="Lithuania flag">
-        <h3>Lithuania</h3>
-        <p>Explore international education opportunities.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/cn.png"
-             alt="China flag">
-        <h3>China</h3>
-        <p>Discover university programs in China.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/in.png"
-             alt="India flag">
-        <h3>India</h3>
-        <p>Explore academic opportunities in India.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/it.png"
-             alt="Italy flag">
-        <h3>Italy</h3>
-        <p>Explore higher education opportunities in Italy.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/tr.png"
-             alt="Turkey flag">
-        <h3>Turkey</h3>
-        <p>Explore university admission opportunities.</p>
-      </div>
-
-      <div class="card">
-        <img class="flag"
-             src="https://flagcdn.com/w160/uz.png"
-             alt="Uzbekistan flag">
-        <h3>Uzbekistan</h3>
-        <p>Explore study opportunities in Uzbekistan.</p>
+        <div>
+          <strong>24/7</strong>
+          <span>Online Inquiry</span>
+        </div>
       </div>
 
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- DESTINATIONS -->
 
-<!-- UNIVERSITY EXPLORER -->
+  <section class="section destinations-section" id="destinations">
+    <div class="container">
 
-<section id="universities">
-  <div class="container">
-
-    <h2 class="section-title">
-      University Explorer
-    </h2>
-
-    <div class="line"></div>
-
-    <p class="section-subtitle">
-      Select your country to explore universities
-      and available academic programs.
-    </p>
-
-    <div class="explorer-box">
-      <div class="explorer-controls">
-
-        <label>
-          Select Country
-          <select id="universityCountry">
-            <option value="">Select Country</option>
-          </select>
-        </label>
-
-        <label>
-          Search University
-          <input
-            id="universitySearch"
-            type="search"
-            placeholder="Search university name...">
-        </label>
-
-      </div>
-    </div>
-
-    <div class="result-grid" id="universityGrid">
-      <div class="empty">
-        Select a country to explore universities.
-      </div>
-    </div>
-
-    <div id="programSection" hidden>
-
-      <h2 class="section-title" id="programTitle">
-        Available Programs
-      </h2>
-
-      <div class="line"></div>
-
-      <div class="result-grid" id="programGrid"></div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- SCHOLARSHIP FINDER -->
-
-<section id="scholarships" class="light-section">
-  <div class="container">
-
-    <h2 class="section-title">
-      Scholarship Finder
-    </h2>
-
-    <div class="line"></div>
-
-    <p class="section-subtitle">
-      Explore published scholarship opportunities
-      and visit official sources for current information.
-    </p>
-
-    <div class="explorer-box">
-      <div class="explorer-controls">
-
-        <label>
-          Select Country
-          <select id="scholarshipCountry">
-            <option value="">Select Country</option>
-          </select>
-        </label>
-
-        <label>
-          Search Scholarship
-          <input
-            id="scholarshipSearch"
-            type="search"
-            placeholder="Search scholarship...">
-        </label>
-
-      </div>
-    </div>
-
-    <div class="result-grid" id="scholarshipGrid">
-      <div class="empty">
-        Select a country to explore scholarships.
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SERVICES -->
-
-<section id="services">
-  <div class="container">
-
-    <h2 class="section-title">Our Services</h2>
-    <div class="line"></div>
-
-    <p class="section-subtitle">
-      Guidance throughout your international education journey.
-    </p>
-
-    <div class="grid">
-
-      <div class="card">
-        <div class="service-icon">📋</div>
-        <h3>Document Assessment</h3>
+      <div class="section-heading">
+        <span class="eyebrow">EXPLORE THE WORLD</span>
+        <h2>Our Study Destinations</h2>
         <p>
-          Academic document review and application guidance.
-          Secure online document submission is being prepared.
+          Discover education opportunities across our international study destinations.
         </p>
       </div>
 
-      <div class="card">
-        <div class="service-icon">🏛️</div>
-        <h3>University Selection</h3>
-        <p>Explore universities and available programs.</p>
-        <a class="card-link" href="#universities">
-          Explore Universities →
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="service-icon">🎓</div>
-        <h3>University Admission</h3>
-        <p>University admission application guidance.</p>
-      </div>
-
-      <div class="card">
-        <div class="service-icon">🛂</div>
-        <h3>Student Visa Processing</h3>
-        <p>Student visa documentation guidance.</p>
-      </div>
-
-      <div class="card">
-        <div class="service-icon">🏅</div>
-        <h3>Scholarship Assistance</h3>
-        <p>Explore scholarship opportunities.</p>
-        <a class="card-link" href="#scholarships">
-          Explore Scholarships →
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="service-icon">📑</div>
-        <h3>Document Preparation</h3>
-        <p>Academic document preparation assistance.</p>
-      </div>
-
-      <div class="card">
-        <div class="service-icon">💼</div>
-        <h3>Career Counseling</h3>
-        <p>Academic pathway and career guidance.</p>
-        <a class="card-link"
-           href="https://wa.me/8801811909779">
-          Request Counseling →
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="service-icon">✈️</div>
-        <h3>Pre-Departure Briefing</h3>
-        <p>Preparation before international travel.</p>
-      </div>
+      <div class="country-grid" id="countryGrid"></div>
 
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- UNIVERSITY EXPLORER -->
 
-<!-- APPLICATION -->
+  <section class="section university-section" id="universities">
+    <div class="container">
 
-<section id="apply" class="light-section">
-  <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">FIND YOUR UNIVERSITY</span>
+        <h2>University Explorer</h2>
+        <p>
+          Select your preferred country and explore available universities and programs.
+        </p>
+      </div>
 
-    <h2 class="section-title">
-      Apply for Study Abroad
-    </h2>
+      <div class="explorer-panel">
 
-    <div class="line"></div>
+        <div class="explorer-controls">
 
-    <p class="section-subtitle">
-      Complete your information to start an inquiry.
-    </p>
-
-    <div class="form-box">
-
-      <form id="applicationForm">
-
-        <div class="form-grid">
-
-          <label>
-            Full Name *
-            <input id="studentName"
-                   required
-                   maxlength="100">
-          </label>
-
-          <label>
-            WhatsApp Number *
-            <input id="studentPhone"
-                   type="tel"
-                   required
-                   maxlength="25">
-          </label>
-
-        </div>
-
-        <div class="form-grid">
-
-          <label>
-            Email Address
-            <input id="studentEmail"
-                   type="email">
-          </label>
-
-          <label>
-            Interested Country *
-            <select id="interestedCountry" required>
+          <div class="form-group">
+            <label for="universityCountry">Select Country</label>
+            <select id="universityCountry">
               <option value="">Select Country</option>
-              <option>Malaysia</option>
-              <option>Slovakia</option>
-              <option>Romania</option>
-              <option>Hungary</option>
-              <option>Lithuania</option>
-              <option>China</option>
-              <option>India</option>
-              <option>Italy</option>
-              <option>Turkey</option>
-              <option>Uzbekistan</option>
             </select>
-          </label>
+          </div>
 
-        </div>
-
-        <label>
-          Education Qualification *
-          <select id="qualification" required>
-            <option value="">Select Qualification</option>
-            <option>SSC</option>
-            <option>HSC</option>
-            <option>Diploma</option>
-            <option>Bachelor's</option>
-            <option>Master's</option>
-            <option>Alim</option>
-            <option>Dakhil</option>
-          </select>
-        </label>
-
-        <div class="education-fields"
-             id="educationFields"
-             hidden>
-
-          <div class="form-grid">
-
-            <label>
-              <span id="subjectLabel">
-                Group / Subject *
-              </span>
-              <input id="subject" maxlength="100">
-            </label>
-
-            <label>
-              Result (GPA / CGPA) *
-              <input id="result" maxlength="40">
-            </label>
-
+          <div class="form-group">
+            <label for="universitySearch">Search University</label>
+            <input
+              type="search"
+              id="universitySearch"
+              placeholder="Search by university name..."
+            >
           </div>
 
         </div>
 
-        <label>
-          Additional Message
-          <textarea id="studentMessage"
-                    rows="4"
-                    maxlength="1000"></textarea>
-        </label>
+        <div id="universityGrid" class="university-grid">
+          <div class="empty-state">
+            Select a country to explore universities.
+          </div>
+        </div>
 
-        <button class="btn gold"
-                type="submit"
-                style="width:100%">
-          Submit Application via WhatsApp →
+      </div>
+
+      <div id="programSection" class="program-section" hidden>
+
+        <div class="section-heading">
+          <span class="eyebrow">AVAILABLE COURSES</span>
+          <h2 id="programTitle">University Programs</h2>
+        </div>
+
+        <div id="programGrid" class="program-grid"></div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCHOLARSHIPS -->
+
+  <section class="section scholarship-section" id="scholarships">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">FUND YOUR FUTURE</span>
+        <h2>Scholarship Finder</h2>
+        <p>
+          Explore scholarship opportunities and verify application details through official sources.
+        </p>
+      </div>
+
+      <div class="explorer-panel">
+
+        <div class="explorer-controls">
+
+          <div class="form-group">
+            <label for="scholarshipCountry">Select Country</label>
+            <select id="scholarshipCountry">
+              <option value="">Select Country</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="scholarshipSearch">Search Scholarship</label>
+            <input
+              type="search"
+              id="scholarshipSearch"
+              placeholder="Search scholarships..."
+            >
+          </div>
+
+        </div>
+
+        <div id="scholarshipGrid" class="scholarship-grid">
+          <div class="empty-state">
+            Select a country to explore scholarships.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+
+  <section class="section services-section" id="services">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">HOW WE SUPPORT YOU</span>
+        <h2>Our Professional Services</h2>
+        <p>
+          Guidance and support throughout your international education journey.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="service-icon">📑</div>
+          <h3>Document Assessment</h3>
+          <p>Review your academic profile and understand documentation requirements.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3>University Selection</h3>
+          <p>Explore universities aligned with your academic interests and goals.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🏛️</div>
+          <h3>University Admission</h3>
+          <p>Receive guidance on admission procedures and application preparation.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">✈️</div>
+          <h3>Student Visa Processing</h3>
+          <p>Understand student visa requirements and the application process.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🏅</div>
+          <h3>Scholarship Assistance</h3>
+          <p>Discover scholarship opportunities and official application resources.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">📂</div>
+          <h3>Document Preparation</h3>
+          <p>Get assistance preparing documents required for applications.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">💬</div>
+          <h3>Career Counseling</h3>
+          <p>Discuss your education plans and future career direction.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🌍</div>
+          <h3>Pre-Departure Briefing</h3>
+          <p>Prepare for your international study experience before departure.</p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOCUMENT ASSESSMENT -->
+
+  <section class="section assessment-section" id="assessment">
+    <div class="container assessment-layout">
+
+      <div>
+        <span class="eyebrow">YOUR PROFILE MATTERS</span>
+        <h2>Document Assessment</h2>
+
+        <p>
+          Understanding your academic qualifications and documents
+          is an important step toward planning your study abroad journey.
+        </p>
+
+        <p>
+          Our team can guide you on which academic documents may be
+          required based on your education background.
+        </p>
+
+        <a href="#apply" class="btn btn-gold">
+          Request Assessment →
+        </a>
+      </div>
+
+      <div class="assessment-card">
+        <h3>Commonly Required Documents</h3>
+
+        <ul>
+          <li>Academic Certificates</li>
+          <li>Academic Transcripts / Marksheets</li>
+          <li>Passport</li>
+          <li>Passport-Size Photograph</li>
+          <li>Additional Supporting Documents</li>
+        </ul>
+
+        <p class="security-note">
+          For your privacy, sensitive document uploads are not currently
+          accepted through this website.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CAREER COUNSELING -->
+
+  <section class="section counseling-section" id="counseling">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">PERSONALIZED GUIDANCE</span>
+        <h2>Career Counseling</h2>
+        <p>
+          Connect with EduVexa to discuss your education goals,
+          university preferences and potential study pathways.
+        </p>
+      </div>
+
+      <div class="counseling-box">
+        <div class="counseling-icon">🎯</div>
+
+        <h3>Plan Your International Education Journey</h3>
+
+        <p>
+          Our counseling service helps you explore your options
+          and make informed decisions about your future.
+        </p>
+
+        <a
+          href="https://wa.me/8801811909779"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-gold"
+        >
+          Speak With EduVexa →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- APPLICATION -->
+
+  <section class="section application-section" id="apply">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="eyebrow">TAKE THE FIRST STEP</span>
+        <h2>Start Your Application</h2>
+        <p>
+          Share your academic background and preferred study destination.
+          Your information will be prepared as a WhatsApp message.
+        </p>
+      </div>
+
+      <form id="applicationForm" class="application-form">
+
+        <div class="form-row">
+
+          <div class="form-group">
+            <label for="studentName">Full Name *</label>
+            <input id="studentName" name="studentName" type="text" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentWhatsapp">WhatsApp Number *</label>
+            <input
+              id="studentWhatsapp"
+              name="studentWhatsapp"
+              type="tel"
+              required
+            >
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="form-group">
+            <label for="studentEmail">Email Address</label>
+            <input id="studentEmail" name="studentEmail" type="email">
+          </div>
+
+          <div class="form-group">
+            <label for="interestedCountry">Interested Country *</label>
+            <select id="interestedCountry" name="interestedCountry" required>
+              <option value="">Select Country</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="qualification">Highest / Relevant Qualification *</label>
+
+          <select id="qualification" name="qualification" required>
+            <option value="">Select Qualification</option>
+            <option value="SSC">SSC</option>
+            <option value="HSC">HSC</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Bachelor's">Bachelor's</option>
+            <option value="Master's">Master's</option>
+            <option value="Alim">Alim</option>
+            <option value="Dakhil">Dakhil</option>
+          </select>
+        </div>
+
+        <div id="educationFields"></div>
+
+        <div class="form-group">
+          <label for="studentMessage">Additional Message</label>
+          <textarea
+            id="studentMessage"
+            name="studentMessage"
+            rows="5"
+            placeholder="Tell us about your preferred subject, budget or study goals..."
+          ></textarea>
+        </div>
+
+        <div class="form-group consent-group">
+          <label>
+            <input type="checkbox" id="applicationConsent" required>
+            I agree to share my submitted information with EduVexa
+            through WhatsApp for education counseling purposes.
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-gold submit-btn">
+          Continue to WhatsApp →
         </button>
 
         <p class="form-note">
-          WhatsApp will open with your information.
-          Press Send to submit your inquiry.
+          Clicking the button opens WhatsApp with a prepared message.
+          You must press Send in WhatsApp to submit your inquiry.
         </p>
 
       </form>
 
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- CONTACT -->
 
-<!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
 
-<section id="contact" class="contact">
-  <div class="container">
-
-    <h2 class="section-title">Contact EduVexa</h2>
-    <div class="line"></div>
-
-    <p>WhatsApp: +880 1811-909779</p>
-    <p>Email: eduvexastudya@gmail.com</p>
-
-    <p>
-      <a href="https://www.facebook.com/EduVexaStudyAbroadSimplified/"
-         target="_blank"
-         rel="noopener noreferrer">
-        Facebook
-      </a>
-
-      &nbsp; | &nbsp;
-
-      <a href="https://www.instagram.com/eduvexastudya/"
-         target="_blank"
-         rel="noopener noreferrer">
-        Instagram
-      </a>
-    </p>
-
-  </div>
-</section>
-
-</main>
-
-<!-- FOOTER -->
-
-<footer>
-  <div class="container">
-
-    <div class="footer-grid">
-
-      <div>
-        <img class="footer-logo"
-             src="../eduvexa%20logo%20jpg.jpg"
-             alt="EduVexa Logo">
-
+      <div class="section-heading">
+        <span class="eyebrow">WE ARE HERE TO HELP</span>
+        <h2>Contact EduVexa</h2>
         <p>
-          EduVexa – Study Abroad Simplified.
-          Explore international education opportunities.
+          Have questions about studying abroad? Get in touch with our team.
         </p>
       </div>
 
-      <div>
-        <h3>Explore</h3>
-        <a href="#destinations">Destinations</a>
-        <a href="#universities">Universities</a>
-        <a href="#scholarships">Scholarships</a>
-        <a href="#apply">Apply Now</a>
-      </div>
+      <div class="contact-grid">
 
-      <div>
-        <h3>Contact</h3>
-        <a href="https://wa.me/8801811909779">
-          WhatsApp
+        <a
+          class="contact-card"
+          href="https://wa.me/8801811909779"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>💬</span>
+          <h3>WhatsApp</h3>
+          <p>+880 1811-909779</p>
         </a>
-        <a href="mailto:eduvexastudya@gmail.com">
-          Email
+
+        <a class="contact-card" href="mailto:eduvexastudya@gmail.com">
+          <span>✉️</span>
+          <h3>Email</h3>
+          <p>eduvexastudya@gmail.com</p>
         </a>
+
+        <a
+          class="contact-card"
+          href="https://www.facebook.com/EduVexaStudyAbroadSimplified/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>📘</span>
+          <h3>Facebook</h3>
+          <p>Follow EduVexa</p>
+        </a>
+
+        <a
+          class="contact-card"
+          href="https://www.instagram.com/eduvexastudya/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>📸</span>
+          <h3>Instagram</h3>
+          <p>Connect With Us</p>
+        </a>
+
       </div>
 
     </div>
+  </section>
 
-    <div class="copyright">
-      © <span id="year"></span>
-      EduVexa. All Rights Reserved.
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+
+    <div class="footer-brand">
+      <h3>EduVexa</h3>
+      <p>Study Abroad Simplified</p>
+      <small>
+        Helping students explore international education opportunities.
+      </small>
+    </div>
+
+    <div class="footer-links">
+      <a href="#destinations">Destinations</a>
+      <a href="#universities">Universities</a>
+      <a href="#scholarships">Scholarships</a>
+      <a href="#services">Services</a>
+      <a href="#apply">Apply Now</a>
     </div>
 
   </div>
+
+  <div class="footer-bottom">
+    © <span id="currentYear">2026</span> EduVexa.
+    All Rights Reserved.
+  </div>
 </footer>
 
-<a class="whatsapp"
-   href="https://wa.me/8801811909779"
-   target="_blank"
-   rel="noopener noreferrer">
-  WhatsApp Chat
+<a
+  href="https://wa.me/8801811909779"
+  class="floating-whatsapp"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contact EduVexa on WhatsApp"
+>
+  💬
 </a>
 
 </body>
