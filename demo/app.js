@@ -1,161 +1,87 @@
 const SUPABASE_URL = 'https://cnxtddpqjzawfwakmlxl.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_KEY = 'sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let globalData = { countries: [], universities: [], programs: [], scholarships: [] };
+let allCountries = [];
+let allCourses = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadData();
-    setupListeners();
+    await initPortal();
+    setupSearch();
 });
 
-async function loadData() {
+async function initPortal() {
+    // Fetch Countries
     const { data: countries } = await supabase.from('countries').select('*').order('name');
-    const { data: unis } = await supabase.from('universities').select('*, countries(name)');
-    const { data: programs } = await supabase.from('programs').select('*, universities(*, countries(*))');
-    const { data: scholarships } = await supabase.from('scholarships').select('*, countries(name)');
+    allCountries = countries || [];
 
-    globalData = { countries, universities: unis, programs, scholarships };
+    // Fetch Programs with Joins
+    const { data: courses } = await supabase.from('programs').select('*, universities(*, countries(*))');
+    allCourses = courses || [];
 
-    populateDropdowns();
-    renderCountries();
-    renderPrograms(globalData.programs);
-    renderUniversities(globalData.universities);
-    renderScholarships(globalData.scholarships);
+    renderDestinations();
+    renderCourses(allCourses);
+    populateDropdown();
 }
 
-function populateDropdowns() {
-    const options = globalData.countries.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-    ['hero-destination-select', 'filter-country', 'uni-country-select', 'student-country'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML += options;
-    });
-}
-
-function renderCountries() {
-    const container = document.getElementById('destinations-grid');
-    container.innerHTML = globalData.countries.map(c => `
-        <div class="card destination-card" style="cursor:pointer" onclick="filterByCountry('${c.name}')">
-            <img src="https://flagcdn.com/w80/${c.code.toLowerCase()}.png" alt="${c.name}">
-            <div class="destination-info"><h3>${c.name}</h3><span style="color:var(--gold)">View Programs →</span></div>
-        </div>
-    `).join('');
-}
-
-function renderPrograms(data) {
-    const container = document.getElementById('program-cards-container');
-    document.getElementById('results-count').innerText = `Showing ${data.length} Programs`;
-    
-    if (data.length === 0) {
-        container.innerHTML = `<p style="padding:40px; text-align:center; background:#FFF; border-radius:15px;">No programs found matching your search.</p>`;
+function renderDestinations() {
+    const grid = document.getElementById('country-grid');
+    if (allCountries.length === 0) {
+        grid.innerHTML = "<p>Connecting to database...</p>";
         return;
     }
-
-    container.innerHTML = data.map(p => `
-        <div class="program-card">
-            <div class="program-header">
-                <h3 class="program-title">${p.name}</h3>
-                <span class="badge-degree">${p.degree_level}</span>
+    grid.innerHTML = allCountries.map(c => `
+        <div class="country-card" onclick="filterByCountry('${c.name}')">
+            <div class="flag-wrapper">
+                <img src="https://flagcdn.com/w160/${c.code.toLowerCase()}.png" alt="${c.name}">
             </div>
-            <p style="color:#64748B; font-size:14px; margin-bottom:10px;">🏛️ ${p.universities.name} • ${p.universities.countries.name}</p>
-            <div class="program-details">
-                <div class="detail-box"><span>Duration</span><strong>${p.duration}</strong></div>
-                <div class="detail-box"><span>Tuition Fee</span><strong>${p.tuition_fee}</strong></div>
-                <div class="detail-box"><span>Requirement</span><strong>${p.admission_requirements}</strong></div>
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <a href="${p.official_url}" target="_blank" style="color:var(--navy); font-weight:700; font-size:13px;">Official Website ↗</a>
-                <button class="btn-whatsapp" onclick="inquire('${p.name}', '${p.universities.name}')">Inquire Now</button>
-            </div>
+            <h4>${c.name}</h4>
         </div>
     `).join('');
 }
 
-function renderUniversities(data) {
-    const container = document.getElementById('universities-grid');
-    container.innerHTML = data.map(u => `
-        <div class="card">
-            <h3>${u.name}</h3>
-            <p style="color:#64748B; font-size:13px; margin:10px 0;">📍 ${u.countries.name}</p>
-            <a href="${u.website}" target="_blank" style="color:var(--gold); font-weight:700; text-decoration:none; font-size:13px;">View Website →</a>
+function renderCourses(list) {
+    const grid = document.getElementById('course-list');
+    if (list.length === 0) {
+        grid.innerHTML = "<p style='padding:40px; font-weight:bold;'>No courses found. Try a different search.</p>";
+        return;
+    }
+    grid.innerHTML = list.map(c => `
+        <div class="course-card">
+            <span class="degree">${c.degree_level}</span>
+            <h3>${c.name}</h3>
+            <span class="uni-name">🏛️ ${c.universities.name} • ${c.universities.countries.name}</span>
+            <div class="meta">
+                <div class="meta-item"><span>Duration</span><strong>${c.duration}</strong></div>
+                <div class="meta-item"><span>Tuition</span><strong>${c.tuition_fee}</strong></div>
+            </div>
+            <a href="https://wa.me/8801811909779?text=I am interested in ${encodeURIComponent(c.name)} at ${encodeURIComponent(c.universities.name)}" target="_blank" class="btn-details">Enquire Now</a>
         </div>
     `).join('');
 }
 
-function renderScholarships(data) {
-    const container = document.getElementById('scholarships-grid');
-    container.innerHTML = data.map(s => `
-        <div class="card" style="text-align:left">
-            <span class="badge-scholarship">${s.countries.name} Scholarship</span>
-            <h3 style="margin-top:10px;">${s.title}</h3>
-            <p style="font-size:13px; color:#64748B; margin:10px 0;">${s.coverage}</p>
-            <a href="${s.official_url}" target="_blank" style="color:var(--navy); font-weight:700; font-size:13px;">Details ↗</a>
-        </div>
-    `).join('');
+function populateDropdown() {
+    const select = document.getElementById('course-country');
+    const opts = allCountries.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+    select.innerHTML += opts;
 }
 
-function setupListeners() {
-    document.getElementById('hero-search-btn').addEventListener('click', () => {
-        const kw = document.getElementById('hero-keyword-input').value;
-        const ct = document.getElementById('hero-destination-select').value;
-        const dg = document.getElementById('hero-degree-select').value;
-        
-        document.getElementById('filter-keyword').value = kw;
-        document.getElementById('filter-country').value = ct;
-        document.getElementById('filter-degree').value = dg;
-        applyFilters();
-        document.getElementById('search').scrollIntoView({behavior:'smooth'});
+function setupSearch() {
+    document.getElementById('search-btn').addEventListener('click', () => {
+        const kw = document.getElementById('course-keyword').value.toLowerCase();
+        const ct = document.getElementById('course-country').value;
+
+        const filtered = allCourses.filter(c => 
+            (c.name.toLowerCase().includes(kw)) && 
+            (!ct || c.universities.countries.name === ct)
+        );
+        renderCourses(filtered);
+        document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
     });
-
-    ['filter-keyword', 'filter-country', 'filter-degree'].forEach(id => {
-        document.getElementById(id).addEventListener('input', applyFilters);
-    });
-
-    document.getElementById('reset-filters-btn').addEventListener('click', () => {
-        ['filter-keyword', 'filter-country', 'filter-degree'].forEach(id => document.getElementById(id).value = '');
-        renderPrograms(globalData.programs);
-    });
-
-    document.getElementById('uni-search-input').addEventListener('input', filterUnis);
-    document.getElementById('uni-country-select').addEventListener('change', filterUnis);
-}
-
-function applyFilters() {
-    const kw = document.getElementById('filter-keyword').value.toLowerCase();
-    const ct = document.getElementById('filter-country').value;
-    const dg = document.getElementById('filter-degree').value;
-
-    const filtered = globalData.programs.filter(p => {
-        return (p.name.toLowerCase().includes(kw) || p.universities.name.toLowerCase().includes(kw)) &&
-               (!ct || p.universities.countries.name === ct) &&
-               (!dg || p.degree_level === dg);
-    });
-    renderPrograms(filtered);
-}
-
-function filterUnis() {
-    const kw = document.getElementById('uni-search-input').value.toLowerCase();
-    const ct = document.getElementById('uni-country-select').value;
-    const filtered = globalData.universities.filter(u => (!ct || u.countries.name === ct) && u.name.toLowerCase().includes(kw));
-    renderUniversities(filtered);
 }
 
 function filterByCountry(name) {
-    document.getElementById('filter-country').value = name;
-    applyFilters();
-    document.getElementById('search').scrollIntoView({behavior:'smooth'});
-}
-
-function inquire(prog, uni) {
-    const text = encodeURIComponent(`Hello EduVexa! I am interested in ${prog} at ${uni}. Please help me.`);
-    window.open(`https://wa.me/8801811909779?text=${text}`, '_blank');
-}
-
-function handleInquirySubmit(e) {
-    e.preventDefault();
-    const name = document.getElementById('student-name').value;
-    const country = document.getElementById('student-country').value;
-    const msg = document.getElementById('student-message').value;
-    const text = encodeURIComponent(`New Inquiry:\nName: ${name}\nCountry: ${country}\nMessage: ${msg}`);
-    window.open(`https://wa.me/8801811909779?text=${text}`, '_blank');
+    const filtered = allCourses.filter(c => c.universities.countries.name === name);
+    renderCourses(filtered);
+    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
 }
