@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduVexa | International Study Portal</title>
+    <title>EduVexa | International Study Program Directory</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -11,15 +11,16 @@
 
     <nav class="navbar">
         <div class="container nav-container">
-            <div class="logo-brand">
-                <img src="../eduvexa%20logo%20jpg.jpg" alt="EduVexa">
+            <a href="#" class="logo-brand">
+                <img src="../eduvexa%20logo%20jpg.jpg" alt="EduVexa Logo" onerror="this.src='./eduvexa logo jpg.jpg'">
                 <div class="logo-text"><h1>EduVexa</h1><span>Study Abroad Simplified</span></div>
-            </div>
+            </a>
             <ul class="nav-links">
-                <li><a href="#search">Search</a></li>
+                <li><a href="#search">Search Programs</a></li>
                 <li><a href="#destinations">Destinations</a></li>
                 <li><a href="#universities">Universities</a></li>
                 <li><a href="#scholarships">Scholarships</a></li>
+                <li><a href="#apply" style="color:var(--gold)">Apply Now</a></li>
             </ul>
         </div>
     </nav>
@@ -27,91 +28,93 @@
     <header class="hero-section">
         <div class="container">
             <h1 class="hero-title">Find Your Ideal Study Program Worldwide</h1>
-            <p style="color: #CBD5E1; margin-bottom: 30px;">Explore thousands of degrees and apply with EduVexa guidance.</p>
+            <p class="hero-subtitle">Explore thousands of degrees and compare tuition fees with expert guidance.</p>
             
-            <div class="filter-sidebar" style="max-width: 900px; margin: 0 auto; text-align: left;">
-                <div style="display: grid; grid-template-columns: 2fr 1.5fr 1.5fr auto; gap: 15px; align-items: flex-end;">
-                    <div><label>Keyword</label><input type="text" id="hero-keyword-input" placeholder="e.g. Computer Science"></div>
-                    <div><label>Country</label><select id="hero-destination-select"><option value="">All Countries</option></select></div>
-                    <div><label>Degree</label><select id="hero-degree-select"><option value="">All Levels</option><option value="Bachelor's">Bachelor's</option><option value="Master's">Master's</option></select></div>
-                    <button id="hero-search-btn" class="btn-whatsapp" style="background: #D9A62C !important; color: #081B35 !important; border-radius: 5px !important; height: 45px;">Search</button>
-                </div>
+            <div class="search-box-card">
+                <div><label>What to study?</label><input type="text" id="hero-keyword-input" placeholder="e.g. Computer Science"></div>
+                <div><label>Where to study?</label><select id="hero-destination-select"><option value="">All Destinations</option></select></div>
+                <div><label>Degree Level</label><select id="hero-degree-select"><option value="">All Levels</option><option value="Bachelor's">Bachelor's</option><option value="Master's">Master's</option></select></div>
+                <button id="hero-search-btn" class="btn-search">Search Programs →</button>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item"><h2>10</h2><p>Destinations</p></div>
+                <div class="stat-item"><h2>24+</h2><p>Universities</p></div>
+                <div class="stat-item"><h2>50+</h2><p>Programs</p></div>
             </div>
         </div>
     </header>
 
-    <section id="search" class="section-padding">
+    <section id="search" class="container directory-layout">
+        <aside class="filter-sidebar">
+            <h3>Filter Results</h3>
+            <div class="filter-group"><label>Keywords</label><input type="text" id="filter-keyword" placeholder="Search title..."></div>
+            <div class="filter-group"><label>Country</label><select id="filter-country"><option value="">All Countries</option></select></div>
+            <div class="filter-group"><label>Degree</label><select id="filter-degree"><option value="">All Degrees</option><option value="Bachelor's">Bachelor's</option><option value="Master's">Master's</option></select></div>
+            <button id="reset-filters-btn" style="width:100%; padding:10px; cursor:pointer; background:#F1F5F9; border:1px solid #CBD5E1; border-radius:8px;">Reset Filters</button>
+        </aside>
+        
+        <main>
+            <div id="results-count" style="margin-bottom:20px; font-weight:700; color:var(--dark-navy);">Loading Programs...</div>
+            <div id="program-cards-container"></div>
+        </main>
+    </section>
+
+    <section id="destinations" style="background:#FFF; padding:80px 0;">
         <div class="container">
-            <div class="directory-layout">
-                <aside class="filter-sidebar">
-                    <h3 style="margin-bottom: 20px;">Filter Programs</h3>
-                    <div style="margin-bottom: 15px;"><label>Search</label><input type="text" id="filter-keyword"></div>
-                    <div style="margin-bottom: 15px;"><label>Country</label><select id="filter-country"><option value="">All</option></select></div>
-                    <div style="margin-bottom: 15px;"><label>Degree</label><select id="filter-degree"><option value="">All</option></select></div>
-                    <button id="reset-filters-btn" style="width:100%; padding:10px; cursor:pointer;">Reset All</button>
-                </aside>
-                <main>
-                    <div id="results-count" style="margin-bottom: 15px; font-weight: bold;">Loading programs...</div>
-                    <div id="program-cards-container" class="program-cards-list"></div>
-                </main>
-            </div>
+            <h2 style="font-family:'Playfair Display'; font-size:32px; margin-bottom:10px;">Study Destinations</h2>
+            <div id="destinations-grid" class="grid-container"></div>
         </div>
     </section>
 
-    <section id="destinations" class="section-padding" style="background: #FFF;">
+    <section id="universities" class="container" style="padding:80px 0;">
+        <h2 style="font-family:'Playfair Display'; font-size:32px; margin-bottom:20px;">University Explorer</h2>
+        <div style="display:flex; gap:15px; margin-bottom:30px; max-width:600px;">
+            <select id="uni-country-select" style="padding:10px; border-radius:8px; border:1px solid #DDD; flex:1;"><option value="">Select Country</option></select>
+            <input type="text" id="uni-search-input" placeholder="Search University..." style="padding:10px; border-radius:8px; border:1px solid #DDD; flex:2;">
+        </div>
+        <div id="universities-grid" class="grid-container"></div>
+    </section>
+
+    <section id="scholarships" style="background:#FFF; padding:80px 0;">
         <div class="container">
-            <h2 class="hero-title" style="color: #081B35; font-size: 32px;">Study Destinations</h2>
-            <div id="destinations-grid"></div>
+            <h2 style="font-family:'Playfair Display'; font-size:32px; margin-bottom:30px;">Scholarship Finder</h2>
+            <div id="scholarships-grid" class="grid-container"></div>
         </div>
     </section>
 
-    <section id="universities" class="section-padding">
-        <div class="container">
-            <h2 class="hero-title" style="color: #081B35; font-size: 32px;">University Explorer</h2>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <select id="uni-country-select"><option value="">Select Country</option></select>
-                <input type="text" id="uni-search-input" placeholder="University name...">
-            </div>
-            <div id="universities-grid"></div>
-        </div>
-    </section>
-
-    <section id="scholarships" class="section-padding" style="background: #FFF;">
-        <div class="container">
-            <h2 class="hero-title" style="color: #081B35; font-size: 32px;">Scholarship Finder</h2>
-            <div id="scholarships-grid"></div>
-        </div>
-    </section>
-
-    <section id="services" class="section-padding">
-        <div class="container">
-            <h2 class="hero-title" style="color: #081B35; font-size: 32px; text-align: center;">Our Services</h2>
-            <div id="services-grid"></div>
-        </div>
-    </section>
-
-    <section id="apply" class="section-padding" style="background: #FFF;">
-        <div class="container">
-            <div class="application-container">
-                <h2 style="margin-bottom: 20px;">Inquiry / Application</h2>
-                <form id="inquiry-form" onsubmit="handleInquirySubmit(event)">
-                    <div class="form-grid">
-                        <div class="form-group-full"><label>Full Name *</label><input type="text" id="student-name" required></div>
-                        <div><label>WhatsApp Number *</label><input type="tel" id="student-whatsapp" required></div>
-                        <div><label>Country *</label><select id="student-country" required></select></div>
-                        <div class="form-group-full"><label>Message</label><textarea id="student-message" rows="3"></textarea></div>
+    <section id="apply" class="container" style="padding:80px 0;">
+        <div class="form-container">
+            <h2 style="font-family:'Playfair Display'; margin-bottom:10px;">Start Your Application</h2>
+            <p style="color:#64748B; margin-bottom:30px;">Fill the form below to connect with us on WhatsApp.</p>
+            <form id="inquiry-form" onsubmit="handleInquirySubmit(event)">
+                <div class="form-grid">
+                    <div class="full-width"><label>Full Name *</label><input type="text" id="student-name" required></div>
+                    <div><label>WhatsApp Number *</label><input type="tel" id="student-whatsapp" required></div>
+                    <div><label>Interested Country *</label><select id="student-country" required></select></div>
+                    <div class="full-width"><label>Highest Qualification *</label>
+                        <select id="student-qualification" required>
+                            <option value="HSC">HSC / A-Levels</option>
+                            <option value="Bachelor">Bachelor Degree</option>
+                            <option value="Master">Master Degree</option>
+                        </select>
                     </div>
-                    <button type="submit" class="btn-submit-gold">Send via WhatsApp</button>
-                </form>
-            </div>
+                    <div class="full-width"><label>Message / Program Preference</label><textarea id="student-message" rows="3"></textarea></div>
+                </div>
+                <button type="submit" class="btn-submit">Send Inquiry via WhatsApp →</button>
+            </form>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container footer-grid">
-            <div><h2>EduVexa</h2><p>Study Abroad Simplified</p></div>
-            <div><h4>Navigation</h4><a href="#hero">Home</a><a href="#search">Search</a></div>
-            <div><h4>Contact</h4><a href="mailto:eduvexastudya@gmail.com">Email Us</a></div>
+            <div><h3>EduVexa</h3><p>Study Abroad Simplified. Your bridge to global education.</p></div>
+            <div><h4>Navigation</h4><a href="#search">Programs</a><a href="#destinations">Destinations</a><a href="#universities">Universities</a></div>
+            <div><h4>Support</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="mailto:eduvexastudya@gmail.com">Contact Us</a></div>
+            <div><h4>Contact</h4><p>eduvexastudya@gmail.com</p><p>+880 1811-909779</p></div>
+        </div>
+        <div class="container" style="text-align:center; margin-top:40px; border-top:1px solid #1E293B; padding-top:20px;">
+            <p style="font-size:12px;">© 2026 EduVexa. All Rights Reserved.</p>
         </div>
     </footer>
 
