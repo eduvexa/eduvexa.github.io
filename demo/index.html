@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduVexa | International University & Course Portal</title>
+    <title>EduVexa | International Student Portal</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -16,91 +16,44 @@
                 <div class="logo-text"><h1>EduVexa</h1><span>Study Abroad Simplified</span></div>
             </a>
             <ul class="nav-links">
-                <li><a href="#courses">Courses</a></li>
+                <li><a href="#courses">Find a Course</a></li>
                 <li><a href="#destinations">Destinations</a></li>
-                <li><a href="#universities">Universities</a></li>
-                <li><a href="#apply">Apply Now</a></li>
+                <li><a href="#apply" class="btn-apply-nav">Apply Now</a></li>
             </ul>
         </div>
     </nav>
 
     <header class="hero-section">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Discover your future at a global university</h1>
-                <p class="hero-subtitle">We help you navigate the journey to study in the world's best academic destinations.</p>
-                
-                <div class="course-finder-box">
-                    <input type="text" id="hero-keyword" class="finder-input" placeholder="What are you interested in studying?">
-                    <select id="hero-country" class="finder-select">
-                        <option value="">Any Destination</option>
-                    </select>
-                    <button id="btn-hero-search" class="btn-find">Find Course</button>
-                </div>
-            </div>
+            <h1 class="hero-title">Your journey to a world-class education starts here.</h1>
+            <p class="hero-subtitle">Access global opportunities and expert guidance for your international degree.</p>
         </div>
     </header>
 
+    <div class="container">
+        <div class="finder-bar">
+            <input type="text" id="course-keyword" class="finder-input" placeholder="What would you like to study? (e.g. Business)">
+            <select id="course-country" class="finder-select">
+                <option value="">Any Destination</option>
+            </select>
+            <button id="search-btn" class="btn-find">Search</button>
+        </div>
+    </div>
+
     <section id="destinations" class="section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2>Our Study Destinations</h2>
-                <p>Explore opportunities in top-ranked international education hubs.</p>
-            </div>
+            <h2 class="section-title">Study Destinations</h2>
             <div id="country-grid" class="country-grid">
-                <!-- Countries loaded via JS -->
+                <!-- Data loaded via JS -->
             </div>
         </div>
     </section>
 
-    <section id="courses" class="section-padding" style="background: var(--light-bg);">
+    <section id="courses" class="section-padding" style="background: #F9FAFB;">
         <div class="container">
-            <div class="section-header">
-                <h2>Explore Courses</h2>
-                <div style="display:flex; gap:15px; margin-top:20px;">
-                    <select id="filter-degree" style="width:200px; padding:10px; border:1px solid #DDD;">
-                        <option value="">All Degrees</option>
-                        <option value="Bachelor's">Bachelor's</option>
-                        <option value="Master's">Master's</option>
-                    </select>
-                </div>
-            </div>
-            <div id="course-grid" class="course-grid">
-                <!-- Courses loaded via JS -->
-            </div>
-        </div>
-    </section>
-
-    <section id="apply" class="inquiry-section">
-        <div class="container">
-            <div class="form-container">
-                <div class="section-header">
-                    <h2>International Student Inquiry</h2>
-                    <p>Ready to start? Fill in your details and our team will contact you on WhatsApp.</p>
-                </div>
-                <form id="student-form" onsubmit="handleForm(event)">
-                    <div class="form-grid">
-                        <div class="full-width">
-                            <label>Full Name</label>
-                            <input type="text" id="s-name" required placeholder="Enter your full name">
-                        </div>
-                        <div>
-                            <label>WhatsApp Number</label>
-                            <input type="tel" id="s-phone" required placeholder="+880 1xxx xxxxxx">
-                        </div>
-                        <div>
-                            <label>Country of Interest</label>
-                            <select id="s-country" required>
-                                <option value="">Select a country</option>
-                            </select>
-                        </div>
-                        <div class="full-width">
-                            <label>Academic Message</label>
-                            <textarea id="s-msg" rows="4" placeholder="Tell us about your background and what you want to study"></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-submit">Submit Inquiry</button>
-                </form>
+            <h2 class="section-title">Explore Courses</h2>
+            <div id="course-list" class="course-grid">
+                <!-- Data loaded via JS -->
             </div>
         </div>
     </section>
@@ -109,19 +62,20 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h4>EduVexa</h4>
-                    <p style="color:#888; line-height:1.8;">Leading education consultancy helping students achieve their dreams of studying abroad through simplified guidance.</p>
+                    <h4>EduVexa International</h4>
+                    <p style="color:#999; line-height:1.8; max-width:400px;">We are a leading global education consultancy, dedicated to helping students navigate their way to prestigious international universities.</p>
                 </div>
                 <div>
-                    <h4>Quick Links</h4>
-                    <a href="#courses">Course Search</a>
-                    <a href="#destinations">Destinations</a>
-                    <a href="#apply">Admissions</a>
+                    <h4>Explore</h4>
+                    <a href="#courses">All Courses</a>
+                    <a href="#destinations">Our Destinations</a>
+                    <a href="#">Scholarships</a>
                 </div>
                 <div>
-                    <h4>Contact Us</h4>
-                    <a href="#">eduvexastudya@gmail.com</a>
-                    <a href="#">+880 1811-909779</a>
+                    <h4>Contact</h4>
+                    <a href="mailto:eduvexastudya@gmail.com">eduvexastudya@gmail.com</a>
+                    <a href="https://wa.me/8801811909779">WhatsApp Support</a>
+                    <p style="margin-top:20px; color:#555;">+880 1811-909779</p>
                 </div>
             </div>
             <div class="footer-bottom">
