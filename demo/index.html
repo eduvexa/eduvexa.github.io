@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduVexa | International Student Portal</title>
+    <title>EduVexa | International University & College Portal</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -12,48 +12,66 @@
     <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo-brand">
-                <img src="../eduvexa%20logo%20jpg.jpg" alt="EduVexa Logo">
+                <img src="../eduvexa%20logo%20jpg.jpg" alt="EduVexa">
                 <div class="logo-text"><h1>EduVexa</h1><span>Study Abroad Simplified</span></div>
             </a>
             <ul class="nav-links">
-                <li><a href="#courses">Find a Course</a></li>
+                <li><a href="#courses">Programmes</a></li>
                 <li><a href="#destinations">Destinations</a></li>
-                <li><a href="#apply" class="btn-apply-nav">Apply Now</a></li>
+                <li><a href="#apply" class="btn-apply-now">Apply / Enquire</a></li>
             </ul>
         </div>
     </nav>
 
     <header class="hero-section">
         <div class="container">
-            <h1 class="hero-title">Your journey to a world-class education starts here.</h1>
-            <p class="hero-subtitle">Access global opportunities and expert guidance for your international degree.</p>
+            <h1 class="hero-title">Your Future, Globalized.</h1>
+            <p class="hero-subtitle">Discover world-class education with EduVexa's global university network.</p>
         </div>
     </header>
 
     <div class="container">
-        <div class="finder-bar">
-            <input type="text" id="course-keyword" class="finder-input" placeholder="What would you like to study? (e.g. Business)">
-            <select id="course-country" class="finder-select">
-                <option value="">Any Destination</option>
-            </select>
-            <button id="search-btn" class="btn-find">Search</button>
+        <div class="finder-wrapper">
+            <div class="finder-group">
+                <label>Keyword</label>
+                <input type="text" id="find-keyword" placeholder="What are you interested in?">
+            </div>
+            <div class="finder-group">
+                <label>Study Destination</label>
+                <select id="find-country">
+                    <option value="">Any Destination</option>
+                </select>
+            </div>
+            <div class="finder-group">
+                <label>Level of Study</label>
+                <select id="find-degree">
+                    <option value="">All Levels</option>
+                    <option value="Bachelor's">Bachelor's Degree</option>
+                    <option value="Master's">Master's Degree</option>
+                </select>
+            </div>
+            <button id="find-btn" class="btn-search">Search</button>
         </div>
     </div>
 
     <section id="destinations" class="section-padding">
         <div class="container">
-            <h2 class="section-title">Study Destinations</h2>
+            <div class="section-header">
+                <h2>Our Study Destinations</h2>
+            </div>
             <div id="country-grid" class="country-grid">
-                <!-- Data loaded via JS -->
+                <!-- Loaded via JS -->
             </div>
         </div>
     </section>
 
-    <section id="courses" class="section-padding" style="background: #F9FAFB;">
+    <section id="courses" class="section-padding" style="background: #F4F7F9;">
         <div class="container">
-            <h2 class="section-title">Explore Courses</h2>
-            <div id="course-list" class="course-grid">
-                <!-- Data loaded via JS -->
+            <div class="section-header">
+                <h2>Explore Programmes</h2>
+            </div>
+            <div id="program-list" class="program-grid">
+                <!-- Loaded via JS -->
             </div>
         </div>
     </section>
@@ -62,24 +80,24 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h4>EduVexa International</h4>
-                    <p style="color:#999; line-height:1.8; max-width:400px;">We are a leading global education consultancy, dedicated to helping students navigate their way to prestigious international universities.</p>
+                    <h4>About EduVexa</h4>
+                    <p>EduVexa is a premier education consultancy helping students unlock international opportunities by providing simplified, expert-led guidance to the world's best universities.</p>
                 </div>
                 <div>
-                    <h4>Explore</h4>
-                    <a href="#courses">All Courses</a>
-                    <a href="#destinations">Our Destinations</a>
-                    <a href="#">Scholarships</a>
+                    <h4>Quick Links</h4>
+                    <a href="#courses">Programme Search</a>
+                    <a href="#destinations">Destinations</a>
+                    <a href="#apply">Scholarships</a>
                 </div>
                 <div>
-                    <h4>Contact</h4>
+                    <h4>Contact Us</h4>
                     <a href="mailto:eduvexastudya@gmail.com">eduvexastudya@gmail.com</a>
-                    <a href="https://wa.me/8801811909779">WhatsApp Support</a>
-                    <p style="margin-top:20px; color:#555;">+880 1811-909779</p>
+                    <p>+880 1811-909779</p>
+                    <a href="https://wa.me/8801811909779" style="color:var(--gold); font-weight:bold; margin-top:15px;">WhatsApp Counseling &rarr;</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2026 EduVexa International Education. All Rights Reserved.
+                &copy; 2026 EduVexa International University Portal. All Rights Reserved.
             </div>
         </div>
     </footer>
