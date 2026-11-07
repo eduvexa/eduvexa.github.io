@@ -1,5 +1,5 @@
 /* ==========================================================================
-   EduVexa - Global Study Abroad Directory & Portal CSS (V6.0)
+   EduVexa - Global Study Abroad Directory & Portal CSS (V7.0 Verified)
    Design Theme: Luxury Navy Blue (#102D4E, #081B35) & Gold (#D9A62C)
    ========================================================================== */
 
@@ -35,40 +35,12 @@ body {
   background-color: var(--bg-light);
   color: var(--text-main);
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
 }
 
 a {
   text-decoration: none;
   color: inherit;
   transition: all 0.2s ease;
-}
-
-/* Universal Input & Form Element Styling */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  font-size: 14px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #FFFFFF;
-  color: var(--text-main);
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--primary-navy);
-  box-shadow: 0 0 0 3px rgba(16, 45, 78, 0.12);
-}
-
-button {
-  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .container {
@@ -81,7 +53,9 @@ button {
   padding: 70px 0;
 }
 
-/* Header & Navbar */
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
 .navbar {
   background-color: var(--dark-navy);
   color: #FFFFFF;
@@ -108,7 +82,7 @@ button {
   height: 42px;
   width: auto;
   border-radius: 6px;
-  background: #FFF;
+  background: #FFFFFF;
   padding: 2px;
 }
 
@@ -153,6 +127,7 @@ button {
   font-size: 14px;
   border: none;
   cursor: pointer;
+  display: inline-block;
 }
 
 .btn-cta:hover {
@@ -160,7 +135,9 @@ button {
   color: #FFFFFF;
 }
 
-/* Hero Section */
+/* ==========================================================================
+   Hero Banner & Search Box
+   ========================================================================== */
 .hero-section {
   background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-navy) 100%);
   color: #FFFFFF;
@@ -183,7 +160,7 @@ button {
 
 .hero-title {
   font-family: 'Playfair Display', serif;
-  font-size: 46px;
+  font-size: 44px;
   font-weight: 700;
   margin-bottom: 12px;
   line-height: 1.2;
@@ -196,7 +173,6 @@ button {
   margin: 0 auto 36px;
 }
 
-/* Hero Search Box Card */
 .search-box-card {
   background: #FFFFFF;
   padding: 24px;
@@ -224,12 +200,34 @@ button {
   margin-bottom: 6px;
 }
 
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FFFFFF;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-navy);
+  box-shadow: 0 0 0 3px rgba(16, 45, 78, 0.12);
+}
+
 .btn-search {
   background-color: var(--gold);
   color: var(--dark-navy);
   font-weight: 800;
   font-size: 15px;
-  padding: 13px 26px;
+  padding: 13px 24px;
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -289,7 +287,9 @@ button {
   color: #94A3B8;
 }
 
-/* Titles */
+/* ==========================================================================
+   Section Headers
+   ========================================================================== */
 .section-subtitle-tag {
   color: var(--gold-hover);
   font-weight: 800;
@@ -306,7 +306,9 @@ button {
   margin-bottom: 24px;
 }
 
-/* Directory Layout (Program Search) */
+/* ==========================================================================
+   Program Directory Layout
+   ========================================================================== */
 .directory-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -333,6 +335,20 @@ button {
   border-bottom: 1px solid var(--border-color);
 }
 
+.filter-header h3 {
+  font-size: 18px;
+  color: var(--dark-navy);
+}
+
+.btn-reset {
+  background: none;
+  border: none;
+  color: var(--gold-hover);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .filter-group {
   margin-bottom: 18px;
 }
@@ -343,6 +359,13 @@ button {
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 6px;
+}
+
+.results-header {
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
 .program-cards-list {
@@ -392,7 +415,15 @@ button {
 .program-meta {
   font-size: 14px;
   color: var(--text-muted);
-  margin-bottom: 16px;
+  margin-top: 4px;
+}
+
+.country-flag-icon {
+  width: 18px;
+  height: 12px;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-right: 4px;
 }
 
 .program-details-grid {
@@ -402,7 +433,7 @@ button {
   background: var(--bg-light);
   padding: 16px;
   border-radius: var(--radius-sm);
-  margin-bottom: 20px;
+  margin: 16px 0;
 }
 
 .detail-box span {
@@ -440,11 +471,11 @@ button {
   border-radius: 20px;
   font-weight: 700;
   font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   border: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-whatsapp:hover {
@@ -452,65 +483,56 @@ button {
 }
 
 /* ==========================================================================
-   Destinations Section Grid (FIXED 10 COUNTRIES GRID)
+   Destinations Section Grid (FIXED STYLING)
    ========================================================================== */
-#destinations-grid,
-.destinations-grid {
+#destinations-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
   gap: 20px !important;
-  margin-top: 24px;
+  margin-top: 20px !important;
 }
 
-.destination-card,
-.country-card {
+.destination-card {
   background: #FFFFFF !important;
   border: 1px solid var(--border-color) !important;
   border-radius: var(--radius-md) !important;
-  padding: 20px !important;
+  padding: 18px !important;
   display: flex !important;
-  align-items: center !alignment;
-  gap: 16px !important;
+  align-items: center !important;
+  gap: 14px !important;
   box-shadow: var(--shadow-sm) !important;
+  cursor: pointer !important;
   transition: all 0.2s ease !important;
 }
 
-.destination-card:hover,
-.country-card:hover {
+.destination-card:hover {
   transform: translateY(-3px) !important;
   border-color: var(--gold) !important;
   box-shadow: var(--shadow-md) !important;
 }
 
 .destination-card img,
-.country-card img {
+.destination-card .country-flag {
   width: 44px !important;
   height: 30px !important;
   object-fit: cover !important;
   border-radius: 4px !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12) !important;
 }
 
-.destination-card h3,
-.country-card h3 {
+.destination-info h3 {
   font-size: 16px !important;
   color: var(--dark-navy) !important;
   font-weight: 700 !important;
+  margin: 0 !important;
 }
 
-.destination-card span,
-.country-card p {
-  font-size: 12px !important;
-  color: var(--text-muted) !important;
-}
-
-.destination-card a,
-.country-card a {
+.destination-info span {
   font-size: 12px !important;
   color: var(--gold-hover) !important;
   font-weight: 700 !important;
-  display: inline-block !important;
-  margin-top: 4px !important;
+  display: block !important;
+  margin-top: 2px !important;
 }
 
 /* ==========================================================================
@@ -524,8 +546,7 @@ button {
 }
 
 #universities-grid,
-#scholarships-grid,
-.card-grid {
+#scholarships-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
   gap: 24px !important;
@@ -553,7 +574,12 @@ button {
 .scholarship-card h3 {
   font-size: 18px !important;
   color: var(--dark-navy) !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 6px !important;
+}
+
+.uni-location {
+  font-size: 13px !important;
+  color: var(--text-muted) !important;
 }
 
 .badge-scholarship {
@@ -567,15 +593,23 @@ button {
   margin-bottom: 12px !important;
 }
 
+.btn-link {
+  display: inline-block !important;
+  margin-top: 16px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--primary-navy) !important;
+  text-decoration: underline !important;
+}
+
 /* ==========================================================================
-   Services Section Grid (4 CARDS FLEX)
+   Services Section Grid
    ========================================================================== */
-#services-grid,
-.services-grid {
+#services-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
   gap: 24px !important;
-  margin-top: 24px;
+  margin-top: 24px !important;
 }
 
 .service-card {
@@ -619,7 +653,7 @@ button {
 }
 
 /* ==========================================================================
-   Application & Inquiry Form Styling
+   Application Form Container
    ========================================================================== */
 .application-container {
   max-width: 780px;
@@ -677,7 +711,9 @@ button {
   color: #FFFFFF;
 }
 
-/* Footer */
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 .footer {
   background-color: var(--dark-navy);
   color: #94A3B8;
@@ -723,7 +759,7 @@ button {
   font-size: 13px;
 }
 
-/* Responsive */
+/* Responsive Breakpoints */
 @media (max-width: 992px) {
   .search-form-grid { grid-template-columns: 1fr; }
   .directory-layout { grid-template-columns: 1fr; }
