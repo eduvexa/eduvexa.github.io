@@ -1,6 +1,5 @@
 /* ==========================================================================
-   EduVexa - Global Study Abroad Directory & Portal CSS (V8.0 FINAL)
-   Design Theme: Luxury Navy Blue & Gold
+   EduVexa - Final Premium CSS (Verified)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
@@ -12,153 +11,116 @@
   --gold-hover: #B8881F;
   --bg-light: #F8FAFC;
   --border-color: #E2E8F0;
-  --shadow-sm: 0 4px 10px rgba(0,0,0,0.05);
-  --shadow-md: 0 10px 25px rgba(0,0,0,0.1);
-  --radius-md: 12px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: var(--bg-light);
-  color: #1E293B;
-  line-height: 1.6;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  background-color: var(--bg-light) !important;
+  color: #1E293B !important;
 }
 
-.container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
-.section-padding { padding: 80px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section-padding { padding: 80px 0 !important; }
 
 /* Navbar */
-.navbar {
-  background-color: var(--dark-navy);
-  color: #FFF;
-  padding: 15px 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 2px solid var(--gold);
-}
+.navbar { background: var(--dark-navy) !important; padding: 15px 0; border-bottom: 2px solid var(--gold); }
 .nav-container { display: flex; align-items: center; justify-content: space-between; }
 .logo-brand { display: flex; align-items: center; gap: 10px; }
 .logo-brand img { height: 40px; background: #FFF; border-radius: 4px; padding: 2px; }
-.logo-text h1 { font-size: 22px; color: #FFF; line-height: 1; }
-.logo-text span { font-size: 10px; color: var(--gold); text-transform: uppercase; font-weight: 700; }
-.nav-links { display: flex; gap: 20px; list-style: none; }
-.nav-links a { color: #E2E8F0; font-size: 14px; font-weight: 600; text-decoration: none; }
-.nav-links a:hover { color: var(--gold); }
+.logo-text h1 { color: #FFF !important; font-size: 22px !important; }
 
 /* Hero */
 .hero-section {
-  background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-navy) 100%);
-  color: #FFF;
-  padding: 80px 0;
-  text-align: center;
+  background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-navy) 100%) !important;
+  color: #FFF !important; padding: 80px 0; text-align: center;
 }
-.hero-title { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 10px; }
-.hero-subtitle { color: #CBD5E1; margin-bottom: 40px; }
+.hero-title { font-family: 'Playfair Display', serif !important; font-size: 42px !important; margin-bottom: 15px; }
 
-/* Search Box */
-.search-box-card {
-  background: #FFF;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: left;
-}
-.search-form-grid { display: grid; grid-template-columns: 2fr 1.5fr 1.5fr auto; gap: 15px; align-items: flex-end; }
-.search-form-grid label { display: block; font-size: 11px; font-weight: 800; color: #64748B; margin-bottom: 5px; text-transform: uppercase; }
-.btn-search { background: var(--gold); color: var(--dark-navy); font-weight: 800; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; }
-
-/* Program Directory Section */
-.directory-layout { display: grid; grid-template-columns: 280px 1fr; gap: 30px; margin-top: 40px; align-items: start; }
-.filter-sidebar { background: #FFF; padding: 20px; border-radius: 10px; border: 1px solid var(--border-color); }
-.program-card { background: #FFF; border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
-.program-details-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; background: #F8FAFC; padding: 15px; border-radius: 8px; margin: 15px 0; }
-.detail-box span { display: block; font-size: 10px; font-weight: 800; color: #64748B; }
-.btn-whatsapp { background: #25D366; color: #FFF; padding: 10px 15px; border-radius: 20px; font-weight: 700; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; font-size: 13px; }
-
-/* Destinations Grid (FIXED) */
-#destinations-grid {
+/* Program Directory Layout */
+.directory-layout {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
-  gap: 20px !important;
+  grid-template-columns: 280px 1fr !important;
+  gap: 30px !important;
   margin-top: 30px !important;
 }
-.destination-card {
-  background: #FFF !important;
-  padding: 20px !important;
-  border-radius: 12px !important;
-  border: 1px solid var(--border-color) !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 15px !important;
-  box-shadow: var(--shadow-sm) !important;
-  cursor: pointer !important;
-}
-.destination-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: var(--shadow-md); }
-.destination-card img { width: 45px; height: 30px; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.destination-info h3 { font-size: 16px; color: var(--dark-navy); margin: 0; }
-.destination-info span { font-size: 12px; color: var(--gold-hover); font-weight: 700; }
-
-/* Universities & Scholarships Grid */
-#universities-grid, #scholarships-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 20px !important;
-  margin-top: 30px !important;
-}
-.uni-card, .scholarship-card {
+.filter-sidebar {
   background: #FFF !important;
   padding: 25px !important;
   border-radius: 12px !important;
   border: 1px solid var(--border-color) !important;
-  box-shadow: var(--shadow-sm) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
 }
-.badge-scholarship { background: var(--gold-light); color: var(--dark-navy); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 800; margin-bottom: 10px; display: inline-block; }
 
-/* Services Grid */
-#services-grid {
+/* Destinations, Universities, Scholarships Grid */
+#destinations-grid, #universities-grid, #scholarships-grid, #services-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
   gap: 20px !important;
   margin-top: 30px !important;
 }
-.service-card {
-  background: #FFF !important;
-  padding: 30px 20px !important;
-  border-radius: 12px !important;
-  border: 1px solid var(--border-color) !important;
-  text-align: center !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-.service-icon { font-size: 30px; margin-bottom: 15px; display: block; }
 
-/* Forms */
-.application-container {
-  max-width: 800px;
-  margin: 0 auto;
-  background: #FFF;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
+/* Cards Styling */
+.destination-card, .uni-card, .scholarship-card, .service-card, .program-card {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+  transition: 0.3s !important;
 }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.form-group-full { grid-column: span 2; }
-input, select, textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; margin-top: 5px; }
-.btn-submit-gold { background: var(--gold); color: var(--dark-navy); border: none; padding: 15px; width: 100%; border-radius: 6px; font-weight: 800; cursor: pointer; margin-top: 20px; font-size: 16px; }
+
+.destination-card:hover, .uni-card:hover, .scholarship-card:hover, .program-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.destination-card { display: flex !important; align-items: center !important; gap: 15px !important; }
+.destination-card img { width: 50px; height: 35px; object-fit: cover; border-radius: 4px; }
+
+/* Program Details */
+.program-details-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 15px !important;
+  background: #F1F5F9 !important;
+  padding: 15px !important;
+  border-radius: 8px !important;
+  margin: 15px 0 !important;
+}
+.detail-box span { display: block !important; font-size: 10px !important; font-weight: 800 !important; color: #64748B !important; }
+
+/* Buttons */
+.btn-whatsapp {
+  background: #25D366 !important;
+  color: #FFF !important;
+  padding: 10px 20px !important;
+  border-radius: 30px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+}
+
+/* Form Container */
+.application-container {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  background: #FFF !important;
+  padding: 40px !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+  border: 1px solid var(--border-color) !important;
+}
+.form-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
+.form-group-full { grid-column: span 2 !important; }
 
 /* Footer */
-.footer { background: var(--dark-navy); color: #94A3B8; padding: 60px 0; margin-top: 80px; border-top: 3px solid var(--gold); }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
-.footer h2, .footer h4 { color: #FFF; }
-.footer a { color: #CBD5E1; text-decoration: none; display: block; margin-bottom: 10px; font-size: 14px; }
-.footer-bottom { text-align: center; border-top: 1px solid #1E293B; padding-top: 20px; margin-top: 40px; font-size: 12px; }
+.footer { background: var(--dark-navy) !important; color: #94A3B8 !important; padding: 60px 0 !important; border-top: 4px solid var(--gold) !important; }
+.footer-grid { display: grid !important; grid-template-columns: 2fr 1fr 1fr 1fr !important; gap: 40px !important; }
 
 @media (max-width: 768px) {
-  .search-form-grid, .directory-layout, .form-grid, .footer-grid { grid-template-columns: 1fr !important; }
-  .form-group-full { grid-column: span 1; }
+  .directory-layout, .form-grid, .footer-grid { grid-template-columns: 1fr !important; }
 }
