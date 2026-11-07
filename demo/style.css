@@ -1,100 +1,87 @@
 /* ==========================================================================
-   EduVexa - UTAS Inspired Institutional Look (V10.0)
+   EduVexa - UTAS Institutional Style (V11.0)
+   Colors: Navy (#002B45), UTAS Red (#E4002B), White (#FFFFFF)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --navy: #002B45;        /* Deep UTAS Navy */
-  --gold: #D9A62C;        /* EduVexa Gold */
-  --light-bg: #F9FAFB;
-  --white: #FFFFFF;
-  --text: #1A1A1A;
-  --muted: #666666;
-  --border: #E5E7EB;
-  --shadow: 0 4px 20px rgba(0,0,0,0.06);
+  --utas-navy: #002B45;
+  --utas-red: #E4002B;
+  --gold: #D9A62C;
+  --bg-grey: #F3F4F6;
+  --text-dark: #1A1A1A;
+  --border: #D1D5DB;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--white); color: var(--text); -webkit-font-smoothing: antialiased; }
+body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; color: var(--text-dark); -webkit-font-smoothing: antialiased; }
 
-h1, h2, h3 { font-family: 'Lora', serif; font-weight: 700; color: var(--navy); }
+h1, h2, h3 { font-family: 'Lora', serif; font-weight: 700; color: var(--utas-navy); }
 
-.container { max-width: 1280px; margin: 0 auto; padding: 0 30px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* Elegant Navbar */
-.navbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
+/* Institutional Navbar */
+.navbar { background: #FFFFFF; border-bottom: 4px solid var(--utas-navy); padding: 20px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 .nav-container { display: flex; align-items: center; justify-content: space-between; }
-.logo-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-brand img { height: 50px; }
-.logo-text h1 { font-size: 24px; margin: 0; letter-spacing: -1px; }
-.logo-text span { color: var(--gold); font-size: 10px; font-weight: 800; text-transform: uppercase; display: block; }
-.nav-links { display: flex; gap: 30px; list-style: none; }
-.nav-links a { text-decoration: none; color: var(--navy); font-weight: 600; font-size: 15px; transition: 0.2s; }
-.nav-links a:hover { color: var(--gold); }
+.logo-brand { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+.logo-brand img { height: 55px; }
+.logo-text h1 { font-size: 28px; margin: 0; letter-spacing: -1px; color: var(--utas-navy); }
+.logo-text span { color: var(--utas-red); font-size: 11px; font-weight: 700; text-transform: uppercase; display: block; }
+.nav-links { display: flex; gap: 35px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--utas-navy); font-weight: 600; font-size: 15px; }
+.btn-apply-nav { background: var(--utas-red); color: #FFF !important; padding: 10px 25px; border-radius: 0; font-weight: 700; }
 
 /* UTAS Style Hero Section */
-.hero-section { background-color: var(--navy); color: var(--white); padding: 120px 0; position: relative; overflow: hidden; }
-.hero-content { position: relative; z-index: 2; max-width: 800px; }
-.hero-title { font-size: 56px; color: var(--white); margin-bottom: 20px; line-height: 1.1; }
-.hero-subtitle { font-size: 20px; color: #E5E7EB; margin-bottom: 40px; font-weight: 300; }
+.hero-section { background: var(--utas-navy); color: #FFFFFF; padding: 100px 0; position: relative; }
+.hero-title { font-size: 52px; color: #FFFFFF; margin-bottom: 20px; max-width: 800px; }
+.hero-subtitle { font-size: 20px; color: #D1D5DB; margin-bottom: 50px; font-weight: 300; }
 
-/* Integrated Search Bar (UTAS Style) */
-.course-finder-box { background: var(--white); padding: 10px; border-radius: 4px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-.finder-input { flex: 2; border: none; padding: 15px 20px; font-size: 16px; font-family: inherit; }
-.finder-select { flex: 1; border: none; border-left: 1px solid var(--border); padding: 0 15px; font-size: 14px; background: transparent; }
-.btn-find { background: var(--gold); color: var(--navy); border: none; padding: 15px 35px; font-weight: 800; text-transform: uppercase; font-size: 14px; cursor: pointer; transition: 0.3s; }
-.btn-find:hover { background: #B8881F; color: #FFF; }
+/* Course Search Bar (Horizontal UTAS Style) */
+.finder-bar { background: #FFFFFF; padding: 10px; display: flex; box-shadow: 0 15px 40px rgba(0,0,0,0.2); margin-top: -50px; z-index: 10; position: relative; }
+.finder-input { flex: 2; border: none; padding: 15px 20px; font-size: 16px; border-right: 1px solid #EEE; }
+.finder-select { flex: 1; border: none; padding: 0 15px; font-size: 15px; background: #FFF; }
+.btn-find { background: var(--utas-red); color: #FFF; border: none; padding: 0 40px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+.btn-find:hover { background: var(--utas-navy); }
 
-/* Sections */
-.section-padding { padding: 100px 0; }
-.section-header { margin-bottom: 50px; }
-.section-header h2 { font-size: 40px; margin-bottom: 10px; }
-.section-header p { font-size: 18px; color: var(--muted); }
+/* Section Headers */
+.section-padding { padding: 90px 0; }
+.section-title { font-size: 42px; margin-bottom: 40px; border-left: 8px solid var(--utas-red); padding-left: 20px; }
 
-/* Country Circle Grid (Fixed) */
-.country-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 40px; }
-.country-item { text-align: center; cursor: pointer; transition: 0.3s; width: 100px; }
-.country-item:hover { transform: translateY(-5px); }
-.flag-circle { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 3px solid var(--border); box-shadow: var(--shadow); }
-.flag-circle img { width: 100%; height: 100%; object-fit: cover; }
-.country-item h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--navy); font-weight: 700; }
+/* Course Cards (Clean institutional style) */
+.course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px; }
+.course-card { background: #FFFFFF; border: 1px solid #E5E7EB; padding: 40px; border-top: 6px solid var(--utas-navy); transition: 0.3s; }
+.course-card:hover { border-top-color: var(--utas-red); box-shadow: 0 20px 40px rgba(0,0,0,0.08); transform: translateY(-5px); }
+.course-card .degree { font-size: 13px; font-weight: 700; color: var(--utas-red); text-transform: uppercase; margin-bottom: 15px; display: block; }
+.course-card h3 { font-size: 26px; margin-bottom: 20px; min-height: 70px; }
+.course-card .uni-name { font-size: 15px; color: #666; font-weight: 600; margin-bottom: 25px; display: block; }
+.course-card .meta { border-top: 1px solid #EEE; padding-top: 20px; display: flex; justify-content: space-between; margin-bottom: 30px; }
+.meta-item span { display: block; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 700; }
+.meta-item strong { font-size: 15px; color: var(--utas-navy); }
+.btn-details { display: inline-block; background: var(--utas-navy); color: #FFF; padding: 12px 30px; text-decoration: none; font-weight: 700; font-size: 14px; }
+.btn-details:hover { background: var(--utas-red); }
 
-/* Course Card (Institutional Style) */
-.course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
-.course-card { background: var(--white); border: 1px solid var(--border); border-bottom: 4px solid var(--navy); padding: 35px; transition: 0.3s; position: relative; }
-.course-card:hover { border-bottom-color: var(--gold); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-.course-card .degree { font-size: 12px; font-weight: 800; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; display: block; }
-.course-card h3 { font-size: 24px; margin-bottom: 15px; min-height: 60px; }
-.course-card .uni-info { font-size: 14px; color: var(--muted); margin-bottom: 20px; display: block; }
-.course-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid var(--border); padding-top: 20px; margin-bottom: 25px; }
-.meta-item span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 700; }
-.meta-item strong { font-size: 14px; color: var(--navy); }
-
-.btn-apply { display: inline-block; text-decoration: none; background: var(--navy); color: var(--white); padding: 12px 25px; font-size: 13px; font-weight: 700; transition: 0.3s; }
-.btn-apply:hover { background: var(--gold); color: var(--navy); }
-
-/* Inquiry Form Section */
-.inquiry-section { background: var(--light-bg); padding: 100px 0; }
-.form-container { background: var(--white); padding: 50px; box-shadow: var(--shadow); max-width: 900px; margin: 0 auto; border-radius: 4px; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.full-width { grid-column: span 2; }
-label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-input, select, textarea { width: 100%; padding: 15px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 15px; }
-.btn-submit { background: var(--navy); color: var(--white); border: none; padding: 18px; width: 100%; font-weight: 700; font-size: 16px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-.btn-submit:hover { background: var(--gold); color: var(--navy); }
+/* Countries Section (Clean Circular Grid) */
+.country-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 30px; margin-top: 50px; }
+.country-card { text-align: center; cursor: pointer; }
+.flag-wrapper { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 4px solid #F3F4F6; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.country-card:hover .flag-wrapper { border-color: var(--utas-red); transform: scale(1.1); }
+.flag-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.country-card h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: var(--utas-navy); }
 
 /* Footer */
-.footer { background: var(--navy); color: #FFF; padding: 80px 0 40px; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
-.footer h4 { color: var(--gold); font-size: 18px; margin-bottom: 20px; font-family: 'Plus Jakarta Sans', sans-serif; }
-.footer a { color: #BBB; text-decoration: none; font-size: 14px; display: block; margin-bottom: 12px; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; font-size: 13px; color: #888; }
+.footer { background: var(--utas-navy); color: #FFFFFF; padding: 80px 0 40px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
+.footer h4 { color: var(--utas-red); font-size: 20px; margin-bottom: 25px; }
+.footer a { color: #BBB; text-decoration: none; display: block; margin-bottom: 12px; font-size: 14px; }
+.footer a:hover { color: #FFF; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; margin-top: 50px; font-size: 13px; color: #777; }
 
 @media (max-width: 768px) {
-  .hero-title { font-size: 38px; }
-  .course-finder-box { flex-direction: column; }
-  .finder-select { border-left: none; border-top: 1px solid var(--border); }
-  .form-grid, .footer-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 34px; }
+  .finder-bar { flex-direction: column; }
+  .finder-input, .finder-select { border: none; border-bottom: 1px solid #EEE; }
+  .btn-find { padding: 15px; }
+  .footer-grid { grid-template-columns: 1fr; }
 }
