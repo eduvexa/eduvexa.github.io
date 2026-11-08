@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduVexa - Study Abroad Simplified</title>
+    
+    <!-- CRITICAL CSS TO PREVENT MASSIVE LOGO GLITCH -->
+    <style>
+        .brand-logo img { height: 44px !important; width: auto !important; max-width: 160px !important; object-fit: contain !important; display: block; }
+        .footer-logo-img { height: 35px !important; width: auto !important; max-width: 120px !important; object-fit: contain !important; display: block; }
+        body { margin: 0; background-color: #ffffff; }
+    </style>
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -39,9 +47,9 @@
     <!-- MAIN HEADER / NAVIGATION -->
     <header class="main-header">
         <div class="header-container">
-            <!-- LOGO BLOCK -->
+            <!-- LOGO BLOCK (Fully Locked Size) -->
             <a href="index.html" class="brand-logo">
-                <img src="logo.jpg" alt="EduVexa Logo" class="logo-img">
+                <img src="logo.jpg" alt="EduVexa Logo" class="logo-img" style="height: 44px; width: auto; max-width: 160px; object-fit: contain;">
                 <div class="logo-text">
                     <span class="logo-title">EduVexa</span>
                     <span class="logo-tagline">STUDY ABROAD SIMPLIFIED</span>
@@ -266,7 +274,7 @@
         <div class="footer-container">
             <div class="footer-col brand-col">
                 <div class="footer-logo">
-                    <img src="logo.jpg" alt="EduVexa Logo" class="footer-logo-img">
+                    <img src="logo.jpg" alt="EduVexa Logo" class="footer-logo-img" style="height: 35px; width: auto; max-width: 120px; object-fit: contain;">
                     <span class="footer-logo-text">EduVexa</span>
                 </div>
                 <p>EduVexa is a premier study abroad consultancy empowering students with world-class education choices in Europe, Asia, and Eurasia.</p>
