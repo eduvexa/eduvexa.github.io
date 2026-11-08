@@ -3,310 +3,724 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduVexa - Study Abroad Simplified</title>
-    
-    <!-- CRITICAL CSS TO PREVENT MASSIVE LOGO GLITCH -->
-    <style>
-        .brand-logo img { height: 44px !important; width: auto !important; max-width: 160px !important; object-fit: contain !important; display: block; }
-        .footer-logo-img { height: 35px !important; width: auto !important; max-width: 120px !important; object-fit: contain !important; display: block; }
-        body { margin: 0; background-color: #ffffff; }
-    </style>
-
+    <title>EduVexa - Super Admin Portal</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Main Style (Linked to demo/style.css) -->
-    <link rel="stylesheet" href="demo/style.css">
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --navy: #002D5B;
+            --navy-dark: #001E3D;
+            --inti-red: #E31E24;
+            --inti-red-hover: #C11318;
+            --gold: #D9A62C;
+            --bg-light: #F4F6F9;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.25);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-light); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
+
+        /* ==========================================================================
+           3D GLASSMORPHISM LOGIN SCREEN
+           ========================================================================== */
+        .login-wrapper {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 20% 20%, #002D5B 0%, #001E3D 60%, #000B1A 100%);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; padding: 20px; overflow: hidden;
+        }
+
+        /* 3D Floating Glow Particles */
+        .glow-particle {
+            position: absolute; border-radius: 50%;
+            background: radial-gradient(circle, rgba(227, 30, 36, 0.4) 0%, rgba(217, 166, 44, 0.1) 70%, transparent 100%);
+            filter: blur(40px); animation: floatParticle 15s infinite alternate ease-in-out;
+        }
+        .particle-1 { width: 320px; height: 320px; top: -50px; left: -50px; }
+        .particle-2 { width: 400px; height: 400px; bottom: -100px; right: -50px; animation-duration: 20s; }
+
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.15); }
+            100% { transform: translate(-30px, -50px) scale(0.9); }
+        }
+
+        /* Glassmorphism Login Card */
+        .login-card {
+            position: relative; z-index: 10; width: 100%; max-width: 440px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            padding: 40px 30px; box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+            color: white; transform-style: preserve-3d; transition: transform 0.3s ease;
+        }
+
+        .login-header { text-align: center; margin-bottom: 30px; }
+        .login-header .badge {
+            background: rgba(227, 30, 36, 0.25); border: 1px solid var(--inti-red);
+            color: #FF8A8C; font-size: 0.7rem; font-weight: 800; padding: 4px 12px;
+            border-radius: 50px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; display: inline-block;
+        }
+        .login-header h2 { font-size: 1.8rem; font-weight: 800; color: white; margin-bottom: 6px; }
+        .login-header p { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 8px; }
+        .input-wrap { position: relative; }
+        .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+        .input-wrap input {
+            width: 100%; padding: 12px 14px 12px 40px; background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: white;
+            font-size: 0.9rem; outline: none; transition: border-color 0.2s, background 0.2s;
+        }
+        .input-wrap input:focus { border-color: var(--inti-red); background: rgba(255, 255, 255, 0.12); }
+        .input-wrap .toggle-pwd { left: auto; right: 14px; cursor: pointer; }
+
+        .btn-3d-login {
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #E31E24 0%, #B81217 100%);
+            border: none; border-radius: 8px; color: white; font-weight: 800; font-size: 0.95rem;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(227, 30, 36, 0.4); transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;
+        }
+        .btn-3d-login:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(227, 30, 36, 0.5); }
+
+        .login-alert {
+            padding: 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; margin-bottom: 20px; display: none;
+        }
+        .login-alert.error { background: rgba(227, 30, 36, 0.2); border: 1px solid #E31E24; color: #FFA3A5; }
+        .login-alert.success { background: rgba(37, 211, 102, 0.2); border: 1px solid #25D366; color: #86EFAC; }
+
+        /* ==========================================================================
+           ADMIN DASHBOARD LAYOUT
+           ========================================================================== */
+        .admin-dashboard { display: none; min-height: 100vh; }
+        .sidebar {
+            width: 260px; background: var(--navy-dark); color: white; position: fixed;
+            top: 0; bottom: 0; left: 0; z-index: 100; padding: 20px 0; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .sidebar-brand { padding: 0 20px 25px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-brand h2 { font-size: 1.4rem; font-weight: 800; color: white; }
+        .sidebar-brand span { font-size: 0.65rem; color: var(--inti-red); font-weight: 800; letter-spacing: 1px; display: block; }
+
+        .sidebar-menu { list-style: none; padding: 20px 10px; }
+        .sidebar-menu li { margin-bottom: 6px; }
+        .sidebar-menu a {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px; color: rgba(255,255,255,0.7);
+            text-decoration: none; font-size: 0.88rem; font-weight: 700; border-radius: 6px; transition: all 0.2s;
+        }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: rgba(255,255,255,0.1); color: white; }
+        .sidebar-menu a.active { border-left: 4px solid var(--inti-red); background: rgba(227, 30, 36, 0.15); }
+
+        .sidebar-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .user-info { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-bottom: 12px; word-break: break-all; }
+        .btn-logout {
+            width: 100%; padding: 10px; background: rgba(227, 30, 36, 0.2); border: 1px solid var(--inti-red);
+            color: #FF8A8C; border-radius: 6px; font-weight: 700; font-size: 0.82rem; cursor: pointer;
+        }
+
+        .main-content { margin-left: 260px; padding: 30px; }
+        .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .content-header h1 { font-size: 1.8rem; color: var(--navy); font-weight: 800; }
+
+        /* Dashboard Overview Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 35px; }
+        .stat-card { background: white; padding: 22px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #E2E8F0; }
+        .stat-card h3 { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+        .stat-card .number { font-size: 2.2rem; font-weight: 800; color: var(--navy); }
+
+        /* Form Cards & Tables */
+        .panel-card { background: white; border-radius: 10px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #E2E8F0; margin-bottom: 30px; }
+        .panel-card h3 { font-size: 1.15rem; color: var(--navy); font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid var(--bg-light); padding-bottom: 10px; }
+
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 0.88rem; outline: none; margin-top: 6px; }
+        .form-control:focus { border-color: var(--navy); }
+        .btn-save { background: var(--inti-red); color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 800; cursor: pointer; margin-top: 15px; }
+
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .data-table th, .data-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #E2E8F0; font-size: 0.85rem; }
+        .data-table th { background: var(--bg-light); color: var(--navy); font-weight: 800; }
+        .btn-action-sm { padding: 5px 10px; border-radius: 4px; border: none; font-weight: 700; font-size: 0.75rem; cursor: pointer; margin-right: 5px; }
+        .btn-edit { background: #0078D7; color: white; }
+        .btn-delete { background: var(--inti-red); color: white; }
+
+        @media (max-width: 992px) {
+            .sidebar { width: 100%; position: relative; height: auto; }
+            .main-content { margin-left: 0; }
+            .form-grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- TOP UTILITY BAR -->
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-left">
-                <span><i class="fas fa-phone-alt"></i> BD: +880 1811-909779</span>
-                <span class="divider">|</span>
-                <span><i class="fas fa-phone-alt"></i> EU: +39 350 931 3338</span>
-                <span class="divider">|</span>
-                <span><i class="fas fa-envelope"></i> eduvexastudya@gmail.com</span>
+    <!-- 1. 3D GLASSMORPHISM LOGIN WRAPPER -->
+    <div class="login-wrapper" id="loginWrapper">
+        <div class="glow-particle particle-1"></div>
+        <div class="glow-particle particle-2"></div>
+
+        <div class="login-card">
+            <div class="login-header">
+                <span class="badge"><i class="fas fa-shield-alt"></i> Super Admin Portal</span>
+                <h2>EduVexa Portal</h2>
+                <p>Enter your credentials to manage website content</p>
             </div>
-            <div class="top-bar-right">
-                <a href="https://wa.me/8801811909779?text=Hello%20EduVexa%20BD,%20I%20want%20information%20about%20studying%20abroad." target="_blank" class="wa-top-btn wa-bd">
-                    <i class="fab fa-whatsapp"></i> BD WhatsApp
-                </a>
-                <a href="https://wa.me/393509313338?text=Hello%20EduVexa%20EU,%20I%20want%20information%20about%20studying%20abroad." target="_blank" class="wa-top-btn wa-eu">
-                    <i class="fab fa-whatsapp"></i> EU WhatsApp
-                </a>
-            </div>
+
+            <div class="login-alert error" id="loginError"></div>
+            <div class="login-alert success" id="loginSuccess"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="adminEmail">SUPER ADMIN EMAIL</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="adminEmail" placeholder="eduvexastudya@gmail.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">PASSWORD</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="adminPassword" placeholder="••••••••" required>
+                        <i class="fas fa-eye toggle-pwd" id="togglePwd"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-3d-login" id="btnLogin">
+                    <i class="fas fa-sign-in-alt"></i> LOGIN TO DASHBOARD
+                </button>
+            </form>
         </div>
     </div>
 
-    <!-- MAIN HEADER / NAVIGATION -->
-    <header class="main-header">
-        <div class="header-container">
-            <!-- LOGO BLOCK (Fully Locked Size) -->
-            <a href="index.html" class="brand-logo">
-                <img src="logo.jpg" alt="EduVexa Logo" class="logo-img" style="height: 44px; width: auto; max-width: 160px; object-fit: contain;">
-                <div class="logo-text">
-                    <span class="logo-title">EduVexa</span>
-                    <span class="logo-tagline">STUDY ABROAD SIMPLIFIED</span>
+    <!-- 2. MAIN ADMIN DASHBOARD (HIDDEN UNTIL AUTHENTICATED) -->
+    <div class="admin-dashboard" id="adminDashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <h2>EduVexa</h2>
+                    <span>SUPER ADMIN DASHBOARD</span>
                 </div>
-            </a>
-
-            <!-- MOBILE TOGGLE -->
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- NAVIGATION MENU -->
-            <nav class="nav-menu" id="navMenu">
-                <ul class="nav-list">
-                    <li class="nav-item has-dropdown">
-                        <a href="#destinations" class="nav-link">STUDY DESTINATIONS <i class="fas fa-chevron-down dropdown-icon"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/my.png" alt="Malaysia"> Malaysia</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/sk.png" alt="Slovakia"> Slovakia</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/ro.png" alt="Romania"> Romania</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/hu.png" alt="Hungary"> Hungary</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/lt.png" alt="Lithuania"> Lithuania</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/cn.png" alt="China"> China</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/in.png" alt="India"> India</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/it.png" alt="Italy"> Italy</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/tr.png" alt="Turkey"> Turkey</a></li>
-                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/uz.png" alt="Uzbekistan"> Uzbekistan</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a href="#programmes" class="nav-link">PROGRAMMES</a></li>
-                    <li class="nav-item"><a href="#universities" class="nav-link">UNIVERSITIES</a></li>
-                    <li class="nav-item"><a href="#scholarships" class="nav-link">SCHOLARSHIPS</a></li>
-                    <li class="nav-item"><a href="#services" class="nav-link">SERVICES</a></li>
-                </ul>
-                <div class="nav-cta">
-                    <a href="#apply" class="btn-primary-apply">REQUEST INFO / APPLY</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- HERO SECTION WITH KEN-BURNS LIVE MOTION -->
-    <section class="hero-section">
-        <div class="hero-live-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-container">
-            <div class="hero-badge">
-                <i class="fas fa-graduation-cap"></i> YOUR FUTURE. OUR EXPERTISE. GLOBAL OPPORTUNITIES.
-            </div>
-            <h1 class="hero-title">Elevate Your Future Through World-Class Education</h1>
-            <p class="hero-description">
-                Unlock access to prestigious universities across Europe, Asia, and Eurasia. Explore internationally recognized Bachelor's, Master's, and PhD programmes, alongside verified scholarship opportunities and personalized expert guidance.
-            </p>
-            <div class="hero-motto">
-                <i class="fas fa-star"></i> Your Ambition Deserves a Global Stage.
-            </div>
-
-            <!-- HERO SEARCH FINDER BAR -->
-            <div class="hero-search-card">
-                <div class="search-grid">
-                    <div class="search-field">
-                        <label for="searchProgram"><i class="fas fa-search"></i> WHAT DO YOU WANT TO STUDY?</label>
-                        <input type="text" id="searchProgram" placeholder="e.g. Computer Science, Business, Nursing...">
-                    </div>
-                    <div class="search-field">
-                        <label for="whereToStudy"><i class="fas fa-globe"></i> WHERE TO STUDY?</label>
-                        <select id="whereToStudy">
-                            <option value="">All Destinations</option>
-                            <option value="Malaysia">Malaysia</option>
-                            <option value="Slovakia">Slovakia</option>
-                            <option value="Romania">Romania</option>
-                            <option value="Hungary">Hungary</option>
-                            <option value="Lithuania">Lithuania</option>
-                            <option value="China">China</option>
-                            <option value="India">India</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="Uzbekistan">Uzbekistan</option>
-                        </select>
-                    </div>
-                    <div class="search-field">
-                        <label for="degreeLevel"><i class="fas fa-user-graduate"></i> DEGREE LEVEL</label>
-                        <select id="degreeLevel">
-                            <option value="">All Degree Levels</option>
-                            <option value="Bachelor">Bachelor's</option>
-                            <option value="Master">Master's</option>
-                            <option value="PhD">PhD / Doctorate</option>
-                            <option value="Diploma">Diploma / Foundation</option>
-                        </select>
-                    </div>
-                    <div class="search-button-wrap">
-                        <button type="button" id="btnHeroSearch" class="btn-hero-search">
-                            SEARCH PROGRAMMES <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STUDY DESTINATIONS SECTION (10 COUNTRIES) -->
-    <section class="section-padding" id="destinations">
-        <div class="section-container">
-            <div class="section-header text-center">
-                <span class="sub-title">EXPLORE THE WORLD</span>
-                <h2>Top Study Destinations</h2>
-                <p>Choose from top-ranked study locations across Europe, Asia, and Eurasia.</p>
-            </div>
-            <div class="country-grid" id="countryGrid">
-                <!-- 10 Countries populated instantly via app.js -->
-            </div>
-        </div>
-    </section>
-
-    <!-- PROGRAMMES SECTION -->
-    <section class="section-padding bg-light" id="programmes">
-        <div class="section-container">
-            <div class="section-header text-center">
-                <span class="sub-title">ACADEMIC EXCELLENCE</span>
-                <h2>Featured Programmes</h2>
-                <p>Find the right degree program tailored to your career ambitions.</p>
-            </div>
-
-            <!-- DETAILED FILTER CONTROLS -->
-            <div class="filter-controls-bar">
-                <div class="filter-item">
-                    <input type="text" id="filterKeyword" placeholder="Search by keyword...">
-                </div>
-                <div class="filter-item">
-                    <select id="filterCountry">
-                        <option value="">Filter by Country</option>
-                        <option value="Malaysia">Malaysia</option>
-                        <option value="Slovakia">Slovakia</option>
-                        <option value="Romania">Romania</option>
-                        <option value="Hungary">Hungary</option>
-                        <option value="Lithuania">Lithuania</option>
-                        <option value="China">China</option>
-                        <option value="India">India</option>
-                        <option value="Italy">Italy</option>
-                        <option value="Turkey">Turkey</option>
-                        <option value="Uzbekistan">Uzbekistan</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <select id="filterDegree">
-                        <option value="">Filter by Degree</option>
-                        <option value="Bachelor">Bachelor's</option>
-                        <option value="Master">Master's</option>
-                        <option value="PhD">PhD</option>
-                        <option value="Diploma">Diploma</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <select id="filterTuition">
-                        <option value="">Filter by Tuition</option>
-                        <option value="low">Under $3,000 / year</option>
-                        <option value="mid">$3,000 - $6,000 / year</option>
-                        <option value="high">Above $6,000 / year</option>
-                    </select>
-                </div>
-                <div class="filter-item reset-wrap">
-                    <button id="btnResetFilters" class="btn-reset"><i class="fas fa-undo"></i> Reset</button>
-                </div>
-            </div>
-
-            <div class="program-grid" id="programGrid">
-                <!-- Programmes populated dynamically -->
-            </div>
-        </div>
-    </section>
-
-    <!-- SCHOLARSHIPS SECTION -->
-    <section class="section-padding" id="scholarships">
-        <div class="section-container">
-            <div class="section-header text-center">
-                <span class="sub-title">FINANCIAL AID</span>
-                <h2>Scholarships & Funding</h2>
-                <p>Unlock partial and full funding options to support your studies overseas.</p>
-            </div>
-            <div class="scholarship-grid" id="scholarshipGrid">
-                <!-- Scholarships populated dynamically -->
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES SECTION -->
-    <section class="section-padding bg-light" id="services">
-        <div class="section-container">
-            <div class="section-header text-center">
-                <span class="sub-title">WHY CHOOSE EDUVEXA</span>
-                <h2>Our End-to-End Support Services</h2>
-                <p>We handle every step of your study abroad journey with complete transparency.</p>
-            </div>
-            <div class="services-grid" id="servicesGrid">
-                <!-- Services populated dynamically -->
-            </div>
-        </div>
-    </section>
-
-    <!-- APPLY / CONTACT INQUIRY SECTION -->
-    <section class="section-padding bg-navy text-white" id="apply">
-        <div class="section-container">
-            <div class="apply-box">
-                <div class="apply-text">
-                    <h2>Ready to Start Your Journey?</h2>
-                    <p>Contact our expert counselors today for direct admission guidance and visa support.</p>
-                </div>
-                <div class="apply-actions">
-                    <a href="https://wa.me/8801811909779?text=Hello%20EduVexa%20BD,%20I%20would%20like%20a%20free%20consultation." target="_blank" class="btn-wa-large bd">
-                        <i class="fab fa-whatsapp"></i> Chat with BD Office (+880 1811-909779)
-                    </a>
-                    <a href="https://wa.me/393509313338?text=Hello%20EduVexa%20EU,%20I%20would%20like%20a%20free%20consultation." target="_blank" class="btn-wa-large eu">
-                        <i class="fab fa-whatsapp"></i> Chat with EU Office (+39 350 931 3338)
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-col brand-col">
-                <div class="footer-logo">
-                    <img src="logo.jpg" alt="EduVexa Logo" class="footer-logo-img" style="height: 35px; width: auto; max-width: 120px; object-fit: contain;">
-                    <span class="footer-logo-text">EduVexa</span>
-                </div>
-                <p>EduVexa is a premier study abroad consultancy empowering students with world-class education choices in Europe, Asia, and Eurasia.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#destinations">Study Destinations</a></li>
-                    <li><a href="#programmes">Programmes</a></li>
-                    <li><a href="#scholarships">Scholarships</a></li>
-                    <li><a href="#services">Services</a></li>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" onclick="switchTab('tabDashboard')"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="#" onclick="switchTab('tabSettings')"><i class="fas fa-cog"></i> Site Settings</a></li>
+                    <li><a href="#" onclick="switchTab('tabUniversities')"><i class="fas fa-university"></i> Universities</a></li>
+                    <li><a href="#" onclick="switchTab('tabPrograms')"><i class="fas fa-graduation-cap"></i> Programmes</a></li>
+                    <li><a href="#" onclick="switchTab('tabScholarships')"><i class="fas fa-award"></i> Scholarships</a></li>
+                    <li><a href="#" onclick="switchTab('tabServices')"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                    <li><a href="#" onclick="switchTab('tabInquiries')"><i class="fas fa-envelope-open-text"></i> Inquiries</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
-                <h4>Contact BD Hotline</h4>
-                <p><i class="fas fa-phone-alt"></i> +880 1811-909779</p>
-                <p><i class="fab fa-whatsapp"></i> WhatsApp BD Support</p>
-                <p><i class="fas fa-envelope"></i> eduvexastudya@gmail.com</p>
+            <div class="sidebar-footer">
+                <div class="user-info" id="loggedInUser">Logged in as: Admin</div>
+                <button class="btn-logout" id="btnLogout"><i class="fas fa-power-off"></i> Logout</button>
             </div>
-            <div class="footer-col">
-                <h4>Contact EU Hotline</h4>
-                <p><i class="fas fa-phone-alt"></i> +39 350 931 3338</p>
-                <p><i class="fab fa-whatsapp"></i> WhatsApp EU Support</p>
-                <p><i class="fas fa-map-marker-alt"></i> Europe Regional Support Desk</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 EduVexa. All Rights Reserved. Study Abroad Simplified.</p>
-        </div>
-    </footer>
+        </aside>
 
-    <!-- MAIN APP SCRIPT (Linked to demo/app.js) -->
-    <script src="demo/app.js"></script>
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1 id="pageTitle">Dashboard Overview</h1>
+                <a href="../index.html" target="_blank" style="text-decoration:none; color:var(--navy); font-weight:700; font-size:0.85rem;"><i class="fas fa-external-link-alt"></i> View Live Site</a>
+            </div>
+
+            <!-- TAB 1: OVERVIEW DASHBOARD -->
+            <div id="tabDashboard" class="tab-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Destinations</h3>
+                        <div class="number">10</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Universities</h3>
+                        <div class="number" id="countUniv">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Programmes</h3>
+                        <div class="number" id="countProg">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Scholarships</h3>
+                        <div class="number" id="countSch">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: SITE SETTINGS (HERO + CONTACT) -->
+            <div id="tabSettings" class="tab-content" style="display:none;">
+                <div class="panel-card">
+                    <h3><i class="fas fa-sliders-h"></i> Hero Section & Branding Control</h3>
+                    <form id="formSettings">
+                        <div class="form-group">
+                            <label>HERO TAGLINE (Top Badge)</label>
+                            <input type="text" id="setHeroTagline" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>HERO TITLE (Main Heading)</label>
+                            <input type="text" id="setHeroTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>HERO DESCRIPTION</label>
+                            <textarea id="setHeroDesc" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>HERO MOTTO</label>
+                            <input type="text" id="setHeroMotto" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>HERO BACKGROUND IMAGE URL</label>
+                            <input type="text" id="setHeroBg" class="form-control">
+                        </div>
+
+                        <h3 style="margin-top:25px;"><i class="fas fa-phone-alt"></i> Contact & Hotline Controls</h3>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label>BD HOTLINE NUMBER</label>
+                                <input type="text" id="setBdHotline" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>EU HOTLINE NUMBER</label>
+                                <input type="text" id="setEuHotline" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>BD WHATSAPP NUMBER (Without +)</label>
+                                <input type="text" id="setBdWa" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>EU WHATSAPP NUMBER (Without +)</label>
+                                <input type="text" id="setEuWa" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>EMAIL ADDRESS</label>
+                                <input type="email" id="setEmail" class="form-control">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-save"><i class="fas fa-save"></i> Save All Settings</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- TAB 3: UNIVERSITIES -->
+            <div id="tabUniversities" class="tab-content" style="display:none;">
+                <div class="panel-card">
+                    <h3>Add New University</h3>
+                    <form id="formUniv">
+                        <div class="form-grid-2">
+                            <input type="text" id="univName" placeholder="University Name" class="form-control" required>
+                            <select id="univCountry" class="form-control" required>
+                                <option value="Malaysia">Malaysia</option>
+                                <option value="Slovakia">Slovakia</option>
+                                <option value="Romania">Romania</option>
+                                <option value="Hungary">Hungary</option>
+                                <option value="Lithuania">Lithuania</option>
+                                <option value="China">China</option>
+                                <option value="India">India</option>
+                                <option value="Italy">Italy</option>
+                                <option value="Turkey">Turkey</option>
+                                <option value="Uzbekistan">Uzbekistan</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-save"><i class="fas fa-plus"></i> Add University</button>
+                    </form>
+                </div>
+                <div class="panel-card">
+                    <h3>Existing Universities</h3>
+                    <table class="data-table">
+                        <thead><tr><th>ID</th><th>Name</th><th>Country</th><th>Action</th></tr></thead>
+                        <tbody id="tableUnivBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 4: PROGRAMMES -->
+            <div id="tabPrograms" class="tab-content" style="display:none;">
+                <div class="panel-card">
+                    <h3>Add New Programme</h3>
+                    <form id="formProg">
+                        <div class="form-grid-2">
+                            <input type="text" id="progTitle" placeholder="Programme Title (e.g. B.Sc. Computer Science)" class="form-control" required>
+                            <input type="text" id="progUniv" placeholder="University Name" class="form-control" required>
+                            <select id="progCountry" class="form-control" required>
+                                <option value="Malaysia">Malaysia</option>
+                                <option value="Slovakia">Slovakia</option>
+                                <option value="Romania">Romania</option>
+                                <option value="Hungary">Hungary</option>
+                                <option value="Lithuania">Lithuania</option>
+                                <option value="China">China</option>
+                                <option value="India">India</option>
+                                <option value="Italy">Italy</option>
+                                <option value="Turkey">Turkey</option>
+                                <option value="Uzbekistan">Uzbekistan</option>
+                            </select>
+                            <select id="progDegree" class="form-control" required>
+                                <option value="Bachelor">Bachelor's</option>
+                                <option value="Master">Master's</option>
+                                <option value="PhD">PhD</option>
+                                <option value="Diploma">Diploma</option>
+                            </select>
+                            <input type="text" id="progTuition" placeholder="Tuition Fee (e.g. $3,500 / year)" class="form-control" required>
+                            <input type="text" id="progDuration" placeholder="Duration (e.g. 3 Years)" class="form-control" required>
+                            <input type="text" id="progIntake" placeholder="Intake (e.g. Sep, Feb)" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn-save"><i class="fas fa-plus"></i> Add Programme</button>
+                    </form>
+                </div>
+                <div class="panel-card">
+                    <h3>Existing Programmes</h3>
+                    <table class="data-table">
+                        <thead><tr><th>Title</th><th>University</th><th>Country</th><th>Degree</th><th>Tuition</th><th>Action</th></tr></thead>
+                        <tbody id="tableProgBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 5: SCHOLARSHIPS -->
+            <div id="tabScholarships" class="tab-content" style="display:none;">
+                <div class="panel-card">
+                    <h3>Add New Scholarship</h3>
+                    <form id="formScholarship">
+                        <div class="form-grid-2">
+                            <input type="text" id="schTitle" placeholder="Scholarship Title" class="form-control" required>
+                            <input type="text" id="schCountry" placeholder="Country" class="form-control" required>
+                            <input type="text" id="schCoverage" placeholder="Coverage (Full/Partial)" class="form-control" required>
+                            <input type="text" id="schDeadline" placeholder="Deadline (e.g. Jan 15, 2026)" class="form-control" required>
+                        </div>
+                        <textarea id="schDesc" placeholder="Description" class="form-control" rows="2" style="margin-top:10px;" required></textarea>
+                        <button type="submit" class="btn-save"><i class="fas fa-plus"></i> Add Scholarship</button>
+                    </form>
+                </div>
+                <div class="panel-card">
+                    <h3>Existing Scholarships</h3>
+                    <table class="data-table">
+                        <thead><tr><th>Title</th><th>Country</th><th>Coverage</th><th>Deadline</th><th>Action</th></tr></thead>
+                        <tbody id="tableSchBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 6: SERVICES -->
+            <div id="tabServices" class="tab-content" style="display:none;">
+                <div class="panel-card">
+                    <h3>Manage Services</h3>
+                    <table class="data-table">
+                        <thead><tr><th>Icon</th><th>Title</th><th>Description</th></tr></thead>
+                        <tbody id="tableServicesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 7: INQUIRIES -->
+            <div id="tabInquiries" class="tab-content" style="display:none;">
+                <div class="panel-card">
+                    <h3>Student Inquiries & Applications</h3>
+                    <table class="data-table">
+                        <thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Country</th><th>Degree</th><th>Message</th></tr></thead>
+                        <tbody id="tableInquiriesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- JS ENGINE -->
+    <script>
+        const SUPABASE_URL = 'https://cnxtddpqjzawfwakmlxl.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF';
+        const ALLOWED_SUPER_ADMINS = ['eduvexastudya@gmail.com', 'shahikkhanh@gmail.com'];
+
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // DOM ELEMENTS
+        const loginWrapper = document.getElementById('loginWrapper');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const btnLogout = document.getElementById('btnLogout');
+
+        // PASSWORD TOGGLE
+        document.getElementById('togglePwd').addEventListener('click', function() {
+            const pwd = document.getElementById('adminPassword');
+            pwd.type = pwd.type === 'password' ? 'text' : 'password';
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // INIT AUTH CHECK
+        document.addEventListener('DOMContentLoaded', async () => {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session && ALLOWED_SUPER_ADMINS.includes(session.user.email.toLowerCase())) {
+                showDashboard(session.user.email);
+            } else {
+                showLogin();
+            }
+        });
+
+        // LOGIN HANDLER
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+
+            const email = document.getElementById('adminEmail').value.trim().toLowerCase();
+            const password = document.getElementById('adminPassword').value;
+
+            if (!ALLOWED_SUPER_ADMINS.includes(email)) {
+                loginError.innerText = 'Access Denied: You are not an authorized Super Admin.';
+                loginError.style.display = 'block';
+                return;
+            }
+
+            const { data, error } = await sb.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                loginError.innerText = error.message;
+                loginError.style.display = 'block';
+            } else {
+                loginSuccess.innerText = 'Login successful! Redirecting...';
+                loginSuccess.style.display = 'block';
+                setTimeout(() => showDashboard(data.user.email), 800);
+            }
+        });
+
+        // LOGOUT HANDLER
+        btnLogout.addEventListener('click', async () => {
+            await sb.auth.signOut();
+            showLogin();
+        });
+
+        function showLogin() {
+            loginWrapper.style.display = 'flex';
+            adminDashboard.style.display = 'none';
+        }
+
+        function showDashboard(email) {
+            loginWrapper.style.display = 'none';
+            adminDashboard.style.display = 'block';
+            document.getElementById('loggedInUser').innerText = `Logged in: ${email}`;
+            loadAllData();
+        }
+
+        // TAB SWITCHER
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            
+            document.getElementById(tabId).style.display = 'block';
+            event.currentTarget.classList.add('active');
+            
+            const titles = {
+                'tabDashboard': 'Dashboard Overview',
+                'tabSettings': 'Site Settings & Branding',
+                'tabUniversities': 'Manage Universities',
+                'tabPrograms': 'Manage Programmes & Tuition Fees',
+                'tabScholarships': 'Manage Scholarships',
+                'tabServices': 'Manage Services',
+                'tabInquiries': 'Student Inquiries'
+            };
+            document.getElementById('pageTitle').innerText = titles[tabId] || 'Admin Dashboard';
+        }
+
+        // LOAD DATA FROM SUPABASE
+        async function loadAllData() {
+            loadSettings();
+            loadUniversities();
+            loadPrograms();
+            loadScholarships();
+            loadServices();
+            loadInquiries();
+        }
+
+        // 1. SITE SETTINGS
+        async function loadSettings() {
+            const { data } = await sb.from('site_settings').select('*').eq('id', 1).single();
+            if (data) {
+                document.getElementById('setHeroTagline').value = data.hero_tagline || '';
+                document.getElementById('setHeroTitle').value = data.hero_title || '';
+                document.getElementById('setHeroDesc').value = data.hero_description || '';
+                document.getElementById('setHeroMotto').value = data.hero_motto || '';
+                document.getElementById('setHeroBg').value = data.hero_bg_url || '';
+                document.getElementById('setBdHotline').value = data.bd_hotline || '';
+                document.getElementById('setEuHotline').value = data.eu_hotline || '';
+                document.getElementById('setBdWa').value = data.bd_whatsapp || '';
+                document.getElementById('setEuWa').value = data.eu_whatsapp || '';
+                document.getElementById('setEmail').value = data.email || '';
+            }
+        }
+
+        document.getElementById('formSettings').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const updates = {
+                hero_tagline: document.getElementById('setHeroTagline').value,
+                hero_title: document.getElementById('setHeroTitle').value,
+                hero_description: document.getElementById('setHeroDesc').value,
+                hero_motto: document.getElementById('setHeroMotto').value,
+                hero_bg_url: document.getElementById('setHeroBg').value,
+                bd_hotline: document.getElementById('setBdHotline').value,
+                eu_hotline: document.getElementById('setEuHotline').value,
+                bd_whatsapp: document.getElementById('setBdWa').value,
+                eu_whatsapp: document.getElementById('setEuWa').value,
+                email: document.getElementById('setEmail').value
+            };
+            await sb.from('site_settings').update(updates).eq('id', 1);
+            alert('Site Settings Updated Successfully!');
+        });
+
+        // 2. UNIVERSITIES
+        async function loadUniversities() {
+            const { data } = await sb.from('universities').select('*');
+            const tbody = document.getElementById('tableUnivBody');
+            document.getElementById('countUniv').innerText = data ? data.length : 0;
+            if (!data) return;
+            tbody.innerHTML = data.map(u => `
+                <tr>
+                    <td>${u.id}</td>
+                    <td><strong>${u.name}</strong></td>
+                    <td>${u.country_name || u.country || ''}</td>
+                    <td><button onclick="deleteUniv(${u.id})" class="btn-action-sm btn-delete">Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('formUniv').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('univName').value;
+            const country_name = document.getElementById('univCountry').value;
+            await sb.from('universities').insert([{ name, country_name }]);
+            document.getElementById('formUniv').reset();
+            loadUniversities();
+        });
+
+        async function deleteUniv(id) {
+            if (confirm('Delete this university?')) {
+                await sb.from('universities').delete().eq('id', id);
+                loadUniversities();
+            }
+        }
+
+        // 3. PROGRAMMES
+        async function loadPrograms() {
+            const { data } = await sb.from('programs').select('*');
+            const tbody = document.getElementById('tableProgBody');
+            document.getElementById('countProg').innerText = data ? data.length : 0;
+            if (!data) return;
+            tbody.innerHTML = data.map(p => `
+                <tr>
+                    <td><strong>${p.title || p.name}</strong></td>
+                    <td>${p.university_name || ''}</td>
+                    <td>${p.country_name || ''}</td>
+                    <td>${p.degree_level || ''}</td>
+                    <td>${p.tuition_fee || ''}</td>
+                    <td><button onclick="deleteProg(${p.id})" class="btn-action-sm btn-delete">Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('formProg').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newProg = {
+                title: document.getElementById('progTitle').value,
+                university_name: document.getElementById('progUniv').value,
+                country_name: document.getElementById('progCountry').value,
+                degree_level: document.getElementById('progDegree').value,
+                tuition_fee: document.getElementById('progTuition').value,
+                duration: document.getElementById('progDuration').value,
+                intake: document.getElementById('progIntake').value
+            };
+            await sb.from('programs').insert([newProg]);
+            document.getElementById('formProg').reset();
+            loadPrograms();
+        });
+
+        async function deleteProg(id) {
+            if (confirm('Delete this programme?')) {
+                await sb.from('programs').delete().eq('id', id);
+                loadPrograms();
+            }
+        }
+
+        // 4. SCHOLARSHIPS
+        async function loadScholarships() {
+            const { data } = await sb.from('scholarships').select('*');
+            const tbody = document.getElementById('tableSchBody');
+            document.getElementById('countSch').innerText = data ? data.length : 0;
+            if (!data) return;
+            tbody.innerHTML = data.map(s => `
+                <tr>
+                    <td><strong>${s.title}</strong></td>
+                    <td>${s.country_name || ''}</td>
+                    <td>${s.coverage || ''}</td>
+                    <td>${s.application_deadline || ''}</td>
+                    <td><button onclick="deleteScholarship(${s.id})" class="btn-action-sm btn-delete">Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('formScholarship').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newSch = {
+                title: document.getElementById('schTitle').value,
+                country_name: document.getElementById('schCountry').value,
+                coverage: document.getElementById('schCoverage').value,
+                application_deadline: document.getElementById('schDeadline').value,
+                description: document.getElementById('schDesc').value
+            };
+            await sb.from('scholarships').insert([newSch]);
+            document.getElementById('formScholarship').reset();
+            loadScholarships();
+        });
+
+        async function deleteScholarship(id) {
+            if (confirm('Delete this scholarship?')) {
+                await sb.from('scholarships').delete().eq('id', id);
+                loadScholarships();
+            }
+        }
+
+        // 5. SERVICES
+        async function loadServices() {
+            const { data } = await sb.from('services').select('*');
+            const tbody = document.getElementById('tableServicesBody');
+            if (!data) return;
+            tbody.innerHTML = data.map(s => `
+                <tr>
+                    <td><i class="fas ${s.icon}"></i></td>
+                    <td><strong>${s.title}</strong></td>
+                    <td>${s.description}</td>
+                </tr>
+            `).join('');
+        }
+
+        // 6. INQUIRIES
+        async function loadInquiries() {
+            const { data } = await sb.from('inquiries').select('*').order('created_at', { ascending: false });
+            const tbody = document.getElementById('tableInquiriesBody');
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6">No student inquiries yet.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = data.map(i => `
+                <tr>
+                    <td>${new Date(i.created_at).toLocaleDateString()}</td>
+                    <td><strong>${i.full_name}</strong></td>
+                    <td>${i.phone}</td>
+                    <td>${i.desired_country || ''}</td>
+                    <td>${i.desired_degree || ''}</td>
+                    <td>${i.message || ''}</td>
+                </tr>
+            `).join('');
+        }
+    </script>
 </body>
 </html>
