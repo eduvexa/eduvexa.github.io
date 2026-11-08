@@ -1,231 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduVexa Admin | Studyportals Management</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    :root { --navy: #102d4e; --deep-navy: #081b35; --gold: #d9a62c; --white: #ffffff; --bg: #f4f7fa; --text: #334155; --border: #e2e8f0; }
-    * { box-sizing: border-box; font-family: 'DM Sans', sans-serif; }
-    body { margin: 0; background: var(--bg); color: var(--text); }
-    
-    /* LOGIN */
-    #loginScreen { display: flex; align-items: center; justify-content: center; height: 100vh; background: var(--deep-navy); }
-    .login-card { background: white; padding: 40px; border-radius: 12px; width: 100%; max-width: 400px; text-align: center; }
-    .login-card img { width: 70px; margin-bottom: 20px; }
-    .form-group { text-align: left; margin-bottom: 15px; }
-    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; outline: none; }
-    .btn-gold { width: 100%; padding: 12px; background: var(--gold); border: none; color: var(--deep-navy); font-weight: 700; border-radius: 6px; cursor: pointer; }
-
-    /* LAYOUT */
-    #adminPanel { display: none; min-height: 100vh; }
-    .sidebar { width: 250px; background: var(--navy); color: white; position: fixed; height: 100%; padding: 25px; }
-    .nav-links { list-style: none; padding: 0; margin-top: 30px; }
-    .nav-links li { padding: 12px 15px; cursor: pointer; border-radius: 8px; margin-bottom: 8px; transition: 0.3s; font-weight: 500; }
-    .nav-links li:hover, .nav-links li.active { background: var(--gold); color: var(--deep-navy); }
-    
-    .main-content { margin-left: 250px; padding: 40px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-    .btn-add { background: var(--deep-navy); color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; }
-
-    /* TABLE */
-    .card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden; }
-    table { width: 100%; border-collapse: collapse; }
-    th { background: #f8fafc; text-align: left; padding: 15px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted); }
-    td { padding: 15px; border-bottom: 1px solid var(--border); font-size: 14px; }
-    .btn-edit { color: var(--navy); font-weight: 700; cursor: pointer; background: none; border: none; margin-right: 10px; }
-    .btn-delete { color: #e11d48; font-weight: 700; cursor: pointer; background: none; border: none; }
-
-    /* MODAL */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 2000; }
-    .modal-content { background: white; padding: 30px; border-radius: 15px; width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .modal-footer { margin-top: 25px; display: flex; justify-content: flex-end; gap: 10px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduVexa - Study Abroad Simplified</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main Style (Linked to demo/style.css) -->
+    <link rel="stylesheet" href="demo/style.css">
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <div id="loginScreen">
-    <div class="login-card">
-      <img src="../eduvexa%20logo%20jpg.jpg" alt="Logo">
-      <h2>Admin Login</h2>
-      <div class="form-group"><label>Email</label><input type="email" id="email" value="eduvexastudya@gmail.com"></div>
-      <div class="form-group"><label>Password</label><input type="password" id="password"></div>
-      <button class="btn-gold" onclick="handleLogin()">Login to Dashboard</button>
-      <p id="loginError" style="color:red; display:none; margin-top:10px; font-size:13px;"></p>
-    </div>
-  </div>
-
-  <div id="adminPanel">
-    <div class="sidebar">
-      <h3>EduVexa Admin</h3>
-      <ul class="nav-links">
-        <li onclick="switchTab('dashboard')" id="tab-dashboard">Dashboard</li>
-        <li onclick="switchTab('countries')" id="tab-countries">Countries</li>
-        <li onclick="switchTab('universities')" id="tab-universities">Universities</li>
-        <li onclick="switchTab('programs')" id="tab-programs">Programs (Studyportals)</li>
-        <li onclick="switchTab('scholarships')" id="tab-scholarships">Scholarships</li>
-      </ul>
-      <div style="margin-top:40px; cursor:pointer; font-weight:bold; color:#fda4af;" onclick="location.reload()">← Logout</div>
-    </div>
-
-    <div class="main-content">
-      <div class="header">
-        <h1 id="pageTitle">Dashboard</h1>
-        <button class="btn-add" id="addBtn" style="display:none;" onclick="openModal()">+ Add New</button>
-      </div>
-      <div id="contentArea" class="card"></div>
-    </div>
-  </div>
-
-  <div id="dataModal" class="modal">
-    <div class="modal-content">
-      <h2 id="modalTitle" style="margin-bottom:20px;">Edit Information</h2>
-      <form id="dataForm">
-        <div id="formFields"></div>
-        <div class="modal-footer">
-          <button type="button" onclick="closeModal()" style="padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">Cancel</button>
-          <button type="submit" class="btn-gold" style="width:auto;">Save Changes</button>
+    <!-- TOP UTILITY BAR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> BD: +880 1811-909779</span>
+                <span class="divider">|</span>
+                <span><i class="fas fa-phone-alt"></i> EU: +39 350 931 3338</span>
+                <span class="divider">|</span>
+                <span><i class="fas fa-envelope"></i> eduvexastudya@gmail.com</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="https://wa.me/8801811909779?text=Hello%20EduVexa%20BD,%20I%20want%20information%20about%20studying%20abroad." target="_blank" class="wa-top-btn wa-bd">
+                    <i class="fab fa-whatsapp"></i> BD WhatsApp
+                </a>
+                <a href="https://wa.me/393509313338?text=Hello%20EduVexa%20EU,%20I%20want%20information%20about%20studying%20abroad." target="_blank" class="wa-top-btn wa-eu">
+                    <i class="fab fa-whatsapp"></i> EU WhatsApp
+                </a>
+            </div>
         </div>
-      </form>
     </div>
-  </div>
 
-  <script>
-    const SUPABASE_URL = "https://cnxtddpqjzawfwakmlxl.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF";
-    const _db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    <!-- MAIN HEADER / NAVIGATION -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- LOGO BLOCK -->
+            <a href="index.html" class="brand-logo">
+                <img src="logo.jpg" alt="EduVexa Logo" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-title">EduVexa</span>
+                    <span class="logo-tagline">STUDY ABROAD SIMPLIFIED</span>
+                </div>
+            </a>
 
-    let currentTab = 'dashboard';
-    let editId = null;
-    let countriesData = [];
-    let universitiesData = [];
+            <!-- MOBILE TOGGLE -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
 
-    async function handleLogin() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const { data, error } = await _db.auth.signInWithPassword({ email, password });
-      if (error) { document.getElementById('loginError').innerText = error.message; document.getElementById('loginError').style.display='block'; return; }
-      
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'block';
-      loadBaseData();
-      switchTab('dashboard');
-    }
+            <!-- NAVIGATION MENU -->
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li class="nav-item has-dropdown">
+                        <a href="#destinations" class="nav-link">STUDY DESTINATIONS <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/my.png" alt="Malaysia"> Malaysia</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/sk.png" alt="Slovakia"> Slovakia</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/ro.png" alt="Romania"> Romania</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/hu.png" alt="Hungary"> Hungary</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/lt.png" alt="Lithuania"> Lithuania</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/cn.png" alt="China"> China</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/in.png" alt="India"> India</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/it.png" alt="Italy"> Italy</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/tr.png" alt="Turkey"> Turkey</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/uz.png" alt="Uzbekistan"> Uzbekistan</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="#programmes" class="nav-link">PROGRAMMES</a></li>
+                    <li class="nav-item"><a href="#universities" class="nav-link">UNIVERSITIES</a></li>
+                    <li class="nav-item"><a href="#scholarships" class="nav-link">SCHOLARSHIPS</a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link">SERVICES</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="#apply" class="btn-primary-apply">REQUEST INFO / APPLY</a>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-    async function loadBaseData() {
-      const { data: c } = await _db.from('countries').select('*').order('name');
-      const { data: u } = await _db.from('universities').select('*').order('name');
-      countriesData = c || [];
-      universitiesData = u || [];
-    }
+    <!-- HERO SECTION WITH KEN-BURNS LIVE MOTION -->
+    <section class="hero-section">
+        <div class="hero-live-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i class="fas fa-graduation-cap"></i> YOUR FUTURE. OUR EXPERTISE. GLOBAL OPPORTUNITIES.
+            </div>
+            <h1 class="hero-title">Elevate Your Future Through World-Class Education</h1>
+            <p class="hero-description">
+                Unlock access to prestigious universities across Europe, Asia, and Eurasia. Explore internationally recognized Bachelor's, Master's, and PhD programmes, alongside verified scholarship opportunities and personalized expert guidance.
+            </p>
+            <div class="hero-motto">
+                <i class="fas fa-star"></i> Your Ambition Deserves a Global Stage.
+            </div>
 
-    function switchTab(tab) {
-      currentTab = tab;
-      document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
-      document.getElementById('tab-' + tab).classList.add('active');
-      document.getElementById('pageTitle').innerText = tab.charAt(0).toUpperCase() + tab.slice(1);
-      document.getElementById('addBtn').style.display = tab === 'dashboard' ? 'none' : 'block';
-      renderContent();
-    }
+            <!-- HERO SEARCH FINDER BAR -->
+            <div class="hero-search-card">
+                <div class="search-grid">
+                    <div class="search-field">
+                        <label for="searchProgram"><i class="fas fa-search"></i> WHAT DO YOU WANT TO STUDY?</label>
+                        <input type="text" id="searchProgram" placeholder="e.g. Computer Science, Business, Nursing...">
+                    </div>
+                    <div class="search-field">
+                        <label for="whereToStudy"><i class="fas fa-globe"></i> WHERE TO STUDY?</label>
+                        <select id="whereToStudy">
+                            <option value="">All Destinations</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Slovakia">Slovakia</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Lithuania">Lithuania</option>
+                            <option value="China">China</option>
+                            <option value="India">India</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Uzbekistan">Uzbekistan</option>
+                        </select>
+                    </div>
+                    <div class="search-field">
+                        <label for="degreeLevel"><i class="fas fa-user-graduate"></i> DEGREE LEVEL</label>
+                        <select id="degreeLevel">
+                            <option value="">All Degree Levels</option>
+                            <option value="Bachelor">Bachelor's</option>
+                            <option value="Master">Master's</option>
+                            <option value="PhD">PhD / Doctorate</option>
+                            <option value="Diploma">Diploma / Foundation</option>
+                        </select>
+                    </div>
+                    <div class="search-button-wrap">
+                        <button type="button" id="btnHeroSearch" class="btn-hero-search">
+                            SEARCH PROGRAMMES <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    async function renderContent() {
-      const container = document.getElementById('contentArea');
-      container.innerHTML = '<div style="padding:20px;">Loading data...</div>';
-      if(currentTab === 'dashboard') { container.innerHTML = '<div style="padding:30px;"><h3>Welcome Admin!</h3><p>Manage your Global Study Directory from here.</p></div>'; return; }
+    <!-- STUDY DESTINATIONS SECTION (10 COUNTRIES) -->
+    <section class="section-padding" id="destinations">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">EXPLORE THE WORLD</span>
+                <h2>Top Study Destinations</h2>
+                <p>Choose from top-ranked study locations across Europe, Asia, and Eurasia.</p>
+            </div>
+            <div class="country-grid" id="countryGrid">
+                <!-- 10 Countries populated instantly via app.js -->
+            </div>
+        </div>
+    </section>
 
-      const { data } = await _db.from(currentTab).select('*').order('id', { ascending: false });
-      
-      let html = '<table><thead><tr>';
-      if (currentTab === 'countries') html += '<th>Name</th><th>Code</th>';
-      if (currentTab === 'universities') html += '<th>University Name</th><th>City</th>';
-      if (currentTab === 'programs') html += '<th>Program Name</th><th>Degree</th><th>Fee</th>';
-      if (currentTab === 'scholarships') html += '<th>Scholarship</th><th>Provider</th>';
-      html += '<th>Actions</th></tr></thead><tbody>';
+    <!-- PROGRAMMES SECTION -->
+    <section class="section-padding bg-light" id="programmes">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">ACADEMIC EXCELLENCE</span>
+                <h2>Featured Programmes</h2>
+                <p>Find the right degree program tailored to your career ambitions.</p>
+            </div>
 
-      data.forEach(item => {
-        html += '<tr>';
-        if (currentTab === 'countries') html += `<td>${item.name}</td><td>${item.code}</td>`;
-        if (currentTab === 'universities') html += `<td>${item.name}</td><td>${item.city}</td>`;
-        if (currentTab === 'programs') html += `<td>${item.name}</td><td>${item.degree_level}</td><td>${item.tuition_fee}</td>`;
-        if (currentTab === 'scholarships') html += `<td>${item.name}</td><td>${item.provider}</td>`;
-        html += `<td><button class="btn-edit" onclick="openModal(${item.id})">Edit</button><button class="btn-delete" onclick="handleDelete(${item.id})">Delete</button></td></tr>`;
-      });
-      container.innerHTML = html + '</tbody></table>';
-    }
+            <!-- DETAILED FILTER CONTROLS -->
+            <div class="filter-controls-bar">
+                <div class="filter-item">
+                    <input type="text" id="filterKeyword" placeholder="Search by keyword...">
+                </div>
+                <div class="filter-item">
+                    <select id="filterCountry">
+                        <option value="">Filter by Country</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Slovakia">Slovakia</option>
+                        <option value="Romania">Romania</option>
+                        <option value="Hungary">Hungary</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="China">China</option>
+                        <option value="India">India</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <select id="filterDegree">
+                        <option value="">Filter by Degree</option>
+                        <option value="Bachelor">Bachelor's</option>
+                        <option value="Master">Master's</option>
+                        <option value="PhD">PhD</option>
+                        <option value="Diploma">Diploma</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <select id="filterTuition">
+                        <option value="">Filter by Tuition</option>
+                        <option value="low">Under $3,000 / year</option>
+                        <option value="mid">$3,000 - $6,000 / year</option>
+                        <option value="high">Above $6,000 / year</option>
+                    </select>
+                </div>
+                <div class="filter-item reset-wrap">
+                    <button id="btnResetFilters" class="btn-reset"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </div>
 
-    async function openModal(id = null) {
-      editId = id;
-      const formFields = document.getElementById('formFields');
-      formFields.innerHTML = 'Loading fields...';
-      document.getElementById('dataModal').style.display = 'flex';
-      
-      let item = {};
-      if (id) {
-        const { data } = await _db.from(currentTab).select('*').eq('id', id).single();
-        item = data;
-      }
+            <div class="program-grid" id="programGrid">
+                <!-- Programmes populated dynamically -->
+            </div>
+        </div>
+    </section>
 
-      let html = '<div class="grid-2">';
-      if (currentTab === 'countries') {
-        html += genInp('Name', 'name', item.name); html += genInp('Code', 'code', item.code);
-      } else if (currentTab === 'universities') {
-        html += genSel('Country', 'country_id', countriesData, item.country_id);
-        html += genInp('University Name', 'name', item.name);
-        html += genInp('City', 'city', item.city);
-        html += genInp('Website', 'official_website', item.official_website);
-      } else if (currentTab === 'programs') {
-        html += genSel('University', 'university_id', universitiesData, item.university_id);
-        html += genInp('Program Name', 'name', item.name);
-        html += genInp('Degree Level', 'degree_level', item.degree_level);
-        html += genInp('Duration (e.g. 3 Years)', 'duration', item.duration);
-        html += genInp('Tuition Fee', 'tuition_fee', item.tuition_fee);
-        html += genInp('Official Link', 'official_program_url', item.official_program_url);
-        html += `</div><div style="margin-top:15px;">` + genTxt('Admission Requirements', 'admission_requirements', item.admission_requirements) + `</div><div class="grid-2">`;
-      } else if (currentTab === 'scholarships') {
-        html += genSel('Country', 'country_id', countriesData, item.country_id);
-        html += genInp('Scholarship Name', 'name', item.name);
-        html += genInp('Provider', 'provider', item.provider);
-        html += genInp('Coverage', 'coverage', item.coverage);
-        html += genInp('Deadline', 'application_deadline', item.application_deadline);
-      }
-      
-      html += `</div><div style="margin-top:15px;"><label><input type="checkbox" name="is_published" ${item.is_published !== false ? 'checked' : ''}> Published on Website</label></div>`;
-      formFields.innerHTML = html;
-    }
+    <!-- SCHOLARSHIPS SECTION -->
+    <section class="section-padding" id="scholarships">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">FINANCIAL AID</span>
+                <h2>Scholarships & Funding</h2>
+                <p>Unlock partial and full funding options to support your studies overseas.</p>
+            </div>
+            <div class="scholarship-grid" id="scholarshipGrid">
+                <!-- Scholarships populated dynamically -->
+            </div>
+        </div>
+    </section>
 
-    function genInp(l, n, v) { return `<div class="form-group"><label>${l}</label><input type="text" name="${n}" value="${v || ''}"></div>`; }
-    function genTxt(l, n, v) { return `<div class="form-group"><label>${l}</label><textarea name="${n}" rows="3">${v || ''}</textarea></div>`; }
-    function genSel(l, n, opts, sel) {
-      let h = `<div class="form-group"><label>${l}</label><select name="${n}">`;
-      opts.forEach(o => h += `<option value="${o.id}" ${o.id == sel ? 'selected' : ''}>${o.name}</option>`);
-      return h + `</select></div>`;
-    }
+    <!-- SERVICES SECTION -->
+    <section class="section-padding bg-light" id="services">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">WHY CHOOSE EDUVEXA</span>
+                <h2>Our End-to-End Support Services</h2>
+                <p>We handle every step of your study abroad journey with complete transparency.</p>
+            </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services populated dynamically -->
+            </div>
+        </div>
+    </section>
 
-    function closeModal() { document.getElementById('dataModal').style.display = 'none'; }
+    <!-- APPLY / CONTACT INQUIRY SECTION -->
+    <section class="section-padding bg-navy text-white" id="apply">
+        <div class="section-container">
+            <div class="apply-box">
+                <div class="apply-text">
+                    <h2>Ready to Start Your Journey?</h2>
+                    <p>Contact our expert counselors today for direct admission guidance and visa support.</p>
+                </div>
+                <div class="apply-actions">
+                    <a href="https://wa.me/8801811909779?text=Hello%20EduVexa%20BD,%20I%20would%20like%20a%20free%20consultation." target="_blank" class="btn-wa-large bd">
+                        <i class="fab fa-whatsapp"></i> Chat with BD Office (+880 1811-909779)
+                    </a>
+                    <a href="https://wa.me/393509313338?text=Hello%20EduVexa%20EU,%20I%20would%20like%20a%20free%20consultation." target="_blank" class="btn-wa-large eu">
+                        <i class="fab fa-whatsapp"></i> Chat with EU Office (+39 350 931 3338)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    document.getElementById('dataForm').onsubmit = async (e) => {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const payload = {};
-      fd.forEach((v, k) => { if(k === 'is_published') payload[k] = true; else payload[k] = v; });
-      if(!payload.is_published) payload.is_published = false;
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <img src="logo.jpg" alt="EduVexa Logo" class="footer-logo-img">
+                    <span class="footer-logo-text">EduVexa</span>
+                </div>
+                <p>EduVexa is a premier study abroad consultancy empowering students with world-class education choices in Europe, Asia, and Eurasia.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#destinations">Study Destinations</a></li>
+                    <li><a href="#programmes">Programmes</a></li>
+                    <li><a href="#scholarships">Scholarships</a></li>
+                    <li><a href="#services">Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact BD Hotline</h4>
+                <p><i class="fas fa-phone-alt"></i> +880 1811-909779</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp BD Support</p>
+                <p><i class="fas fa-envelope"></i> eduvexastudya@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact EU Hotline</h4>
+                <p><i class="fas fa-phone-alt"></i> +39 350 931 3338</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp EU Support</p>
+                <p><i class="fas fa-map-marker-alt"></i> Europe Regional Support Desk</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 EduVexa. All Rights Reserved. Study Abroad Simplified.</p>
+        </div>
+    </footer>
 
-      let res;
-      if (editId) res = await _db.from(currentTab).update(payload).eq('id', editId);
-      else res = await _db.from(currentTab).insert(payload);
-
-      if (res.error) alert(res.error.message); else { closeModal(); renderContent(); }
-    };
-
-    async function handleDelete(id) {
-      if (confirm("Delete this item?")) {
-        await _db.from(currentTab).delete().eq('id', id);
-        renderContent();
-      }
-    }
-  </script>
+    <!-- MAIN APP SCRIPT (Linked to demo/app.js) -->
+    <script src="demo/app.js"></script>
 </body>
 </html>
