@@ -3,188 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduVexa - Study Abroad Simplified</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <title>EduVexa - Study Abroad Simplified | Demo</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Supabase JS -->
+    <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <!-- Utility Bar -->
-    <div class="utility-bar">
-        <div class="container utility-content">
-            <div class="contact-info">
-                <span><i class="fab fa-whatsapp"></i> BD: <a href="https://wa.me/8801811909779" id="top-wa-bd">+880 1811-909779</a></span>
-                <span><i class="fab fa-whatsapp"></i> EU: <a href="https://wa.me/393509313338" id="top-wa-eu">+39 350 931 3338</a></span>
-                <span class="email-hide"><i class="fas fa-envelope"></i> <a href="mailto:eduvexastudya@gmail.com" id="top-email">eduvexastudya@gmail.com</a></span>
+
+    <!-- TOP UTILITY BAR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> BD: +880 1811-909779</span>
+                <span class="divider">|</span>
+                <span><i class="fas fa-phone-alt"></i> EU: +39 350 931 3338</span>
+                <span class="divider">|</span>
+                <span><i class="fas fa-envelope"></i> eduvexastudya@gmail.com</span>
             </div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <div class="top-bar-right">
+                <a href="https://wa.me/8801811909779?text=Hello%20EduVexa%20BD,%20I%20want%20information%20about%20studying%20abroad." target="_blank" class="wa-top-btn wa-bd">
+                    <i class="fab fa-whatsapp"></i> BD WhatsApp
+                </a>
+                <a href="https://wa.me/393509313338?text=Hello%20EduVexa%20EU,%20I%20want%20information%20about%20studying%20abroad." target="_blank" class="wa-top-btn wa-eu">
+                    <i class="fab fa-whatsapp"></i> EU WhatsApp
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo">
-                <img src="https://i.ibb.co/bRVB2xV/logo.png" alt="EduVexa Logo" style="height: 44px !important; max-width: 160px !important;">
+    <!-- MAIN HEADER / NAVIGATION -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- LOGO BLOCK -->
+            <a href="index.html" class="brand-logo">
+                <img src="../logo.jpg" alt="EduVexa Logo" class="logo-img" onerror="this.onerror=null; this.src='logo.jpg'">
                 <div class="logo-text">
-                    <span class="brand-name">EduVexa</span>
-                    <span class="brand-tagline">STUDY ABROAD SIMPLIFIED</span>
+                    <span class="logo-title">EduVexa</span>
+                    <span class="logo-tagline">STUDY ABROAD SIMPLIFIED</span>
                 </div>
             </a>
-            <ul class="nav-links">
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">STUDY DESTINATIONS <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Study in Germany</a>
-                        <a href="#">Study in Italy</a>
-                        <a href="#">Study in Hungary</a>
-                        <a href="#">Study in Malaysia</a>
-                    </div>
-                </li>
-                <li><a href="#programmes">PROGRAMMES</a></li>
-                <li><a href="#universities">UNIVERSITIES</a></li>
-                <li><a href="#scholarships">SCHOLARSHIPS</a></li>
-                <li><a href="#services">SERVICES</a></li>
-                <li><a href="#contact" class="btn-cta">REQUEST INFO / APPLY</a></li>
-            </ul>
-            <div class="mobile-menu-icon">
+
+            <!-- MOBILE TOGGLE -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
                 <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </nav>
+            </button>
 
-    <!-- Hero Section -->
-    <header class="hero" id="hero-section">
-        <div class="container hero-content">
-            <div class="hero-text-area">
-                <span class="badge" id="hero-tagline"><i class="fas fa-graduation-cap"></i> YOUR FUTURE. OUR EXPERTISE. GLOBAL OPPORTUNITIES.</span>
-                <h1 id="hero-title">Elevate Your Future Through World-Class Education</h1>
-                <p id="hero-desc">Unlock access to prestigious universities across Europe, Asia, and Eurasia. Explore internationally recognized Bachelor's, Master's, and PhD programmes, alongside verified scholarship opportunities and personalized expert guidance.</p>
-                <div class="hero-status">
-                    <span id="hero-motto"><i class="fas fa-star" style="color: var(--gold);"></i> Your Ambition Deserves a Global Stage.</span>
+            <!-- NAVIGATION MENU -->
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li class="nav-item has-dropdown">
+                        <a href="#destinations" class="nav-link">STUDY DESTINATIONS <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/my.png" alt="Malaysia"> Malaysia</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/sk.png" alt="Slovakia"> Slovakia</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/ro.png" alt="Romania"> Romania</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/hu.png" alt="Hungary"> Hungary</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/lt.png" alt="Lithuania"> Lithuania</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/cn.png" alt="China"> China</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/in.png" alt="India"> India</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/it.png" alt="Italy"> Italy</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/tr.png" alt="Turkey"> Turkey</a></li>
+                            <li><a href="#destinations"><img src="https://flagcdn.com/w20/uz.png" alt="Uzbekistan"> Uzbekistan</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="#programmes" class="nav-link">PROGRAMMES</a></li>
+                    <li class="nav-item"><a href="#universities" class="nav-link">UNIVERSITIES</a></li>
+                    <li class="nav-item"><a href="#scholarships" class="nav-link">SCHOLARSHIPS</a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link">SERVICES</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="#apply" class="btn-primary-apply">REQUEST INFO / APPLY</a>
                 </div>
-            </div>
-
-            <!-- Global Search Bar -->
-            <div class="search-container">
-                <div class="search-box">
-                    <div class="search-input-group">
-                        <label><i class="fas fa-search"></i> WHAT DO YOU WANT TO STUDY?</label>
-                        <input type="text" id="progSearch" placeholder="e.g. Computer Science, Business, Nursing...">
-                    </div>
-                    <div class="search-input-group">
-                        <label><i class="fas fa-globe"></i> WHERE TO STUDY?</label>
-                        <select id="countryFilter">
-                            <option value="">All Destinations</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Hungary">Hungary</option>
-                            <option value="Malaysia">Malaysia</option>
-                        </select>
-                    </div>
-                    <div class="search-input-group">
-                        <label><i class="fas fa-user-graduate"></i> DEGREE LEVEL</label>
-                        <select id="degreeFilter">
-                            <option value="">All Degree Levels</option>
-                            <option value="Bachelor">Bachelor's Degree</option>
-                            <option value="Master">Master's Degree</option>
-                            <option value="PhD">PhD / Doctorate</option>
-                        </select>
-                    </div>
-                    <button class="btn-search" onclick="handleSearch()">SEARCH PROGRAMMES <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
+            </nav>
         </div>
     </header>
 
-    <!-- Content Sections (Rest remains same) -->
-    <main class="container">
-        <section id="programmes" class="section">
-            <div class="section-header">
-                <h2>Featured Programmes</h2>
-                <p>Discover top-rated courses tailored to your career goals.</p>
+    <!-- HERO SECTION WITH KEN-BURNS LIVE MOTION -->
+    <section class="hero-section">
+        <div class="hero-live-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i class="fas fa-graduation-cap"></i> YOUR FUTURE. OUR EXPERTISE. GLOBAL OPPORTUNITIES.
             </div>
-            <div class="filter-pills">
-                <button class="pill active" onclick="filterByBudget('all')">All Budgets</button>
-                <button class="pill" onclick="filterByBudget('low')">Tuition < €3,000</button>
-                <button class="pill" onclick="filterByBudget('mid')">€3,000 - €6,000</button>
-                <button class="pill" onclick="filterByBudget('high')">€6,000+</button>
+            <h1 class="hero-title">Elevate Your Future Through World-Class Education</h1>
+            <p class="hero-description">
+                Unlock access to prestigious universities across Europe, Asia, and Eurasia. Explore internationally recognized Bachelor's, Master's, and PhD programmes, alongside verified scholarship opportunities and personalized expert guidance.
+            </p>
+            <div class="hero-motto">
+                <i class="fas fa-star"></i> Your Ambition Deserves a Global Stage.
             </div>
-            <div id="programmesGrid" class="grid grid-3"></div>
-        </section>
 
-        <section id="universities" class="section">
-            <div class="section-header">
-                <h2>Top Destinations & Universities</h2>
-                <p>We partner with world-renowned institutions across the globe.</p>
-            </div>
-            <div id="countriesGrid" class="grid grid-4"></div>
-        </section>
-
-        <section id="scholarships" class="section">
-            <div class="section-header">
-                <h2>Scholarship Opportunities</h2>
-                <p>Make your education affordable with these funded opportunities.</p>
-            </div>
-            <div id="scholarshipsGrid" class="grid grid-2"></div>
-        </section>
-
-        <section id="services" class="section">
-            <div class="section-header">
-                <h2>Our Premium Services</h2>
-                <p>End-to-end support for your international education journey.</p>
-            </div>
-            <div id="servicesGrid" class="grid grid-3"></div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container footer-content">
-            <div class="footer-info">
-                <img src="https://i.ibb.co/bRVB2xV/logo.png" alt="EduVexa Logo" class="footer-logo">
-                <p>EduVexa is your trusted partner for study abroad consulting, providing transparent and expert guidance for students worldwide.</p>
-                <div class="contact-details">
-                    <p><i class="fas fa-phone"></i> BD Hotline: <span id="footer-hotline-bd">+880 1811-909779</span></p>
-                    <p><i class="fas fa-phone"></i> EU Hotline: <span id="footer-hotline-eu">+39 350 931 3338</span></p>
-                    <p><i class="fas fa-envelope"></i> <span id="footer-email">eduvexastudya@gmail.com</span></p>
+            <!-- HERO SEARCH FINDER BAR -->
+            <div class="hero-search-card">
+                <div class="search-grid">
+                    <div class="search-field">
+                        <label for="searchProgram"><i class="fas fa-search"></i> WHAT DO YOU WANT TO STUDY?</label>
+                        <input type="text" id="searchProgram" placeholder="e.g. Computer Science, Business, Nursing...">
+                    </div>
+                    <div class="search-field">
+                        <label for="whereToStudy"><i class="fas fa-globe"></i> WHERE TO STUDY?</label>
+                        <select id="whereToStudy">
+                            <option value="">All Destinations</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Slovakia">Slovakia</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Lithuania">Lithuania</option>
+                            <option value="China">China</option>
+                            <option value="India">India</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Uzbekistan">Uzbekistan</option>
+                        </select>
+                    </div>
+                    <div class="search-field">
+                        <label for="degreeLevel"><i class="fas fa-user-graduate"></i> DEGREE LEVEL</label>
+                        <select id="degreeLevel">
+                            <option value="">All Degree Levels</option>
+                            <option value="Bachelor">Bachelor's</option>
+                            <option value="Master">Master's</option>
+                            <option value="PhD">PhD / Doctorate</option>
+                            <option value="Diploma">Diploma / Foundation</option>
+                        </select>
+                    </div>
+                    <div class="search-button-wrap">
+                        <button type="button" id="btnHeroSearch" class="btn-hero-search">
+                            SEARCH PROGRAMMES <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="footer-links">
+        </div>
+    </section>
+
+    <!-- STUDY DESTINATIONS SECTION (10 COUNTRIES) -->
+    <section class="section-padding" id="destinations">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">EXPLORE THE WORLD</span>
+                <h2>Top Study Destinations</h2>
+                <p>Choose from top-ranked study locations across Europe, Asia, and Eurasia.</p>
+            </div>
+            <div class="country-grid" id="countryGrid">
+                <!-- 10 Countries populated instantly via app.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMMES SECTION -->
+    <section class="section-padding bg-light" id="programmes">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">ACADEMIC EXCELLENCE</span>
+                <h2>Featured Programmes</h2>
+                <p>Find the right degree program tailored to your career ambitions.</p>
+            </div>
+
+            <!-- DETAILED FILTER CONTROLS -->
+            <div class="filter-controls-bar">
+                <div class="filter-item">
+                    <input type="text" id="filterKeyword" placeholder="Search by keyword...">
+                </div>
+                <div class="filter-item">
+                    <select id="filterCountry">
+                        <option value="">Filter by Country</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Slovakia">Slovakia</option>
+                        <option value="Romania">Romania</option>
+                        <option value="Hungary">Hungary</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="China">China</option>
+                        <option value="India">India</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <select id="filterDegree">
+                        <option value="">Filter by Degree</option>
+                        <option value="Bachelor">Bachelor's</option>
+                        <option value="Master">Master's</option>
+                        <option value="PhD">PhD</option>
+                        <option value="Diploma">Diploma</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <select id="filterTuition">
+                        <option value="">Filter by Tuition</option>
+                        <option value="low">Under $3,000 / year</option>
+                        <option value="mid">$3,000 - $6,000 / year</option>
+                        <option value="high">Above $6,000 / year</option>
+                    </select>
+                </div>
+                <div class="filter-item reset-wrap">
+                    <button id="btnResetFilters" class="btn-reset"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </div>
+
+            <div class="program-grid" id="programGrid">
+                <!-- Programmes populated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHOLARSHIPS SECTION -->
+    <section class="section-padding" id="scholarships">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">FINANCIAL AID</span>
+                <h2>Scholarships & Funding</h2>
+                <p>Unlock partial and full funding options to support your studies overseas.</p>
+            </div>
+            <div class="scholarship-grid" id="scholarshipGrid">
+                <!-- Scholarships populated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section-padding bg-light" id="services">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="sub-title">WHY CHOOSE EDUVEXA</span>
+                <h2>Our End-to-End Support Services</h2>
+                <p>We handle every step of your study abroad journey with complete transparency.</p>
+            </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services populated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- APPLY / CONTACT INQUIRY SECTION -->
+    <section class="section-padding bg-navy text-white" id="apply">
+        <div class="section-container">
+            <div class="apply-box">
+                <div class="apply-text">
+                    <h2>Ready to Start Your Journey?</h2>
+                    <p>Contact our expert counselors today for direct admission guidance and visa support.</p>
+                </div>
+                <div class="apply-actions">
+                    <a href="https://wa.me/8801811909779?text=Hello%20EduVexa%20BD,%20I%20would%20like%20a%20free%20consultation." target="_blank" class="btn-wa-large bd">
+                        <i class="fab fa-whatsapp"></i> Chat with BD Office (+880 1811-909779)
+                    </a>
+                    <a href="https://wa.me/393509313338?text=Hello%20EduVexa%20EU,%20I%20would%20like%20a%20free%20consultation." target="_blank" class="btn-wa-large eu">
+                        <i class="fab fa-whatsapp"></i> Chat with EU Office (+39 350 931 3338)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <img src="../logo.jpg" alt="EduVexa Logo" class="footer-logo-img" onerror="this.onerror=null; this.src='logo.jpg'">
+                    <span class="footer-logo-text">EduVexa</span>
+                </div>
+                <p>EduVexa is a premier study abroad consultancy empowering students with world-class education choices in Europe, Asia, and Eurasia.</p>
+            </div>
+            <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#destinations">Study Destinations</a></li>
+                    <li><a href="#programmes">Programmes</a></li>
+                    <li><a href="#scholarships">Scholarships</a></li>
+                    <li><a href="#services">Services</a></li>
                 </ul>
             </div>
-            <div class="footer-newsletter">
-                <h4>Newsletter</h4>
-                <p>Subscribe for latest scholarship updates.</p>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Your Email">
-                    <button class="btn-cta">JOIN</button>
-                </div>
+            <div class="footer-col">
+                <h4>Contact BD Hotline</h4>
+                <p><i class="fas fa-phone-alt"></i> +880 1811-909779</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp BD Support</p>
+                <p><i class="fas fa-envelope"></i> eduvexastudya@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact EU Hotline</h4>
+                <p><i class="fas fa-phone-alt"></i> +39 350 931 3338</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp EU Support</p>
+                <p><i class="fas fa-map-marker-alt"></i> Europe Regional Support Desk</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2025 EduVexa Study Abroad Simplified. All Rights Reserved.</p>
-            </div>
+            <p>&copy; 2025 EduVexa. All Rights Reserved. Study Abroad Simplified.</p>
         </div>
     </footer>
+
+    <!-- MAIN APP SCRIPT -->
     <script src="app.js"></script>
 </body>
 </html>
