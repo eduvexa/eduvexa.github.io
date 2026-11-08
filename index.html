@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Main Style (Linked to demo/style.css) -->
+    <!-- Main Style -->
     <link rel="stylesheet" href="demo/style.css">
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -47,7 +47,6 @@
     <!-- MAIN HEADER / NAVIGATION -->
     <header class="main-header">
         <div class="header-container">
-            <!-- LOGO BLOCK -->
             <a href="index.html" class="brand-logo">
                 <img src="logo.jpg" alt="EduVexa Logo" class="logo-img" style="height: 44px; width: auto; max-width: 160px; object-fit: contain;">
                 <div class="logo-text">
@@ -56,12 +55,10 @@
                 </div>
             </a>
 
-            <!-- MOBILE TOGGLE -->
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <!-- NAVIGATION MENU -->
             <nav class="nav-menu" id="navMenu">
                 <ul class="nav-list">
                     <li class="nav-item has-dropdown">
@@ -91,9 +88,11 @@
         </div>
     </header>
 
-    <!-- HERO SECTION WITH KEN-BURNS LIVE MOTION -->
+    <!-- HERO SECTION WITH PREMIUM CINEMATIC VIDEO BACKGROUND -->
     <section class="hero-section">
-        <div class="hero-live-bg"></div>
+        <video class="hero-video-bg" autoplay loop muted playsinline disablepictureinpicture poster="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1600&auto=format&fit=crop">
+            <source src="https://cdn.coverr.co/videos/coverr-students-walking-in-a-university-5332/1080p.mp4" type="video/mp4">
+        </video>
         <div class="hero-overlay"></div>
         <div class="hero-container">
             <div class="hero-badge">
@@ -150,7 +149,7 @@
         </div>
     </section>
 
-    <!-- STUDY DESTINATIONS SECTION (10 COUNTRIES) -->
+    <!-- STUDY DESTINATIONS SECTION -->
     <section class="section-padding" id="destinations">
         <div class="section-container">
             <div class="section-header text-center">
@@ -158,9 +157,7 @@
                 <h2>Top Study Destinations</h2>
                 <p>Choose from top-ranked study locations across Europe, Asia, and Eurasia.</p>
             </div>
-            <div class="country-grid" id="countryGrid">
-                <!-- 10 Countries populated instantly via app.js -->
-            </div>
+            <div class="country-grid" id="countryGrid"></div>
         </div>
     </section>
 
@@ -173,11 +170,9 @@
                 <p>Find the right degree program tailored to your career ambitions.</p>
             </div>
 
-            <!-- DETAILED FILTER CONTROLS -->
+            <!-- FILTERS -->
             <div class="filter-controls-bar">
-                <div class="filter-item">
-                    <input type="text" id="filterKeyword" placeholder="Search by keyword...">
-                </div>
+                <div class="filter-item"><input type="text" id="filterKeyword" placeholder="Search by keyword..."></div>
                 <div class="filter-item">
                     <select id="filterCountry">
                         <option value="">Filter by Country</option>
@@ -215,9 +210,7 @@
                 </div>
             </div>
 
-            <div class="program-grid" id="programGrid">
-                <!-- Programmes populated dynamically -->
-            </div>
+            <div class="program-grid" id="programGrid"></div>
         </div>
     </section>
 
@@ -229,9 +222,7 @@
                 <h2>Scholarships & Funding</h2>
                 <p>Unlock partial and full funding options to support your studies overseas.</p>
             </div>
-            <div class="scholarship-grid" id="scholarshipGrid">
-                <!-- Scholarships populated dynamically -->
-            </div>
+            <div class="scholarship-grid" id="scholarshipGrid"></div>
         </div>
     </section>
 
@@ -243,13 +234,11 @@
                 <h2>Our End-to-End Support Services</h2>
                 <p>We handle every step of your study abroad journey with complete transparency.</p>
             </div>
-            <div class="services-grid" id="servicesGrid">
-                <!-- Services populated dynamically -->
-            </div>
+            <div class="services-grid" id="servicesGrid"></div>
         </div>
     </section>
 
-    <!-- APPLY / CONTACT INQUIRY SECTION -->
+    <!-- APPLY / CONTACT SECTION -->
     <section class="section-padding bg-navy text-white" id="apply">
         <div class="section-container">
             <div class="apply-box">
@@ -306,7 +295,6 @@
         </div>
     </footer>
 
-    <!-- MAIN APP SCRIPT (Linked to demo/app.js) -->
     <script src="demo/app.js"></script>
 </body>
 </html>
