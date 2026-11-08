@@ -66,14 +66,6 @@
 
     <!-- Hero Section -->
     <header class="hero" id="hero-section">
-        <!-- Cinematic Background Video -->
-        <video class="hero-video-bg" autoplay loop muted playsinline disablepictureinpicture poster="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1600&auto=format&fit=crop">
-            <source src="https://cdn.coverr.co/videos/coverr-students-walking-in-a-university-5332/1080p.mp4" type="video/mp4">
-        </video>
-        
-        <!-- Blue Dark Overlay -->
-        <div class="hero-overlay"></div>
-
         <div class="container hero-content">
             <div class="hero-text-area">
                 <span class="badge" id="hero-tagline"><i class="fas fa-graduation-cap"></i> YOUR FUTURE. OUR EXPERTISE. GLOBAL OPPORTUNITIES.</span>
@@ -116,31 +108,8 @@
         </div>
     </header>
 
-    <!-- Key Statistics -->
-    <section class="stats-bar">
-        <div class="container stats-grid">
-            <div class="stat-item">
-                <span class="stat-number">500+</span>
-                <span class="stat-label">Partner Universities</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">10k+</span>
-                <span class="stat-label">Programmes Listed</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">98%</span>
-                <span class="stat-label">Visa Success Rate</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">Expert Support</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Sections -->
+    <!-- Content Sections (Rest remains same) -->
     <main class="container">
-        <!-- Programmes Section -->
         <section id="programmes" class="section">
             <div class="section-header">
                 <h2>Featured Programmes</h2>
@@ -152,42 +121,31 @@
                 <button class="pill" onclick="filterByBudget('mid')">€3,000 - €6,000</button>
                 <button class="pill" onclick="filterByBudget('high')">€6,000+</button>
             </div>
-            <div id="programmesGrid" class="grid grid-3">
-                <!-- Programmes will be loaded here via JS -->
-            </div>
+            <div id="programmesGrid" class="grid grid-3"></div>
         </section>
 
-        <!-- Featured Universities -->
         <section id="universities" class="section">
             <div class="section-header">
                 <h2>Top Destinations & Universities</h2>
                 <p>We partner with world-renowned institutions across the globe.</p>
             </div>
-            <div id="countriesGrid" class="grid grid-4">
-                <!-- Countries will be loaded here via JS -->
-            </div>
+            <div id="countriesGrid" class="grid grid-4"></div>
         </section>
 
-        <!-- Scholarships -->
         <section id="scholarships" class="section">
             <div class="section-header">
                 <h2>Scholarship Opportunities</h2>
                 <p>Make your education affordable with these funded opportunities.</p>
             </div>
-            <div id="scholarshipsGrid" class="grid grid-2">
-                <!-- Scholarships will be loaded here via JS -->
-            </div>
+            <div id="scholarshipsGrid" class="grid grid-2"></div>
         </section>
 
-        <!-- Our Services -->
         <section id="services" class="section">
             <div class="section-header">
                 <h2>Our Premium Services</h2>
                 <p>End-to-end support for your international education journey.</p>
             </div>
-            <div id="servicesGrid" class="grid grid-3">
-                <!-- Services will be loaded here via JS -->
-            </div>
+            <div id="servicesGrid" class="grid grid-3"></div>
         </section>
     </main>
 
@@ -227,8 +185,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Scripts -->
     <script src="app.js"></script>
 </body>
 </html>
