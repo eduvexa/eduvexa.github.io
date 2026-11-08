@@ -75,33 +75,22 @@ a {
     color: var(--edu-gold);
 }
 
-.badge-status {
-    background: rgba(217, 166, 44, 0.2);
-    color: var(--edu-gold);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
 .utility-right {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
 .utility-btn-wa {
     background: #25D366;
     color: #FFF;
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: 4px;
     font-weight: 600;
+    font-size: 0.78rem;
 }
 
-.utility-btn-admin {
-    background: rgba(255,255,255,0.15);
-    color: #FFF;
-    padding: 3px 10px;
-    border-radius: 4px;
+.utility-btn-wa.wa-eu {
+    background: #0078D7;
 }
 
 /* ---------------- Main Header & Mega Menu ---------------- */
@@ -128,6 +117,7 @@ a {
 
 .logo-img {
     height: 52px;
+    max-height: 55px;
     width: auto;
     object-fit: contain;
 }
@@ -314,46 +304,73 @@ a {
     cursor: pointer;
 }
 
-/* ---------------- Hero Banner ---------------- */
+/* ---------------- Hero Banner Live Motion ---------------- */
 .hero-banner {
-    background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
     position: relative;
-    padding: 90px 0 110px 0;
+    padding: 100px 0 120px 0;
     color: #FFFFFF;
+    overflow: hidden;
+}
+
+.hero-live-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    animation: kenburns 22s infinite alternate ease-in-out;
+    z-index: 1;
+}
+
+@keyframes kenburns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.12); }
 }
 
 .hero-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 45, 91, 0.92) 0%, rgba(0, 20, 45, 0.85) 100%);
+    background: linear-gradient(135deg, rgba(0, 45, 91, 0.94) 0%, rgba(0, 20, 45, 0.88) 100%);
+    z-index: 2;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
-    max-width: 800px;
+    z-index: 3;
+    max-width: 850px;
 }
 
 .hero-tagline {
     color: var(--edu-gold);
-    font-weight: 700;
-    font-size: 0.88rem;
+    font-weight: 800;
+    font-size: 0.85rem;
     letter-spacing: 1.5px;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .hero-title {
     font-size: 2.8rem;
     color: #FFFFFF;
     line-height: 1.25;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .hero-description {
     font-size: 1.05rem;
-    opacity: 0.9;
-    max-width: 680px;
+    opacity: 0.92;
+    max-width: 780px;
+    margin-bottom: 18px;
+}
+
+.hero-motto {
+    display: inline-block;
+    background: rgba(217, 166, 44, 0.18);
+    border: 1px solid var(--edu-gold);
+    color: var(--edu-gold);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 50px;
 }
 
 /* ---------------- Horizontal Search Finder ---------------- */
@@ -674,15 +691,15 @@ a {
     background: #25D366;
     color: #FFFFFF;
     text-align: center;
-    padding: 10px;
+    padding: 9px;
     border-radius: 4px;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     display: block;
 }
 
 .btn-apply-wa:hover {
-    background: #1EBE5D;
+    opacity: 0.9;
 }
 
 /* ---------------- Scholarships ---------------- */
@@ -710,19 +727,6 @@ a {
     font-weight: 700;
     font-size: 0.9rem;
     margin-bottom: 12px;
-}
-
-/* Loading Spinner */
-.loading-spinner {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 40px;
-    color: var(--text-muted);
-}
-
-.loading-spinner i {
-    color: var(--inti-navy);
-    margin-bottom: 10px;
 }
 
 /* Footer */
