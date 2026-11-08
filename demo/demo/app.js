@@ -1,6 +1,6 @@
 /* ==========================================================================
    EduVexa - INTI Portal App JS (V12.0 Instant Render Engine)
-   Instant Display + Background Supabase Sync
+   Dual WhatsApp Routing & Instant Display
    ========================================================================== */
 
 const SUPABASE_URL = 'https://cnxtddpqjzawfwakmlxl.supabase.co';
@@ -62,7 +62,7 @@ let globalData = {
 document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
     
-    // Step 1: Render Default UI Instantly (0 Millisecond Delay)
+    // Step 1: Render Default UI Instantly
     renderAll();
 
     // Step 2: Background Sync from Supabase
@@ -90,7 +90,6 @@ function renderAll() {
     renderServices();
 }
 
-// Background Data Fetcher
 async function syncSupabaseData() {
     if (!supabase) return;
 
@@ -154,7 +153,7 @@ function renderCountries() {
     }).join('');
 }
 
-// Render Programs
+// Render Programs with Dual WhatsApp option
 function renderPrograms(list) {
     const container = document.getElementById('programGrid');
     if (!container) return;
@@ -172,7 +171,9 @@ function renderPrograms(list) {
         const country = p.country_name || 'Global';
         const univ = p.university_name || 'Partner University';
         const tuition = p.tuition_per_year ? `$${p.tuition_per_year.toLocaleString()} / year` : 'Varies';
-        const waText = encodeURIComponent(`Hello EduVexa Team, I want to apply for "${p.name}" at ${univ} (${country}).`);
+        
+        const waTextBD = encodeURIComponent(`Hello EduVexa BD Team, I want to apply for "${p.name}" at ${univ} (${country}).`);
+        const waTextEU = encodeURIComponent(`Hello EduVexa EU Team, I want to apply for "${p.name}" at ${univ} (${country}).`);
 
         return `
             <div class="program-card">
@@ -196,15 +197,19 @@ function renderPrograms(list) {
                     </div>
                 </div>
 
-                <a href="https://wa.me/8801811909779?text=${waText}" target="_blank" class="btn-apply-wa">
-                    <i class="fa-brands fa-whatsapp"></i> Apply via WhatsApp
-                </a>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+                    <a href="https://wa.me/8801811909779?text=${waTextBD}" target="_blank" class="btn-apply-wa">
+                        <i class="fa-brands fa-whatsapp"></i> BD Apply
+                    </a>
+                    <a href="https://wa.me/393509313338?text=${waTextEU}" target="_blank" class="btn-apply-wa" style="background:#0078D7;">
+                        <i class="fa-brands fa-whatsapp"></i> EU Apply
+                    </a>
+                </div>
             </div>
         `;
     }).join('');
 }
 
-// Render Dropdowns
 function renderDropdowns() {
     const whereToStudy = document.getElementById('whereToStudy');
     const filterCountry = document.getElementById('filterCountry');
@@ -215,7 +220,6 @@ function renderDropdowns() {
     if (filterCountry) filterCountry.innerHTML = `<option value="">All Countries</option>` + opts;
 }
 
-// Render Scholarships
 function renderScholarships() {
     const container = document.getElementById('scholarshipGrid');
     if (!container) return;
@@ -229,7 +233,6 @@ function renderScholarships() {
     `).join('');
 }
 
-// Render Services
 function renderServices() {
     const container = document.getElementById('servicesGrid');
     if (!container) return;
@@ -245,7 +248,6 @@ function renderServices() {
     `).join('');
 }
 
-// Filters Setup
 function setupEventListeners() {
     const btnHero = document.getElementById('btnHeroSearch');
     if (btnHero) btnHero.addEventListener('click', applyHeroSearch);
