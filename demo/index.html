@@ -27,7 +27,6 @@
             </div>
             <div class="utility-right">
                 <a href="https://wa.me/8801811909779" target="_blank" class="utility-btn-wa"><i class="fa-brands fa-whatsapp"></i> Instant WhatsApp</a>
-                <a href="../admin/index.html" class="utility-btn-admin"><i class="fa-solid fa-lock"></i> Staff Portal</a>
             </div>
         </div>
     </div>
@@ -37,7 +36,7 @@
         <div class="container header-flex">
             <!-- Brand Logo -->
             <a href="index.html" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/eduvexa/eduvexa.github.io/main/demo/eduvexa%20logo%20jpg.jpg" alt="EduVexa Logo" class="logo-img">
+                <img src="eduvexa logo jpg.jpg" alt="EduVexa Logo" class="logo-img" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/eduvexa/eduvexa.github.io/main/demo/eduvexa%20logo%20jpg.jpg'">
                 <div class="logo-text">
                     <span class="logo-title">EduVexa</span>
                     <span class="logo-tagline">STUDY ABROAD SIMPLIFIED</span>
@@ -59,7 +58,7 @@
                             <div class="mega-grid">
                                 <div class="mega-col">
                                     <h4 class="mega-title"><i class="fa-solid fa-globe"></i> Top 10 Destinations</h4>
-                                    <ul class="mega-links" id="megaCountryList">
+                                    <ul class="mega-links">
                                         <li><a href="#destinations"><img src="https://flagcdn.com/w20/my.png" alt="MY"> Study in Malaysia</a></li>
                                         <li><a href="#destinations"><img src="https://flagcdn.com/w20/sk.png" alt="SK"> Study in Slovakia</a></li>
                                         <li><a href="#destinations"><img src="https://flagcdn.com/w20/ro.png" alt="RO"> Study in Romania</a></li>
@@ -167,12 +166,7 @@
             </div>
 
             <!-- Country Grid Anchor -->
-            <div class="country-grid" id="countryGrid">
-                <div class="loading-spinner">
-                    <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
-                    <p>Loading global study destinations...</p>
-                </div>
-            </div>
+            <div class="country-grid" id="countryGrid"></div>
         </div>
     </section>
 
@@ -231,12 +225,7 @@
 
                 <!-- Program Cards Grid -->
                 <main class="program-main">
-                    <div class="program-grid" id="programGrid">
-                        <div class="loading-spinner">
-                            <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
-                            <p>Loading degree programmes from Supabase...</p>
-                        </div>
-                    </div>
+                    <div class="program-grid" id="programGrid"></div>
                 </main>
             </div>
         </div>
@@ -251,12 +240,7 @@
                 <div class="heading-line"></div>
             </div>
 
-            <div class="scholarship-grid" id="scholarshipGrid">
-                <div class="loading-spinner">
-                    <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
-                    <p>Fetching available scholarship schemes...</p>
-                </div>
-            </div>
+            <div class="scholarship-grid" id="scholarshipGrid"></div>
         </div>
     </section>
 
@@ -269,9 +253,7 @@
                 <div class="heading-line"></div>
             </div>
 
-            <div class="services-grid" id="servicesGrid">
-                <!-- Dynamically populated or static services -->
-            </div>
+            <div class="scholarship-grid" id="servicesGrid"></div>
         </div>
     </section>
 
