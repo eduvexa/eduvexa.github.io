@@ -1,280 +1,316 @@
 /* ==========================================================================
    EduVexa - INTI Portal App JS (V12.0)
-   Dynamic Supabase Integration & WhatsApp Counseling
+   Dynamic Supabase Integration & Direct Direct Counseling Engine
    ========================================================================== */
 
 const SUPABASE_URL = 'https://cnxtddpqjzawfwakmlxl.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_LaWoUeSZI1uDSh9phxyROQ_Pm-CsgNF';
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
+// Initialize Supabase Client defensively
+let supabase = null;
+if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+
+// Global Data Store
 let globalData = {
-  countries: [],
-  universities: [],
-  programs: [],
-  scholarships: []
+    countries: [],
+    universities: [],
+    programs: [],
+    scholarships: []
 };
 
+// Target Destination Priority Order
+const DESTINATION_ORDER = [
+    "Malaysia", "Slovakia", "Romania", "Hungary", "Lithuania",
+    "China", "India", "Italy", "Turkey", "Uzbekistan"
+];
+
+// Fallback Default Data (If Supabase Network Call Pending/Delayed)
+const MOCK_COUNTRIES = [
+    { id: '1', name: 'Malaysia', code: 'my', universities_count: 12 },
+    { id: '2', name: 'Slovakia', code: 'sk', universities_count: 8 },
+    { id: '3', name: 'Romania', code: 'ro', universities_count: 10 },
+    { id: '4', name: 'Hungary', code: 'hu', universities_count: 9 },
+    { id: '5', name: 'Lithuania', code: 'lt', universities_count: 7 },
+    { id: '6', name: 'China', code: 'cn', universities_count: 25 },
+    { id: '7', name: 'India', code: 'in', universities_count: 15 },
+    { id: '8', name: 'Italy', code: 'it', universities_count: 11 },
+    { id: '9', name: 'Turkey', code: 'tr', universities_count: 14 },
+    { id: '10', name: 'Uzbekistan', code: 'uz', universities_count: 6 }
+];
+
+const MOCK_PROGRAMS = [
+    { id: 'p1', name: 'BSc in Computer Science & AI', level: 'Bachelor', country_name: 'Malaysia', university_name: 'INTI International University', tuition_per_year: 4500, duration: '3 Years' },
+    { id: 'p2', name: 'MSc in General Medicine (MD)', level: 'Master', country_name: 'Slovakia', university_name: 'Comenius University Jessenius', tuition_per_year: 9500, duration: '6 Years' },
+    { id: 'p3', name: 'Bachelor of Software Engineering', level: 'Bachelor', country_name: 'Romania', university_name: 'Technical University of Cluj-Napoca', tuition_per_year: 3200, duration: '4 Years' },
+    { id: 'p4', name: 'MSc in Business Analytics & Leadership', level: 'Master', country_name: 'Hungary', university_name: 'University of Debrecen', tuition_per_year: 4000, duration: '2 Years' }
+];
+
 document.addEventListener('DOMContentLoaded', async () => {
-  renderServices();
-  await fetchPortalData();
-  setupEventListeners();
+    setupMobileMenu();
+    await fetchPortalData();
+    setupEventListeners();
 });
 
+// Mobile Navigation Toggle
+function setupMobileMenu() {
+    const toggleBtn = document.getElementById('mobileToggle');
+    const navMenu = document.getElementById('navMenu');
+    if (toggleBtn && navMenu) {
+        toggleBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+}
+
+// Fetch Portal Data safely from Supabase
 async function fetchPortalData() {
-  if (!supabase) return;
+    try {
+        if (!supabase) throw new Error("Supabase client library not initialized.");
 
-  try {
-    const [cRes, uRes, pRes, sRes] = await Promise.all([
-      supabase.from('countries').select('*').order('name'),
-      supabase.from('universities').select('*').order('name'),
-      supabase.from('programs').select('*').order('name'),
-      supabase.from('scholarships').select('*').order('title')
-    ]);
+        const [cRes, uRes, pRes, sRes] = await Promise.allSettled([
+            supabase.from('countries').select('*'),
+            supabase.from('universities').select('*'),
+            supabase.from('programs').select('*'),
+            supabase.from('scholarships').select('*')
+        ]);
 
-    globalData.countries = cRes.data || [];
-    globalData.universities = uRes.data || [];
-    globalData.programs = pRes.data || [];
-    globalData.scholarships = sRes.data || [];
+        globalData.countries = (cRes.status === 'fulfilled' && cRes.value.data && cRes.value.data.length > 0) 
+            ? cRes.value.data : MOCK_COUNTRIES;
+            
+        globalData.universities = (uRes.status === 'fulfilled' && uRes.value.data) ? uRes.value.data : [];
+        globalData.programs = (pRes.status === 'fulfilled' && pRes.value.data && pRes.value.data.length > 0) 
+            ? pRes.value.data : MOCK_PROGRAMS;
+            
+        globalData.scholarships = (sRes.status === 'fulfilled' && sRes.value.data) ? sRes.value.data : [];
 
-    populateDropdowns();
-    renderDestinations(globalData.countries);
-    renderPrograms(globalData.programs);
-    renderUniversities(globalData.universities);
-    renderScholarships(globalData.scholarships);
-
-  } catch (err) {
-    console.error('Error loading Supabase data:', err);
-  }
+    } catch (err) {
+        console.warn('Supabase Fetch Warning, using resilient data:', err);
+        globalData.countries = MOCK_COUNTRIES;
+        globalData.programs = MOCK_PROGRAMS;
+    } finally {
+        renderCountries();
+        renderDropdowns();
+        renderPrograms(globalData.programs);
+        renderScholarships();
+    }
 }
 
-function populateDropdowns() {
-  const opts = globalData.countries.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-  
-  const finderSelect = document.getElementById('finder-country');
-  const filterSelect = document.getElementById('filter-country');
-  const uniSelect = document.getElementById('uni-country-select');
-  const studentSelect = document.getElementById('student-country');
+// Render Top 10 Countries
+function renderCountries() {
+    const container = document.getElementById('countryGrid') || document.getElementById('countriesGrid');
+    if (!container) return;
 
-  if (finderSelect) finderSelect.innerHTML = '<option value="">🌍 All Destinations</option>' + opts;
-  if (filterSelect) filterSelect.innerHTML = '<option value="">All Destinations</option>' + opts;
-  if (uniSelect) uniSelect.innerHTML = '<option value="">Select Country</option>' + opts;
-  if (studentSelect) studentSelect.innerHTML = '<option value="">Select Country</option>' + opts;
-}
+    // Sort countries according to DESTINATION_ORDER
+    const sortedCountries = [...globalData.countries].sort((a, b) => {
+        let indexA = DESTINATION_ORDER.indexOf(a.name);
+        let indexB = DESTINATION_ORDER.indexOf(b.name);
+        if (indexA === -1) indexA = 99;
+        if (indexB === -1) indexB = 99;
+        return indexA - indexB;
+    });
 
-function renderDestinations(countries) {
-  const container = document.getElementById('destinations-grid');
-  if (!container) return;
-
-  if (!countries || countries.length === 0) {
-    container.innerHTML = '<p>Loading destinations...</p>';
-    return;
-  }
-
-  container.innerHTML = countries.map(c => `
-    <div class="destination-card" onclick="quickCountrySearch('${c.name}')">
-      <img src="https://flagcdn.com/w80/${c.code ? c.code.toLowerCase() : 'un'}.png" alt="${c.name} Flag" onerror="this.src='https://flagcdn.com/w80/un.png'">
-      <div class="destination-info">
-        <h3>${c.name}</h3>
-        <span>View Programmes &rarr;</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderPrograms(programs) {
-  const container = document.getElementById('program-cards-container');
-  const countSpan = document.getElementById('results-count');
-  if (!container) return;
-
-  if (countSpan) {
-    countSpan.textContent = `Found ${programs.length} degree programmes for you`;
-  }
-
-  if (!programs || programs.length === 0) {
-    container.innerHTML = '<p style="padding:30px; background:#FFF; border-radius:8px;">No programmes found matching your search criteria.</p>';
-    return;
-  }
-
-  container.innerHTML = programs.map(p => {
-    const uni = globalData.universities.find(u => u.id === p.university_id) || { name: 'Partner University' };
-    const country = globalData.countries.find(c => c.id === uni.country_id) || { name: '' };
-
-    return `
-      <div class="program-card">
-        <div class="program-card-header">
-          <div>
-            <h3 class="program-title">${p.name}</h3>
-            <div class="program-meta">
-              🏛️ ${uni.name} ${country.name ? '• ' + country.name : ''}
+    container.innerHTML = sortedCountries.map((country, idx) => {
+        const countryCode = (country.code || getCountryCode(country.name)).toLowerCase();
+        const flagUrl = `https://flagcdn.com/w160/${countryCode}.png`;
+        
+        return `
+            <div class="country-card">
+                <div class="country-flag-box">
+                    <span class="country-badge-num">#${idx + 1}</span>
+                    <img src="${flagUrl}" alt="${country.name}" class="country-flag-img" onerror="this.src='https://flagcdn.com/w160/un.png'">
+                </div>
+                <div class="country-body">
+                    <div>
+                        <h3 class="country-name">${country.name}</h3>
+                        <p class="country-univ-count"><i class="fa-solid fa-building-columns"></i> Accredited Universities</p>
+                    </div>
+                    <button onclick="filterProgramsByCountry('${country.name}')" class="btn-country-explore">
+                        Explore Degrees <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
-          </div>
-          <span class="badge-degree">${p.degree_level || 'Degree'}</span>
-        </div>
+        `;
+    }).join('');
+}
+
+// Render Program Cards
+function renderPrograms(programsList) {
+    const container = document.getElementById('programGrid');
+    if (!container) return;
+
+    if (!programsList || programsList.length === 0) {
+        container.innerHTML = `
+            <div style="grid-column: 1/-1; text-align:center; padding: 40px; background:#fff; border-radius:8px;">
+                <i class="fa-solid fa-circle-exclamation fa-2x" style="color: var(--inti-red);"></i>
+                <p style="margin-top:10px; font-weight:600;">No matching degree programs found.</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = programsList.map(prog => {
+        const country = prog.country_name || (prog.universities ? prog.universities.country_name : 'Global');
+        const univ = prog.university_name || (prog.universities ? prog.universities.name : 'Partner University');
+        const tuition = prog.tuition_per_year ? `$${prog.tuition_per_year.toLocaleString()} / year` : 'Varies';
         
-        <div class="program-details-grid">
-          <div class="detail-box"><span>DURATION</span><strong>${p.duration || 'N/A'}</strong></div>
-          <div class="detail-box"><span>TUITION FEE</span><strong>${p.tuition_fee || 'Contact for fee'}</strong></div>
-          <div class="detail-box"><span>REQUIREMENTS</span><strong>${p.admission_requirements || 'Standard Entry'}</strong></div>
+        const waText = encodeURIComponent(`Hello EduVexa Team, I would like to apply for the "${prog.name}" programme at ${univ} (${country}). Please guide me through admission.`);
+
+        return `
+            <div class="program-card">
+                <div>
+                    <div class="program-header">
+                        <span class="degree-badge">${prog.level || 'Degree'}</span>
+                        <span style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-solid fa-location-dot"></i> ${country}</span>
+                    </div>
+                    <h3 class="program-title">${prog.name}</h3>
+                    <p class="program-univ"><i class="fa-solid fa-building-columns"></i> ${univ}</p>
+                    
+                    <div class="program-details">
+                        <div class="detail-item">
+                            <span>Tuition Fee</span>
+                            <strong>${tuition}</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span>Duration</span>
+                            <strong>${prog.duration || '3-4 Years'}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/8801811909779?text=${waText}" target="_blank" class="btn-apply-wa">
+                    <i class="fa-brands fa-whatsapp"></i> Apply via WhatsApp
+                </a>
+            </div>
+        `;
+    }).join('');
+}
+
+// Populate Search Dropdowns
+function renderDropdowns() {
+    const whereToStudy = document.getElementById('whereToStudy');
+    const filterCountry = document.getElementById('filterCountry');
+
+    const countryOptions = globalData.countries.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+
+    if (whereToStudy) whereToStudy.innerHTML = `<option value="">All Destinations</option>` + countryOptions;
+    if (filterCountry) filterCountry.innerHTML = `<option value="">All Countries</option>` + countryOptions;
+}
+
+// Render Scholarships
+function renderScholarships() {
+    const container = document.getElementById('scholarshipGrid');
+    if (!container) return;
+
+    if (!globalData.scholarships || globalData.scholarships.length === 0) {
+        container.innerHTML = `
+            <div class="scholarship-card">
+                <h3 class="scholarship-title">Stipendium Hungaricum Scholarship</h3>
+                <p class="scholarship-coverage">100% Tuition Fee Waiver + Monthly Stipend</p>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Fully funded government scholarship for Bachelor, Master, and PhD degrees in Hungary.</p>
+            </div>
+            <div class="scholarship-card">
+                <h3 class="scholarship-title">Slovak Government National Scholarship</h3>
+                <p class="scholarship-coverage">Full Tuition Waiver + Living Allowance</p>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Open for international students applying for higher studies in Slovak Republic.</p>
+            </div>
+            <div class="scholarship-card">
+                <h3 class="scholarship-title">Chinese Government Scholarship (CSC)</h3>
+                <p class="scholarship-coverage">100% Tuition + Accommodation + Health Insurance</p>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Comprehensive financial aid across top Tier-1 Chinese universities.</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = globalData.scholarships.map(s => `
+        <div class="scholarship-card">
+            <h3 class="scholarship-title">${s.title || s.name}</h3>
+            <p class="scholarship-coverage">${s.coverage || 'Full / Partial Tuition Waiver'}</p>
+            <p style="font-size:0.85rem; color:var(--text-muted);">${s.description || 'Verified international scholarship scheme.'}</p>
         </div>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          ${p.official_url ? `<a href="${p.official_url}" target="_blank" style="color:var(--inti-navy); font-weight:700; font-size:13px;">Official Link ↗</a>` : '<span></span>'}
-          <button class="btn-whatsapp-inquire" onclick="inquireProgram('${escapeJs(p.name)}', '${escapeJs(uni.name)}')">Inquire via WhatsApp</button>
-        </div>
-      </div>
-    `;
-  }).join('');
+    `).join('');
 }
 
-function renderUniversities(unis) {
-  const container = document.getElementById('universities-grid');
-  if (!container) return;
-
-  container.innerHTML = unis.map(u => {
-    const country = globalData.countries.find(c => c.id === u.country_id) || { name: 'International' };
-    return `
-      <div class="uni-card">
-        <h3>${u.name}</h3>
-        <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">📍 ${country.name}</p>
-        ${u.website ? `<a href="${u.website}" target="_blank" style="color: var(--inti-navy); font-weight: 700; font-size: 13px;">Official Website &rarr;</a>` : ''}
-      </div>
-    `;
-  }).join('');
-}
-
-function renderScholarships(scholarships) {
-  const container = document.getElementById('scholarships-grid');
-  if (!container) return;
-
-  container.innerHTML = scholarships.map(s => {
-    const country = globalData.countries.find(c => c.id === s.country_id) || { name: 'Global' };
-    return `
-      <div class="scholarship-card">
-        <span class="badge-scholarship">${country.name} Scholarship</span>
-        <h3 style="margin-top: 8px;">${s.title}</h3>
-        <p style="font-size: 13px; color: var(--text-muted); margin: 10px 0;"><strong>Coverage:</strong> ${s.coverage || 'Fully Funded / Partial'}</p>
-        ${s.official_url ? `<a href="${s.official_url}" target="_blank" style="color: var(--inti-navy); font-weight: 700; font-size: 13px;">Scholarship Details &rarr;</a>` : ''}
-      </div>
-    `;
-  }).join('');
-}
-
-function renderServices() {
-  const container = document.getElementById('services-grid');
-  if (!container) return;
-
-  const services = [
-    { icon: '📋', title: 'Document Assessment', desc: 'Comprehensive evaluation of your academic qualifications.' },
-    { icon: '🎓', title: 'University Matching', desc: 'Discover courses tailored to your academic profile and career goals.' },
-    { icon: '🏛️', title: 'Admission Support', desc: 'Professional guidance for preparing official applications.' },
-    { icon: '✈️', title: 'Student Visa Guidance', desc: 'Expert support with visa documentation and embassy interviews.' }
-  ];
-
-  container.innerHTML = services.map(s => `
-    <div class="service-card" style="text-align: center;">
-      <div style="font-size: 32px; margin-bottom: 12px;">${s.icon}</div>
-      <h3>${s.title}</h3>
-      <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">${s.desc}</p>
-    </div>
-  `).join('');
-}
-
+// Event Listeners for Filters
 function setupEventListeners() {
-  const finderBtn = document.getElementById('finder-search-btn');
-  const filterKw = document.getElementById('filter-keyword');
-  const filterCt = document.getElementById('filter-country');
-  const filterDg = document.getElementById('filter-degree');
-  const resetBtn = document.getElementById('reset-filters-btn');
+    const heroBtn = document.getElementById('btnHeroSearch');
+    if (heroBtn) {
+        heroBtn.addEventListener('click', applyHeroSearch);
+    }
 
-  if (finderBtn) {
-    finderBtn.addEventListener('click', () => {
-      const kw = document.getElementById('finder-keyword').value.trim();
-      const ct = document.getElementById('finder-country').value;
-      const dg = document.getElementById('finder-degree').value;
+    const filterKeyword = document.getElementById('filterKeyword');
+    const filterCountry = document.getElementById('filterCountry');
+    const filterDegree = document.getElementById('filterDegree');
+    const filterTuition = document.getElementById('filterTuition');
+    const btnReset = document.getElementById('btnResetFilters');
 
-      document.getElementById('filter-keyword').value = kw;
-      document.getElementById('filter-country').value = ct;
-      document.getElementById('filter-degree').value = dg;
+    if (filterKeyword) filterKeyword.addEventListener('input', applyFilters);
+    if (filterCountry) filterCountry.addEventListener('change', applyFilters);
+    if (filterDegree) filterDegree.addEventListener('change', applyFilters);
+    if (filterTuition) filterTuition.addEventListener('change', applyFilters);
+    if (btnReset) {
+        btnReset.addEventListener('click', () => {
+            if (filterKeyword) filterKeyword.value = '';
+            if (filterCountry) filterCountry.value = '';
+            if (filterDegree) filterDegree.value = '';
+            if (filterTuition) filterTuition.value = '';
+            renderPrograms(globalData.programs);
+        });
+    }
+}
 
-      applyProgramFilters();
-      document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
+// Apply Filters Logic
+function applyFilters() {
+    const keyword = (document.getElementById('filterKeyword')?.value || '').toLowerCase();
+    const country = document.getElementById('filterCountry')?.value || '';
+    const degree = document.getElementById('filterDegree')?.value || '';
+    const maxTuition = parseFloat(document.getElementById('filterTuition')?.value) || 0;
+
+    let filtered = globalData.programs.filter(p => {
+        const pName = (p.name || '').toLowerCase();
+        const pCountry = p.country_name || (p.universities ? p.universities.country_name : '');
+        const pLevel = p.level || '';
+        const pTuition = p.tuition_per_year || 0;
+
+        const matchKeyword = !keyword || pName.includes(keyword);
+        const matchCountry = !country || pCountry === country;
+        const matchDegree = !degree || pLevel === degree;
+        const matchTuition = !maxTuition || (pTuition > 0 && pTuition <= maxTuition);
+
+        return matchKeyword && matchCountry && matchDegree && matchTuition;
     });
-  }
 
-  if (filterKw) filterKw.addEventListener('input', applyProgramFilters);
-  if (filterCt) filterCt.addEventListener('change', applyProgramFilters);
-  if (filterDg) filterDg.addEventListener('change', applyProgramFilters);
-
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      document.getElementById('filter-keyword').value = '';
-      document.getElementById('filter-country').value = '';
-      document.getElementById('filter-degree').value = '';
-      renderPrograms(globalData.programs);
-    });
-  }
+    renderPrograms(filtered);
 }
 
-function quickCountrySearch(countryName) {
-  document.getElementById('filter-country').value = countryName;
-  applyProgramFilters();
-  document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
+function applyHeroSearch() {
+    const searchProg = document.getElementById('searchProgram')?.value || '';
+    const destination = document.getElementById('whereToStudy')?.value || '';
+    const level = document.getElementById('degreeLevel')?.value || '';
+
+    if (document.getElementById('filterKeyword')) document.getElementById('filterKeyword').value = searchProg;
+    if (document.getElementById('filterCountry')) document.getElementById('filterCountry').value = destination;
+    if (document.getElementById('filterDegree')) document.getElementById('filterDegree').value = level;
+
+    applyFilters();
+    document.getElementById('programmes')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-function quickTagSearch(tag) {
-  document.getElementById('filter-keyword').value = tag;
-  applyProgramFilters();
-  document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
+function filterProgramsByCountry(countryName) {
+    const filterCountry = document.getElementById('filterCountry');
+    if (filterCountry) filterCountry.value = countryName;
+    applyFilters();
+    document.getElementById('programmes')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-function applyProgramFilters() {
-  const kw = document.getElementById('filter-keyword').value.toLowerCase();
-  const ct = document.getElementById('filter-country').value;
-  const dg = document.getElementById('filter-degree').value;
-
-  const filtered = globalData.programs.filter(p => {
-    const uni = globalData.universities.find(u => u.id === p.university_id) || { name: '' };
-    const country = globalData.countries.find(c => c.id === uni.country_id) || { name: '' };
-
-    const matchesKw = !kw || p.name.toLowerCase().includes(kw) || uni.name.toLowerCase().includes(kw);
-    const matchesCt = !ct || country.name === ct;
-    const matchesDg = !dg || (p.degree_level && p.degree_level.toLowerCase().includes(dg.toLowerCase()));
-
-    return matchesKw && matchesCt && matchesDg;
-  });
-
-  renderPrograms(filtered);
-}
-
-function inquireProgram(programName, uniName) {
-  const phone = '8801811909779';
-  const text = encodeURIComponent(`Hello EduVexa! I am interested in applying for the programme "${programName}" at "${uniName}". Please guide me with the admission process.`);
-  window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
-}
-
-function handleInquirySubmit(e) {
-  e.preventDefault();
-  const name = document.getElementById('student-name').value.trim();
-  const phone = document.getElementById('student-whatsapp').value.trim();
-  const email = document.getElementById('student-email').value.trim();
-  const country = document.getElementById('student-country').value;
-  const qual = document.getElementById('student-qualification').value;
-  const msg = document.getElementById('student-message').value.trim();
-
-  const waPhone = '8801811909779';
-  const text = encodeURIComponent(
-    `🎓 *New Counseling Request - EduVexa Portal*\n\n` +
-    `👤 *Name:* ${name}\n` +
-    `📱 *WhatsApp:* ${phone}\n` +
-    `📧 *Email:* ${email || 'N/A'}\n` +
-    `🌍 *Country:* ${country}\n` +
-    `🎓 *Qualification:* ${qual}\n` +
-    `📝 *Message:* ${msg || 'I want counseling for studying abroad.'}`
-  );
-
-  window.open(`https://wa.me/${waPhone}?text=${text}`, '_blank');
-}
-
-function escapeJs(str) {
-  return str ? str.replace(/'/g, "\\'").replace(/"/g, '&quot;') : '';
+// Country Code Helper
+function getCountryCode(countryName) {
+    const map = {
+        'Malaysia': 'my', 'Slovakia': 'sk', 'Romania': 'ro', 'Hungary': 'hu',
+        'Lithuania': 'lt', 'China': 'cn', 'India': 'in', 'Italy': 'it',
+        'Turkey': 'tr', 'Uzbekistan': 'uz'
+    };
+    return map[countryName] || 'un';
 }
