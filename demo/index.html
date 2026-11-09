@@ -13,34 +13,39 @@
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Safe Video Background Styles -->
+    <!-- Safe Premium Video Background Styles -->
     <style>
         .hero-section {
-            position: relative;
-            overflow: hidden;
+            position: relative !important;
+            overflow: hidden !important;
+            background: #002D5B; /* fallback color */
         }
         .hero-video-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 0; 
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            opacity: 0.50; /* Luxury dark cinematic feel */
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            min-width: 100% !important;
+            min-height: 100% !important;
+            width: auto !important;
+            height: auto !important;
+            z-index: 0 !important;
+            transform: translate(-50%, -50%) !important;
+            object-fit: cover !important;
+            opacity: 0.55 !important;
+            pointer-events: none !important;
         }
         .hero-live-bg {
-            display: none !important; /* আগের নড়াচড়া করা ছবিটা হাইড করা হলো */
+            display: none !important;
         }
         .hero-overlay {
-            z-index: 1;
+            position: absolute !important;
+            inset: 0 !important;
+            z-index: 1 !important;
+            background: linear-gradient(rgba(0, 45, 91, 0.65), rgba(0, 45, 91, 0.45)) !important;
         }
         .hero-container {
-            position: relative;
-            z-index: 2;
+            position: relative !important;
+            z-index: 2 !important;
         }
     </style>
 </head>
@@ -70,7 +75,6 @@
     <!-- MAIN HEADER / NAVIGATION -->
     <header class="main-header">
         <div class="header-container">
-            <!-- LOGO BLOCK -->
             <a href="index.html" class="brand-logo">
                 <img src="../logo.jpg" alt="EduVexa Logo" class="logo-img" onerror="this.onerror=null; this.src='logo.jpg'">
                 <div class="logo-text">
@@ -79,12 +83,10 @@
                 </div>
             </a>
 
-            <!-- MOBILE TOGGLE -->
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <!-- NAVIGATION MENU -->
             <nav class="nav-menu" id="navMenu">
                 <ul class="nav-list">
                     <li class="nav-item has-dropdown">
@@ -114,11 +116,14 @@
         </div>
     </header>
 
-    <!-- HERO SECTION WITH CINEMATIC VIDEO BACKGROUND -->
+    <!-- HERO SECTION WITH PREMIUM VIDEO (Multi-Fallback) -->
     <section class="hero-section">
-        <!-- Cinematic Campus Drone Video (Premium Luxury) -->
         <video class="hero-video-bg" autoplay loop muted playsinline disablepictureinpicture poster="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1600&auto=format&fit=crop">
-            <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-university-campus-4276/1080p.mp4" type="video/mp4">
+            <!-- Primary: previously working -->
+            <source src="https://cdn.coverr.co/videos/coverr-students-walking-in-a-university-5332/1080p.mp4" type="video/mp4">
+            <!-- Premium fallbacks -->
+            <source src="https://videos.pexels.com/video-files/2675511/2675511-uhd_2560_1440_25fps.mp4" type="video/mp4">
+            <source src="https://videos.pexels.com/video-files/3209298/3209298-uhd_2560_1440_25fps.mp4" type="video/mp4">
         </video>
 
         <div class="hero-overlay"></div>
@@ -177,7 +182,7 @@
         </div>
     </section>
 
-    <!-- STUDY DESTINATIONS SECTION (10 COUNTRIES) -->
+    <!-- STUDY DESTINATIONS SECTION -->
     <section class="section-padding" id="destinations">
         <div class="section-container">
             <div class="section-header text-center">
@@ -185,9 +190,7 @@
                 <h2>Top Study Destinations</h2>
                 <p>Choose from top-ranked study locations across Europe, Asia, and Eurasia.</p>
             </div>
-            <div class="country-grid" id="countryGrid">
-                <!-- 10 Countries populated instantly via app.js -->
-            </div>
+            <div class="country-grid" id="countryGrid"></div>
         </div>
     </section>
 
@@ -200,7 +203,6 @@
                 <p>Find the right degree program tailored to your career ambitions.</p>
             </div>
 
-            <!-- DETAILED FILTER CONTROLS -->
             <div class="filter-controls-bar">
                 <div class="filter-item">
                     <input type="text" id="filterKeyword" placeholder="Search by keyword...">
@@ -242,9 +244,7 @@
                 </div>
             </div>
 
-            <div class="program-grid" id="programGrid">
-                <!-- Programmes populated dynamically -->
-            </div>
+            <div class="program-grid" id="programGrid"></div>
         </div>
     </section>
 
@@ -256,9 +256,7 @@
                 <h2>Scholarships & Funding</h2>
                 <p>Unlock partial and full funding options to support your studies overseas.</p>
             </div>
-            <div class="scholarship-grid" id="scholarshipGrid">
-                <!-- Scholarships populated dynamically -->
-            </div>
+            <div class="scholarship-grid" id="scholarshipGrid"></div>
         </div>
     </section>
 
@@ -270,13 +268,11 @@
                 <h2>Our End-to-End Support Services</h2>
                 <p>We handle every step of your study abroad journey with complete transparency.</p>
             </div>
-            <div class="services-grid" id="servicesGrid">
-                <!-- Services populated dynamically -->
-            </div>
+            <div class="services-grid" id="servicesGrid"></div>
         </div>
     </section>
 
-    <!-- APPLY / CONTACT INQUIRY SECTION -->
+    <!-- APPLY / CONTACT -->
     <section class="section-padding bg-navy text-white" id="apply">
         <div class="section-container">
             <div class="apply-box">
@@ -333,7 +329,6 @@
         </div>
     </footer>
 
-    <!-- MAIN APP SCRIPT -->
     <script src="app.js"></script>
 </body>
 </html>
